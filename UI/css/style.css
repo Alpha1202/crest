@@ -104,6 +104,7 @@ nav.navbar {
 .login a {
     color: white;
     text-decoration: none;
+    padding: 0.2rem;
 }
 .inputtxt {
     height: 20px;
