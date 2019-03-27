@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/user-dashboard.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+</head>
+<body>
+    
+    <div class="wrapper">
+        <div class="top-box top-box-a" id="side-menu">
+                <div class="left-image">
+                <figure>
+                <img src="../images/logo (2).png" alt="Logo">
+                <figcaption><strong>Crest Finance</strong></figcaption>
+            </figure>
+            </div>
+            <hr>
+            <div class="left-links">
+                <ul>
+                    <li><a href="#dashboard">
+                        <i class="fas fa-home fa-1x"></i>
+                    Dashboard</a></li>
+                    <li><a href="./userAccount.html">
+                            <i class="fas fa-envelope-open"></i>
+                    Create Account</a></li>
+                    <li><a href="#account-details">
+                            <i class="fas fa-eye"></i>
+                    View Account</a></li>
+                    <li><a href="#transaction">
+                        <i class="fas fa-search-dollar"></i>
+                    Transactions</a></li>
+                    <li><a href="./index.html">
+                            <i class="fas fa-sign-out-alt"></i>
+                    Logout</a></li>
+                </ul>
+            </div>
+
+
+
+
+            </div>
+
+
+
+
+        
+        <div class="showcase" id="main">
+           <div class="header" id="dashboard">
+                <span class="open-slide">
+                <a href="#" onclick="openSlideMenu()">
+                <svg width="30" height="30">
+                <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+                <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+                <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+                </svg>
+                </a>
+                </span>
+               <p>Dashboard</p> 
+           </div>
+
+           <div class="top-container">
+           <section class="boxes">
+               <div class="box box-a">
+                   <h3>Account Type:</h3><span>
+                   <p>Current</p>
+               </div>
+               <div class="box box-b">
+                    <h3>Account Balance:</h3><span>
+                    <p>$1,000,000</p>
+                </div>
+           </section>
+        </div>
+        <div class="div-box">
+           <section class="boxes boxes-small box-account">
+                <div class="box">
+                    <h3>Account Details:</h3><span>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Nnamani Nzubechukwu</th>
+                        </tr>
+                        <tr>
+                            <th>Account Name</th>
+                            <th>Nnamani Nzubechukwu .R.</th>
+                        </tr>
+                        <tr>
+                            <th>Account Number</th>
+                            <th>08139228639</th>
+                        </tr>
+                        <tr>
+                            <th>Account Balance</th>
+                            <th>$1,000,000.04</th>
+                        </tr>
+                        <tr>
+                            <th>Account Type</th>
+                            <th>Current</th>
+                        </tr>
+                        <tr>
+                            <th>Account Status</th>
+                            <th>Active</th>
+                        </tr>
+                    </table>
+                </div>
+           </section>
+           <section class="boxes boxes-small small">
+                <div class="box">
+                    <h3>Last 50 Transactions:</h3><span>
+                            <table>
+                                    <tr>
+                                       <th>S/no</th>
+                                       <th>Id</th>
+                                       <th>Acc Number</th>
+                                       <th>Transaction Type</th>
+                                    </tr>
+                                    <tr>
+                                    <th>1</th>
+                                    <th>0033992929</th>
+                                    <th>003294933</th>
+                                    <th>Credit</th>
+                                    </tr>
+                                </table>
+                                </span>
+                        
+                    </section>
+                <section class="boxes boxes-small big">
+                        <div class="box">
+                            <h3>Last 50 Transactions:</h3><span>
+                                    <table>
+                                            <tr>
+                                               <th>S/no</th>
+                                               <th>Id</th>
+                                               <th>Acc Number</th>
+                                               <th>Transaction Type</th>
+                                               <th>Old Balance</th>
+                                               <th>New Balance</th>
+                                               <th>Amount</th>
+                                            </tr>
+                                            <tr>
+                                            <th>1</th>
+                                            <th>0033992929</th>
+                                            <th>003294933</th>
+                                            <th>Credit</th>
+                                            <th>$1,000,000</th>
+                                            <th>$ 4,000,000</th>
+                                            <th>$3,000,000</th>
+                                            </tr>
+                                            
+                                        </table>
+                        </div>
+    
+            </section>
+        </div>
+    
+        </div>
+        
+    </div>
+    
+    </div>
+
+    
+    <footer>
+            <p>Made with love</p>
+        </footer>
+    
+
+    <script src="../scripts/index.js"></script>
+</body>
+
+</html>
