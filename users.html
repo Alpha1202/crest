@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Dashboard</title>
+    <title>Users</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./users.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
         <div class="head">
             <div class="header">
                 
-                <div class="header-text"><a href="./index.html"><img src="../images/logo (2).png" alt="">
+                <div class="header-text"><a href="./index.html"><img src="./logo (2).png" alt="">
                     <p>Crest Finance</p></a></div>
                 <div class="header-links">
                     <ul>
@@ -23,7 +23,7 @@
                         <li><a href="./users.html">Deactivated Accounts</a></li>
                     </ul>
                 </div>
-                <div class="header-logout"><a href="./admin.html">Create Admin</a></div>
+                <div class="header-logout"><a href="./adminSign-up.html">Create Admin</a></div>
                 <div class="header-logout"><a href="./admin.html">Logout</a></div>
                 <div class="header-greeting">Welcome, <span>Admin</span></div>
             </div>
@@ -45,7 +45,8 @@
             </div>
         </div>
         <div class="dashboard-layer">
-            <p>Dashboard</p>
+            <p><a href="./admin-dashboard.html">Dashboard</a> / <a href="#">users</a></p>
+            <a href=""><i class="fas fa-search"></i><input type="search" placeholder="sort......."></a>
         </div>
        
        <section class="top-container">
@@ -80,6 +81,61 @@
             </div>
            </div>
        </section>
+       <div class="list">
+            <div class="list-header"><h3>All Users</h3></div>
+            <div class="top-box">
+            <table class="user-table">
+                <tr>
+                    <th>S/no</th>
+                    <th>FirstName</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Account Number</th>
+                    <th>Account Type</th>
+                </tr>
+                <tr data-href="./singleuser.html">
+                    <th><a href="./singleuser.html">1</a></th>
+                    <th><a href="./singleuser.html">Nzubechukwu</a></th>
+                    <th><a href="./singleuser.html">Nnamani</a></th>
+                    <th><a href="./singleuser.html">Email</a></th>
+                    <th><a href="./singleuser.html">08139228639</a></th>
+                    <th><a href="./singleuser.html">003322867</a></th>
+                    <th><a href="./singleuser.html">current</a></th>
+                </tr>
+                <tr data-href="">
+                        <th><a href="./singleuser.html">2</a></th>
+                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
+                        <th><a href="./singleuser.html">Nnamani</a></th>
+                        <th><a href="./singleuser.html">Email</a></th>
+                        <th><a href="./singleuser.html">08139228639</a></th>
+                        <th><a href="./singleuser.html">003322867</a></th>
+                        <th><a href="./singleuser.html">current</a></th>
+                </tr>
+                <tr data-href="./singleuser.html">
+                        <th><a href="./singleuser.html">3</a></th>
+                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
+                        <th><a href="./singleuser.html">Nnamani</a></th>
+                        <th><a href="./singleuser.html">Email</a></th>
+                        <th><a href="./singleuser.html">08139228639</a></th>
+                        <th><a href="./singleuser.html">003322867</a></th>
+                        <th><a href="./singleuser.html">current</a></th>
+                </tr>
+            </table>
+         </div>
+        </div>
+        <div class="center-pagination">
+        <div class="pagination">
+        <a href="#">&laquo;</a>
+        <a href="./admin-dashboard.html"class="active">1</a>
+        <a href="./admin-dashboard.html" >2</a>
+        <a href="./admin-dashboard.html">3</a>
+        <a href="./admin-dashboard.html">4</a>
+        <a href="./admin-dashboard.html">5</a>
+        <a href="./admin-dashboard.html">6</a>
+        <a href="./admin-dashboard.html">&raquo;</a>
+        </div>
+        </div>
        <footer>
            <p>Made with love</p>
        </footer>
