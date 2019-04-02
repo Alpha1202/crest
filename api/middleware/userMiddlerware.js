@@ -34,9 +34,27 @@ exports.validate = (method) => {
                 .exists()
                 .withMessage('Please enter your password')
                 .isLength({ min: 6 })
+                .withMessage('Password should be atleast six characters')
             ]
         }
-    }
+    case 'signin': {
+        return [
+        body('email', 'please enter a valid email')
+        .trim()
+        .exists()
+        .withMessage('Email is required')
+        .isEmail()
+        .withMessage('Please enter a valid email')
+        .normalizeEmail({ all_lowercase: true }),
+
+        body('password', 'please enter your password')
+        .exists()
+        .withMessage('Please enter your password')
+        .isLength({ min: 6 })
+        .withMessage('Password should be atleast six characters')
+    ]  
+    } 
+}
 }
 
 exports.verifyToken = (req, res, next) => {
