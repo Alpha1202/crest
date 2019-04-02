@@ -42,8 +42,12 @@ describe('API Tests', () => {
         lastName: "Nnamani",
         password: "123",
     };
-
-
+    
+    const user7 = {
+        
+        password: "123456"
+    }
+    
 
 
     describe('User sign Up', () => {
@@ -122,7 +126,34 @@ describe('API Tests', () => {
             .end((err, res) => {
             res.should.have.status(422);
             res.body.should.be.a('object');
-            res.body.error.should.equal('please enter your password');
+            res.body.error.should.equal('Password should be atleast six characters');
+            done();
+            });
+        });
+    });
+
+    describe('User sign In', () => {
+        it('should POST a new user sign in', (done) => {
+            chai.request(app)
+            .post('/api/v1/users/auth/signin')
+            .send(user)
+            .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            done();
+            });
+        });
+    });
+
+    describe('User sign In', () => {
+        it('should not be able to POST a new user sign in', (done) => {
+            chai.request(app)
+            .post('/api/v1/users/auth/signin')
+            .send(user7)
+            .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.error.should.equal('Email does not exist');
             done();
             });
         });
