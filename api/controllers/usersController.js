@@ -62,7 +62,7 @@ export default class UserController {
 static login(req, res) {
     
     const newUser = client.findAllUser();
-    const found = newUser.some(auser => auser.email === req.body.email)
+    const found = newUser.find(auser => auser.email === req.body.email)
     if(!found) {
         return res.status(400).json({ error: 'Email does not exist'});
       }
@@ -82,23 +82,19 @@ static login(req, res) {
             //     password: User.password,
         
     const verifiedUser = {
-        email: newUser.email,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        password: newUser.password,
+        id: found.id,
+        email: found.email,
+        firstName: found.firstName,
+        lastName: found.lastName,
+        password: found.password,
     };
-    const token= jwt.sign({ user: verifiedUser }, 'secretkey', {expiresIn: "7d"}); 
+    
+    const token= jwt.sign({verifiedUser}, 'secretkey', {expiresIn: "7d"}); 
         return res.status(200).json({ 
             message: 'Login successful',
             data: {
                 token,
-                id: newUser.id,
-                email: newUser.email,
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
-                password: newUser.password,
-                type: "client",
-                isAdmin: false
+               verifiedUser
             }
         });
 
