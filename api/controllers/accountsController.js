@@ -1,6 +1,6 @@
 import Account from '../models/Accounts';
 import jwt from 'jsonwebtoken';
-import { validationResult } from 'Express-validator/check';
+import { validationResult } from 'express-validator/check';
 // import { body } from 'express-validator/check';
 
 
