@@ -7,7 +7,7 @@ import router from './api/routes';
 const app = express();
 
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
 
