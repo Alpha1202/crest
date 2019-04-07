@@ -1,7 +1,7 @@
 import Account from '../models/Accounts';
 import jwt from 'jsonwebtoken';
 import { validationResult } from 'express-validator/check';
-// import { body } from 'express-validator/check';
+
 
 
 
@@ -47,7 +47,12 @@ export default class AccountsController {
       }) 
     
     };
-
+      /**
+   * Activate or Deactivate an account
+   * @param {object} req
+   * @param {object} res
+   * @return {object} PATCHed account
+   */
   static patchAcc(req, res) {
       const { accountNumber } = req.params;
       const Account =  acc.findAccount(accountNumber);
@@ -83,11 +88,27 @@ export default class AccountsController {
              openingBalance,
              createdOn
           }})
-     }
-    
-     
-            
+        }   
   }
+
+    /**
+   * Delete an account
+   * @param {object} req
+   * @param {object} res
+   * @return {object} all accounts except the deleted account
+   */
+  static AccDelete(req, res) {
+    const { accountNumber } = req.params;
+     const found = acc.findAccount(accountNumber)
+     if(!found) {
+       return res.status(404).json({error: 'No account with that account number'});
+     } 
+     const deleted =  acc.deleteAcc(found);
+     return res.status(200).json({
+       status: 200,
+       message: 'Account successfully deleted'
+     });
+ }
  }
     
   

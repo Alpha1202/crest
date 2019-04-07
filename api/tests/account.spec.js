@@ -41,4 +41,17 @@ describe('API Tests', () => {
             });
         });
     });
+
+    describe('delete an account', () => {
+        it('should not be able to delete an account because there is no token', (done) => {
+            chai.request(app)
+            .delete('/api/v1/accounts/12345')
+            .send()
+            .end((err, res) => {
+            res.should.have.status(403);
+            res.body.should.be.a('object');
+            done();
+            });
+        });
+    });
 });
