@@ -26,7 +26,7 @@ export default class Account {
                 accountNumber:'23451',
                 ownerId: 2,
                 type: "current",
-                status: "active",
+                status: "dormant",
                 openingBalance: "1200000",
                 createdOn: moment.now(),
             },
