@@ -47,6 +47,47 @@ export default class AccountsController {
       }) 
     
     };
-}
+
+  static patchAcc(req, res) {
+      const { accountNumber } = req.params;
+      const Account =  acc.findAccount(accountNumber);
+     
+      if(!Account) {
+        return res.status(404).json({error: 'No account with that account number'});
+      } 
+      const { id,  ownerId, type, status, openingBalance, createdOn } = Account;
+      if(Account.status === 'active') {
+         Account.status = 'dormant';
+         return res.status(200).json({
+           status:200,
+           data: {
+             accountNumber,
+            status,
+             id,
+             ownerId,
+             type,
+             openingBalance,
+             createdOn
+           }})
+      }
+      if(Account.status === 'dormant') {
+        Account.status = 'active';
+        return res.status(200).json({
+          status: 200,
+          data: {
+            accountNumber,
+            status,
+             id,
+             ownerId,
+             type,
+             openingBalance,
+             createdOn
+          }})
+     }
+    
+     
+            
+  }
+ }
     
   

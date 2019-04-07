@@ -1,4 +1,5 @@
 import { body } from 'express-validator/check';
+import { param } from 'express-validator/check';
 
 exports.validate = (method) => {
     switch (method) {
@@ -8,17 +9,9 @@ exports.validate = (method) => {
                 .trim()
                 .exists()
                 .withMessage('Account type is required')
-                // .contains('savings', 'current')
-                // .withMessage('Please chose either savings or current')
                 .isAlpha()
                 .withMessage('Only alphabetical characters are allowed'),
-                // .custom((type, { req }) => {
-                //      type = req.body.type
-                //     if(typeof type !== 'savings' || 'current') {
-                //         throw new Error('Please chose either savings or current')
-                //     }
-                
-                // }),
+               
                 
 
                  body('status', 'please specify status')
@@ -26,9 +19,8 @@ exports.validate = (method) => {
                 .exists()
                 .withMessage('Please specify status')
                 .isAlpha()
-                .withMessage('Only alphabetical characters are allowed')
-                .contains('active')
-                .withMessage('Please chose either active or dormant or draft'),
+                .withMessage('Only alphabetical characters are allowed'),
+            
 
                  body('openingBalance', 'please enter the opening Balance')
                  .trim()
@@ -40,35 +32,16 @@ exports.validate = (method) => {
                 .withMessage('Must be at least 3 characters long'),
             ]
         }
-    // case 'signin': {
-    //     return [
-    //     body('email', 'please enter a valid email')
-    //     .trim()
-    //     .exists()
-    //     .withMessage('Email is required')
-    //     .isEmail()
-    //     .withMessage('Please enter a valid email')
-    //     .normalizeEmail({ all_lowercase: true }),
-
-    //     body('password', 'please enter your password')
-    //     .exists()
-    //     .withMessage('Please enter your password')
-    //     .isLength({ min: 6 })
-    //     .withMessage('Password should be atleast six characters')
-    // ]  
-    // } 
+    case 'patchAcc': {
+        return [
+        param('accountNumber', 'Please enter an account number')
+        .trim()
+        .exists()
+        .withMessage('Please enter account')
+        .isFloat()
+        .withMessage('Account number can only contain numbers')
+    .withMessage('Password should be atleast six characters')
+    ]  
+    } 
 }
 }
-
-// exports.verifyToken = (req, res, next) => {
-//     const bearerHeader = req.headers['authorization'];
-
-//     if(typeof bearerHeader !== 'undefined') {
-//         const bearer = bearerHeader.split(' ');
-//         const bearerToken = bearer[1];
-//         req.token = bearerToken;
-//         next();   
-//     } else {
-//         res.status(403).json({error: 'You are not authorised'});
-//     }
-// }
