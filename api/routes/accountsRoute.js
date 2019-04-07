@@ -6,6 +6,7 @@ import { validate } from '../middleware/accountMiddleware';
 const accountsRouter = express.Router();
 
 accountsRouter.post('/', Auth.verifyToken, validate('createAccount'), AccountsController.createAccount);
+accountsRouter.patch('/:accountNumber', Auth.verifyToken, validate('patchAcc'), AccountsController.patchAcc);
 
 
 export default accountsRouter;  

@@ -14,7 +14,7 @@ export default class Account {
         this.accounts = [
             {
                 id: uuid.v4(),
-                accountNumber: accNumber,
+                accountNumber:'12345',
                 ownerId: 2,
                 type: "current",
                 status: "active",
