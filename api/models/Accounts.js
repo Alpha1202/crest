@@ -21,6 +21,24 @@ export default class Account {
                 openingBalance: "1200000",
                 createdOn: moment.now(),
             },
+            {
+                id: uuid.v4(),
+                accountNumber:'23451',
+                ownerId: 2,
+                type: "current",
+                status: "active",
+                openingBalance: "1200000",
+                createdOn: moment.now(),
+            },
+            {
+                id: uuid.v4(),
+                accountNumber:'34251',
+                ownerId: 2,
+                type: "current",
+                status: "active",
+                openingBalance: "1200000",
+                createdOn: moment.now(),
+            },
         ];
     }
     /**
@@ -69,9 +87,9 @@ export default class Account {
      * @returns {object} all accounts excluding the deleted account
      */
     deleteAcc(accountNumber) {
-        const someAcc = this.findAccount(accountNumber);
-        const found = this.accounts.indexOf(someAcc);
-        this.accounts.splice(found, 1);
-        return this.accounts;
+        const found = this.findAccount(accountNumber);
+        const foundIndex =this.accounts.indexOf(found);
+        this.accounts.splice(foundIndex, 1);
+        return {};
     }
 }
