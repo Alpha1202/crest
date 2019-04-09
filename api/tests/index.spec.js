@@ -12,7 +12,7 @@ describe('Server', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
-          res.body.message.should.equal('server is running');
+          res.body.message.should.equal('Welcome to crest finance APIs');
           done();
         })
     })

@@ -35,7 +35,7 @@ export default class validate {
     if (!firstName || firstName === 'undefined' || firstName === '') {
       return res.status(400).json({ error: 'Please enter your First Name' });
     }
-    const alphaRegExp =  /^[a-zA-Z]+$/;
+    const alphaRegExp = /^[a-zA-Z]+$/;
     if (!firstName.match(alphaRegExp)) {
       return res.status(400).json({ error: 'Only alphabets are allowed, white spaces are not allowed' });
     }
@@ -56,7 +56,7 @@ export default class validate {
     if (!lastName || lastName === 'undefined' || lastName === '') {
       return res.status(400).json({ error: 'Please enter your Last Name' });
     }
-    const alphaRegExp =  /^[a-zA-Z]+$/;
+    const alphaRegExp = /^[a-zA-Z]+$/;
     if (!lastName.match(alphaRegExp)) {
       return res.status(400).json({ error: 'Only alphabets are allowed' });
     }
