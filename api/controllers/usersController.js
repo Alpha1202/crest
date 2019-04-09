@@ -4,8 +4,9 @@ import User from '../models/User';
 
 
 const user = new User();
+
 /**
- *
+ *@class user controller
  */
 export default class UserController {
   /**
@@ -31,7 +32,7 @@ export default class UserController {
     const saveUser = user.create({ email, firstName, lastName, password: hash, isAdmin, type });
 
     if (saveUser.saved) {
-      const token = jwt.sign({ id: user.id, email, firstName, lastName }, process.env.JWT_SECRET, { expiresIn: '7d'});
+      const token = jwt.sign({ id: user.id, firstName, lastName, email, type, isAdmin }, process.env.JWT_SECRET, { expiresIn: '7d'});
       return res.status(201).json({
         status: 201,
         data: {
@@ -45,7 +46,7 @@ export default class UserController {
         },
       });
     }
-    return res.status(400).json({ error: 'Registration failed, ttry again' });
+    return res.status(400).json({ error: 'Registration failed, try again' });
   }
 
 
@@ -60,7 +61,7 @@ export default class UserController {
     const { email } = req.body;
     const found = someUser.find(aUser => aUser.email === email);
     const { id, firstName, lastName, type, isAdmin } = found;
-    const token = jwt.sign({ id, email, firstName, lastName }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id, firstName, lastName, email, type: found.type, isAdmin: found.isAdmin  }, process.env.JWT_SECRET, { expiresIn: '7d' });
     return res.status(200).json({
       status: 200,
       data: {

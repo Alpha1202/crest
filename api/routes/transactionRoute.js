@@ -5,7 +5,7 @@ import { validate } from '../middleware/transactionMiddleware';
 
 const transactionRouter = express.Router();
 
-transactionRouter.post('/:accountNumber/debit', Auth.verifyToken, validate('transaction'), TransactionController.debit);
-transactionRouter.post('/:accountNumber/credit', Auth.verifyToken, validate('transaction'), TransactionController.credit);
+// transactionRouter.post('/:accountNumber/debit', Auth.verifyToken, validate('transaction'), TransactionController.debit);
+// transactionRouter.post('/:accountNumber/credit', Auth.verifyToken, validate('transaction'), TransactionController.credit);
 
 export default transactionRouter;

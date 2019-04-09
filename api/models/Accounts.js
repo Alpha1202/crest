@@ -1,8 +1,13 @@
 import uuid from 'uuid';
-import moment from 'moment';
 
 
-const accNumber = Math.ceil(Math.random() * 9999999);
+const accountNumberPrefix = '00';
+const generateAccountNumber = Date.now();
+const newAccountNumber = accountNumberPrefix + generateAccountNumber;
+
+
+const date = new Date();
+
 
 export default class Account {
   /**
@@ -17,8 +22,8 @@ export default class Account {
         ownerId: 2,
         type: 'current',
         status: 'active',
-        openingBalance: '1200000',
-        createdOn: moment.now(),
+        openingBalance: '0',
+        createdOn: date,
       },
       {
         id: uuid.v4(),
@@ -26,8 +31,8 @@ export default class Account {
         ownerId: 2,
         type: 'current',
         status: 'dormant',
-        openingBalance: '1200000',
-        createdOn: moment.now(),
+        openingBalance: '0',
+        createdOn: date,
       },
       {
         id: uuid.v4(),
@@ -35,8 +40,8 @@ export default class Account {
         ownerId: 2,
         type: 'current',
         status: 'active',
-        openingBalance: '1200000',
-        createdOn: moment.now(),
+        openingBalance: '0',
+        createdOn: date,
       },
     ];
   }
@@ -48,15 +53,21 @@ export default class Account {
   create(account) {
     const newAccount = {
       id: uuid.v4(),
-      accountNumber: accNumber,
+      accountNumber: newAccountNumber,
       ownerId: account.ownerId,
       type: account.type,
-      status: account.status,
-      openingBalance: account.openingBalance,
-      createdOn: moment.now(),
+      status: 'dormant',
+      openingBalance: 0,
+      createdOn: date,
     };
-    this.accounts.push(newAccount);
-    return newAccount;
+    const saveAccount = this.accounts.push(newAccount);
+    if (saveAccount) {
+      return {
+        newAccount,
+        saved: true,
+      };
+    }
+    return { saved: false };
   }
 
   /**
@@ -68,29 +79,18 @@ export default class Account {
   }
 
   /**
-     * @returns {object} returns all the accounts
+     * @returns {object} stores account to the dummy database
      */
-  findAllAccounts() {
-    return this.accounts;
+  save(data) {
+    return this.accounts.push(data);
   }
 
-  /**
-     * @param {uuid} accountNumber, account
-     * @param {object} account object instance
-     * @returns {object} the updated account object instance
-     */
-  updateAcc(accountNumber, account) {
-    const someAcc = this.findAccount(accountNumber);
-    const found = this.accounts.indexOf(someAcc);
-    this.accounts[found].status = account.status || someAcc.status;
-    return this.accounts[found];
-  }
 
   /**
-     * @param {uuid} accountNumber
+     * @param {} accountNumber
      * @returns {object} all accounts excluding the deleted account
      */
-  deleteAcc(accountNumber) {
+  deleteAccount(accountNumber) {
     const found = this.findAccount(accountNumber);
     const foundIndex = this.accounts.indexOf(found);
     this.accounts.splice(foundIndex, 1);
