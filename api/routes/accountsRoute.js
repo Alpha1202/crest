@@ -10,4 +10,4 @@ accountsRouter.patch('/:accountNumber', Auth.verifyToken, validate('patchAcc'), 
 accountsRouter.delete('/:accountNumber', Auth.verifyToken, AccountsController.AccDelete);
 
 
-export default accountsRouter;  
+export default accountsRouter;

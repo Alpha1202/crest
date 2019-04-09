@@ -1,71 +1,103 @@
-import { body } from 'express-validator/check';
+import User from '../models/User';
 
-exports.validate = (method) => {
-    switch (method) {
-        case 'signup': {
-            return [
-                body('email', 'please enter a valid email')
-                .trim()
-                .exists()
-                .withMessage('Email is required')
-                .isEmail()
-                .withMessage('Please enter a valid email')
-                .normalizeEmail({ all_lowercase: true }),
+const user = new User();
 
-                 body('firstName', 'please enter a valid name')
-                 .trim()
-                .exists()
-                .withMessage('You must enter your First Name')
-                .isAlpha()
-                .withMessage('Only alphabetical characters are allowed')
-                .isLength({ min: 3 })
-                .withMessage('Must be at least 3 characters long'),
-
-                 body('lastName', 'please enter a valid name')
-                 .trim()
-                .exists()
-                .withMessage('You must enter your Last Name')
-                .isAlpha()
-                .withMessage('Only alphabetical characters are allowed')
-                .isLength({ min: 3 })
-                .withMessage('Must be at least 3 characters long'),
-
-                body('password', 'please enter your password')
-                .exists()
-                .withMessage('Please enter your password')
-                .isLength({ min: 6 })
-                .withMessage('Password should be atleast six characters')
-            ]
-        }
-    case 'signin': {
-        return [
-        body('email', 'please enter a valid email')
-        .trim()
-        .exists()
-        .withMessage('Email is required')
-        .isEmail()
-        .withMessage('Please enter a valid email')
-        .normalizeEmail({ all_lowercase: true }),
-
-        body('password', 'please enter your password')
-        .exists()
-        .withMessage('Please enter your password')
-        .isLength({ min: 6 })
-        .withMessage('Password should be atleast six characters')
-    ]  
-    } 
-}
-}
-
-exports.verifyToken = (req, res, next) => {
-    const bearerHeader = req.headers['authorization'];
-
-    if(typeof bearerHeader !== 'undefined') {
-        const bearer = bearerHeader.split(' ');
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
-        next();   
-    } else {
-        res.status(403).json({error: 'You are not authorised'});
+/**
+     *@class validate
+  */
+export default class validate {
+  /**
+     * validates inputs for creating a new user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created user object
+     */
+  static validateEmail(req, res, next) {
+    const { email } = req.body;
+    if (!email || email === 'undefined' || email === '') {
+      return res.status(400).json({ error: 'Please enter your email' });
     }
+    const emailExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!email.match(emailExp)) {
+      return res.status(400).json({ error: 'Invalid Email' });
+    }
+    next();
+  }
+
+  /**
+     * validates inputs for creating a new user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created user object
+     */
+  static validateFirstName(req, res, next) {
+    const { firstName } = req.body;
+    if (!firstName || firstName === 'undefined' || firstName === '') {
+      return res.status(400).json({ error: 'Please enter your First Name' });
+    }
+    const alphaRegExp =  /^[a-zA-Z]+$/;
+    if (!firstName.match(alphaRegExp)) {
+      return res.status(400).json({ error: 'Only alphabets are allowed, white spaces are not allowed' });
+    }
+    if (firstName.length <= 2) {
+      return res.status(400).json({ error: 'First Name should be atleast 3 letters' });
+    }
+    next();
+  }
+
+  /**
+     * validates inputs for creating a new user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created user object
+     */
+  static validateLastName(req, res, next) {
+    const { lastName } = req.body;
+    if (!lastName || lastName === 'undefined' || lastName === '') {
+      return res.status(400).json({ error: 'Please enter your Last Name' });
+    }
+    const alphaRegExp =  /^[a-zA-Z]+$/;
+    if (!lastName.match(alphaRegExp)) {
+      return res.status(400).json({ error: 'Only alphabets are allowed' });
+    }
+    if (lastName.length <= 2) {
+      return res.status(400).json({ error: 'Last Name should be atleast 3 letters' });
+    }
+    next();
+  }
+
+  /**
+     * validates inputs for creating or logging a user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a user object
+     */
+  static validatePassword(req, res, next) {
+    const { password } = req.body;
+    if (!password || password === 'undefined' || password === '') {
+      return res.status(400).json({ error: 'Please enter your password' });
+    }
+    if (!password.length >= 7 && password.length <= 15) {
+      return res.status(400).json({ error: 'Password should be atleast 7 characters' })
+    }
+    next();
+  }
+
+  /**
+     * validates inputs for signin in a user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} signed in user object
+     */
+  static verifyUser(req, res, next) {
+    const newUser = user.findAllUser();
+    const found = newUser.find(auser => auser.email === req.body.email);
+    if (!found) {
+      return res.status(400).json({ error: 'Email does not exist' });
+    }
+    if (found.password !== req.body.password) {
+      return res.status(400).json({error: 'incorrect password'})
+    }
+    next();
+  }
 }

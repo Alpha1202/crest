@@ -1,103 +1,77 @@
-import User from '../models/User';
-import { validationResult } from 'express-validator/check';
 import jwt from 'jsonwebtoken';
-// import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
+import User from '../models/User';
 
 
-
-const client = new User();
+const user = new User();
+/**
+ *
+ */
 export default class UserController {
-    /**
+  /**
      * Create a new user
      * @params {object} req
      * @params {object} res
      * @returns {object} a newly created user object
      */
-    static signup(req, res) {
-        const newUser = client.findAllUser();
-        const found = newUser.some(auser => auser.email === req.body.email)
-        if(found) {
-          return res.status(400).json({ error: 'Email already exists'})
-        }
-        const errors = validationResult(req);
-        if(!errors.isEmpty()) {
-            return res.status(422).json({ error: errors.array()[0].msg })
-        }
-         else {
-            const { email, firstName, lastName, password } = req.body;
-            const hash = bcrypt.hashSync(password, 10);
-            const User = client.create({ email, firstName, lastName, password: hash });
-            const newUser = {
-                email: User.email,
-                firstName: User.firstName,
-                lastName: User.lastName,
-                password: User.password,
-            };
-            jwt.sign({ user: newUser }, 'secretkey', {expiresIn: "7d"}, (err, token) => {
-                return res.status(201).json({ 
-                    data: {
-                        token,
-                        id: User.id,
-                        email: User.email,
-                        firstName: User.firstName,
-                        lastName: User.lastName,
-                        password: User.password,
-                        type: "client",
-                        isAdmin: false
-                    }
-                });
-            });
-           
-        }
-        
-    }
 
-/**
+  static signup(req, res) {
+    const someUser = user.findAllUser();
+    const { email, firstName, lastName, password } = req.body;
+    const found = someUser.find(aUser => aUser.email === email);
+    if (found) {
+      return res.status(400).json({ error: 'Email already exists' });
+    }
+    const isAdmin = req.body.isAdmin || false;
+
+    let type;
+    isAdmin ? type = 'staff' : type = 'client';
+
+    const hash = bcrypt.hashSync(password, 10);
+    const saveUser = user.create({ email, firstName, lastName, password: hash, isAdmin, type });
+
+    if (saveUser.saved) {
+      const token = jwt.sign({ id: user.id, email, firstName, lastName }, process.env.JWT_SECRET, { expiresIn: '7d'});
+      return res.status(201).json({
+        status: 201,
+        data: {
+          token,
+          id: saveUser.newUser.id,
+          firstName: saveUser.newUser.firstName,
+          lastName: saveUser.newUser.lastName,
+          email: saveUser.newUser.email.toLowerCase().trim().toString(),
+          type,
+          isAdmin,
+        },
+      });
+    }
+    return res.status(400).json({ error: 'Registration failed, ttry again' });
+  }
+
+
+  /**
  * Login a user
  * @param {object} req
  * @param {object} res
  * @return {json} user logged in
  */
-static login(req, res) {
-    
-    const newUser = client.findAllUser();
-    const found = newUser.find(auser => auser.email === req.body.email)
-    if(!found) {
-        return res.status(400).json({ error: 'Email does not exist'});
-      }
-      const errors = validationResult(req);
-        if(!errors.isEmpty()) {
-            return res.status(422).json({ error: errors.array()[0].msg })
-        }
-        //  {
-            // const someUser = client.findAuser(req.body.email)
-            // const { password } = req.body;
-            // bcrypt.compareSync(password, someUser.password);
-            // const User = client.create({ email, firstName, lastName, password: hash });
-            // const newUser = {
-            //     email: User.email,
-            //     firstName: User.firstName,
-            //     lastName: User.lastName,
-            //     password: User.password,
-        
-    const verifiedUser = {
-        id: found.id,
+  static login(req, res) {
+    const someUser = user.findAllUser();
+    const { email } = req.body;
+    const found = someUser.find(aUser => aUser.email === email);
+    const { id, firstName, lastName, type, isAdmin } = found;
+    const token = jwt.sign({ id, email, firstName, lastName }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    return res.status(200).json({
+      status: 200,
+      data: {
+        token,
+        id,
+        firstName,
+        lastName,
         email: found.email,
-        firstName: found.firstName,
-        lastName: found.lastName,
-        password: found.password,
-    };
-    
-    const token= jwt.sign({verifiedUser}, 'secretkey', {expiresIn: "7d"}); 
-        return res.status(200).json({ 
-            message: 'Login successful',
-            data: {
-                token,
-               verifiedUser
-            }
-        });
-
+        type,
+        isAdmin,
+      },
+    });
+  }
 }
-}
-

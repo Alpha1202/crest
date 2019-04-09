@@ -1,5 +1,5 @@
-import { body } from 'express-validator/check';
-import { param } from 'express-validator/check';
+import { body, param } from 'express-validator/check';
+
 
 exports.validate = (method) => {
     switch (method) {
