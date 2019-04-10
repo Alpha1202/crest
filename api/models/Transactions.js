@@ -1,5 +1,6 @@
 import uuid from 'uuid';
-import moment from 'moment';
+
+const date = new Date();
 
 
 export default class Transactions {
@@ -11,7 +12,7 @@ export default class Transactions {
     this.transactions = [
       {
         id: uuid.v4(),
-        createdOn: moment.now(),
+        createdOn: date,
         type: 'credit',
         accountNumber: '000333112',
         cashier: 23,
@@ -30,7 +31,7 @@ export default class Transactions {
   credit(transaction) {
     const creditTransaction = {
       id: uuid.v4(),
-      createdOn: moment.now(),
+      createdOn: date,
       type: 'credit',
       accountNumber: transaction.accountNumber,
       cashier: transaction.cashier,
@@ -38,14 +39,20 @@ export default class Transactions {
       oldBalance: transaction.oldBalance,
       newBalance: transaction.newBalance,
     };
-    this.transactions.push(creditTransaction);
-    return creditTransaction;
+    const saveTransaction = this.transactions.push(creditTransaction);
+    if (saveTransaction) {
+      return {
+        saveTransaction,
+        saved: true,
+      };
+    }
+    return { saved: false };
   }
 
   debit(transaction) {
     const debitTransaction = {
       id: uuid.v4(),
-      createdOn: moment.now(),
+      createdOn: date,
       type: 'debit',
       accountNumber: transaction.accountNumber,
       cashier: transaction.cashier,
@@ -53,8 +60,13 @@ export default class Transactions {
       oldBalance: transaction.oldBalance,
       newBalance: transaction.newBalance,
     };
-    this.transactions.push(debitTransaction);
-    return debitTransaction;
+    const saveTransaction = this.transactions.push(debitTransaction);
+    if (saveTransaction) {
+      return {
+        saveTransaction,
+        saved: true,
+      };
+    }
+    return { saved: false };
   }
-
 }

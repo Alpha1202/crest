@@ -19,11 +19,11 @@ export default class AccountsController {
   static createAccount(req, res) {
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
-        return res.status(403).json({ error: 'Forbidden' });
+        return res.status(403).json({status: 403, error: 'Forbidden' });
       }
       const { firstName, lastName, email, isAdmin } = authData;
       if (isAdmin === true) {
-        return res.status(403).json({error: 'Admin is not authorized'});
+        return res.status(403).json({status: 403, error: 'Admin is not authorized'});
       }
       const { type } = req.body;
 
@@ -44,7 +44,7 @@ export default class AccountsController {
           },
         });
       }
-      return res.status(400).json({ error: 'Account not created successfully'});
+      return res.status(400).json({status: 400, error: 'Account not created successfully'});
     });
   }
 
@@ -57,16 +57,16 @@ export default class AccountsController {
   static updateAccountStatus(req, res) {
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
-        return res.status(403).json({ error: 'Forbidden' });
+        return res.status(403).json({status: 403, error: 'Forbidden' });
       }
       const { isAdmin } = authData;
       if (isAdmin === false) {
-        return res.status(403).json({error: 'Only Admin is authorized'});
+        return res.status(403).json({status: 403, error: 'Only Admin is authorized'});
       }
       const { accountNumber } = req.params;
       const found = account.findAccount(accountNumber);
       if (!found) {
-        return res.status(404).json({ error: `Account Number ${accountNumber} does not exist` });
+        return res.status(404).json({status: 404, error: `Account Number ${accountNumber} does not exist` });
       }
       const { id, ownerId, type, status, openingBalance, createdOn } = found;
       if (found.status === 'active') {
@@ -114,16 +114,16 @@ export default class AccountsController {
   static deleteAccount(req, res) {
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
-        return res.status(403).json({ error: 'Forbidden' });
+        return res.status(403).json({status: 403, error: 'Forbidden' });
       }
       const { isAdmin } = authData;
       if (isAdmin === false) {
-        return res.status(403).json({error: 'Only Admin is authorized'});
+        return res.status(403).json({status: 403, error: 'Only Admin is authorized'});
       }
       const { accountNumber } = req.params;
       const found = account.findAccount(accountNumber);
       if (!found) {
-        return res.status(404).json({ error: 'No account with that account number' });
+        return res.status(404).json({status: 404, error: 'No account with that account number' });
       }
       account.deleteAccount(found);
       return res.status(200).json({

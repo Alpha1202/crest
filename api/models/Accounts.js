@@ -22,7 +22,7 @@ export default class Account {
         ownerId: 2,
         type: 'current',
         status: 'active',
-        openingBalance: '0',
+        openingBalance: '10000',
         createdOn: date,
       },
       {

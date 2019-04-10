@@ -18,10 +18,10 @@ export default class Auth {
         req.token = bearerToken;
         next();
       } else {
-        res.status(403).json({ error: 'You are not authorised' });
+        res.status(403).json({status: 403, error: 'You are not authorised' });
       }
     } catch (error) {
-      res.status(400).json({ error: 'Access token not valid' });
+      res.status(400).json({status: 400, error: 'Access token not valid' });
     }
   }
 }
