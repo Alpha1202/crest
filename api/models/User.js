@@ -1,76 +1,88 @@
 import uuid from 'uuid';
 
 export default class User {
-    /**
+  /**
      * class constructor
      * @param {object} user
      */
-    constructor() {
-        this.users = [
-            {
-               id: 1,
-               email: "nzubennamani@gmail.com",
-               firstName: "Nzubechukwu",
-               lastName: "Nnamani",
-               password: "123456",
-               type: "client",
-               isAdmin: false
-            },
-        ];
-    }
-    /**
+  constructor() {
+    this.users = [
+      {
+        id: 1,
+        email: 'nzubennamani@gmail.com',
+        firstName: 'Nzubechukwu',
+        lastName: 'Nnamani',
+        password: '123456',
+        type: 'client',
+        isAdmin: false,
+      },
+      {
+        id: 20,
+        email: 'nnamani@gmail.com',
+        firstName: 'Nzubechukwu',
+        lastName: 'Nnamani',
+        password: '654321',
+        type: 'staff',
+        isAdmin: true,
+      },
+      {
+        id: 43,
+        email: 'zuby@gmail.com',
+        firstName: 'Nzubechukwu',
+        lastName: 'Nnamani',
+        password: '213456',
+        type: 'client',
+        isAdmin: false,
+      },
+      {
+        id: 20,
+        email: 'alpha@gmail.com',
+        firstName: 'Nzubechukwu',
+        lastName: 'Nnamani',
+        password: '543216',
+        type: 'staff',
+        isAdmin: true,
+      },
+    ];
+  }
+
+  /**
      * @param {object} new user object
      * @returns {object} user object
      */
-    create(user) {
-        const newUser = {
-        id: uuid.v4(),
-        token: user.token,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        password: user.password,
-        type: "client",
-        isAdmin: false
-        };
-        this.users.push(newUser);
-        return newUser
+  create(user) {
+    const newUser = {
+      id: uuid.v4(),
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+      type: user.type,
+      isAdmin: user.isAdmin,
+    };
+
+    const saveUser = this.users.push(newUser);
+    if (saveUser) {
+      return {
+        newUser,
+        saved: true,
+      };
     }
-    /**
+    return { saved: false };
+  }
+
+  /**
      * @param {uuid} id
      * @returns {object} user object
      */
-    findAuser(id) {
-        return this.users.find(user => user.id === id);
-    }
-    /**
+  findAuser(email) {
+    return this.users.find(user => user.email === email);
+  }
+
+  /**
      * @returns {object} returns all the users
      */
-    findAllUser() {
-        return this.users;
-    }
-    /**
-     * @param {uuid} id
-     * @param {object} user object instance
-     * @returns {object} the updated user object instance
-     */
-    updateUser(id, user) {
-        const someUser = this.findAuser(id);
-        const found = this.users.indexOf(someUser);
-        this.users[found].email = user['email'] || someUser.email;
-        this.users[found].firstName = user['firstName'] || someUser.firstName;
-        this.users[found].lastName = user['lastName'] || someUser.lastName;
-        this.users[found].password = user['password'] || someUser.password;
-        return this.users[found];
-    }
-    /**
-     * @param {uuid} id
-     * @returns {object} all users excluding the deleted user
-     */
-    deleteAuser(id) {
-        const someUser = this.findAuser(id);
-        const found = this.users.indexOf(someUser);
-        this.users.splice(found, 1);
-        return this.users;
-    }
+  findAllUser() {
+    return this.users;
+  }
 }

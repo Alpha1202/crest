@@ -1,13 +1,27 @@
 import express from 'express';
-import AccountsController from '../controllers/accountsController';
+import account from '../controllers/accountsController';
 import Auth from '../middleware/auth';
-import { validate } from '../middleware/accountMiddleware';
+import validate from '../middleware/accountMiddleware';
 
 const accountsRouter = express.Router();
 
-accountsRouter.post('/', Auth.verifyToken, validate('createAccount'), AccountsController.createAccount);
-accountsRouter.patch('/:accountNumber', Auth.verifyToken, validate('patchAcc'), AccountsController.patchAcc);
-accountsRouter.delete('/:accountNumber', Auth.verifyToken, AccountsController.AccDelete);
+accountsRouter.post('/',
+  Auth.checkToken,
+  validate.validateType,
+  validate.validateOpeningBalance,
+  account.createAccount);
+
+accountsRouter.patch('/:accountNumber',
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  validate.validateStatus,
+  account.updateAccountStatus);
 
 
-export default accountsRouter;  
+accountsRouter.delete('/:accountNumber',
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  account.deleteAccount);
+
+
+export default accountsRouter;

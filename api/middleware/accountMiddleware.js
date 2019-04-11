@@ -1,47 +1,70 @@
-import { body } from 'express-validator/check';
-import { param } from 'express-validator/check';
+/* eslint-disable consistent-return */
 
-exports.validate = (method) => {
-    switch (method) {
-        case 'createAccount': {
-            return [
-                body('type', 'please enter account type, savings or current')
-                .trim()
-                .exists()
-                .withMessage('Account type is required')
-                .isAlpha()
-                .withMessage('Only alphabetical characters are allowed'),
-               
-                
 
-                 body('status', 'please specify status')
-                 .trim()
-                .exists()
-                .withMessage('Please specify status')
-                .isAlpha()
-                .withMessage('Only alphabetical characters are allowed'),
-            
+/**
+     *@class validate
+  */
+export default class validate {
+/**
+     * validates inputs for creating account
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created account object
+     */
+  static validateType(req, res, next) {
+    const { type } = req.body;
+    if (!type || type === 'undefined' || type === '') {
+      return res.status(400).json({ status: 400, error: 'please enter account type, savings or current' });
+    }
+    const alphaRegExp = /^[a-zA-Z]+$/;
+    if (!type.match(alphaRegExp)) {
+      return res.status(400).json({ status: 400, error: 'Only alphabets are allowed, white spaces are not allowed' });
+    }
+    next();
+  }
 
-                 body('openingBalance', 'please enter the opening Balance')
-                 .trim()
-                .exists()
-                .withMessage('Please enter the opening Balance')
-                .isFloat()
-                .withMessage('Only numbers are allowed')
-                .isLength({ min: 3 })
-                .withMessage('Must be at least 3 characters long'),
-            ]
-        }
-    case 'patchAcc': {
-        return [
-        param('accountNumber', 'Please enter an account number')
-        .trim()
-        .exists()
-        .withMessage('Please enter account')
-        .isFloat()
-        .withMessage('Account number can only contain numbers')
-    .withMessage('Password should be atleast six characters')
-    ]  
-    } 
-}
+  /**
+     * validates inputs for creating a new user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created user object
+     */
+  static validateOpeningBalance(req, res, next) {
+    const { openingBalance } = req.body;
+    if (!openingBalance || openingBalance === 'undefined' || openingBalance === '') {
+      return res.status(400).json({ status: 400, error: 'please specify your opening Balance' });
+    }
+    const numericRegExp = /^[0-9]+$/;
+    if (!openingBalance.match(numericRegExp)) {
+      return res.status(400).json({ status: 400, error: 'Please enter a valid amount' });
+    }
+    next();
+  }
+
+  /**
+     * validates inputs for creating a new user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created user object
+     */
+  static validateStatus(req, res, next) {
+    const { status } = req.body;
+    if (!status || status === 'undefined' || status === '') {
+      return res.status(400).json({ status: 400, error: 'please specify the account status, please specify dormant or active' });
+    }
+    const alphaRegExp = /^[a-zA-Z]+$/;
+    if (!status.match(alphaRegExp)) {
+      return res.status(400).json({ status: 400, error: 'Invalid account status, please specify dormant or active' });
+    }
+    next();
+  }
+
+  static validateAccountNumber(req, res, next) {
+    const { accountNumber } = req.params;
+    const numericRegExp = /^[0-9]+$/;
+    if (!accountNumber.match(numericRegExp)) {
+      return res.status(400).json({ status: 400, error: 'Please enter a valid account Number' });
+    }
+    next();
+  }
 }

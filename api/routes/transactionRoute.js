@@ -1,11 +1,20 @@
 import express from 'express';
-import TransactionController from '../controllers/transactionsController';
+import transaction from '../controllers/transactionsController';
 import Auth from '../middleware/auth';
-import { validate } from '../middleware/transactionMiddleware';
+import validate from '../middleware/accountMiddleware';
+
 
 const transactionRouter = express.Router();
 
-transactionRouter.post('/:accountNumber/debit', Auth.verifyToken, validate('transaction'), TransactionController.debit);
-transactionRouter.post('/:accountNumber/credit', Auth.verifyToken, validate('transaction'), TransactionController.credit);
+transactionRouter.post('/:accountNumber/debit',
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  transaction.debit);
+
+
+transactionRouter.post('/:accountNumber/credit',
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  transaction.credit);
 
 export default transactionRouter;

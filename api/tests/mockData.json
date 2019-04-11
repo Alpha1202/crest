@@ -1,0 +1,237 @@
+{
+    "Users": {
+        "validUser": {
+        "email": "nzubennamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456"
+        },
+        "validAdmin": {
+        "email": "nnamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "654321",
+        "isAdmin": true
+        },
+        "validUserSignup": {
+        "email": "nzubennamani1@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456"
+        },
+        "validAdminSignup": {
+        "email": "nnamani9@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "654321",
+        "isAdmin": true
+        },
+        "invalidUser": {
+        "id": "1",
+        "email": "nzubennamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "1256",
+        "type": "client",
+        "isAdmin": false
+        },
+        "invalidEmail": {
+        "email": "nzubennamani",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456"
+        },
+        "missingEmail": {
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456"
+        },
+        "missingFirstName": {
+        "id": "1",
+        "email": "nzubennamani@gmail.com",
+        "lastName": "Nnamani",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+        "emptyFirstName": {
+        "id": "1",
+        "email": "nzubennamani@gmail.com",
+        "firstName": "",
+        "lastName": "Nnamani",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+        "invalidFirstName": {
+        "email": "nzubennamani@yahoo.com",
+        "firstName": "Nzube12",
+        "lastName": "Nnamani",
+        "password": "123456"
+        },
+        "anotherInvalidFirstName": {
+        "email": "nzubennamani@yahoo.com",
+        "firstName": "Nz",
+        "lastName": "Nnamani",
+        "password": "123456"
+        },
+        "missingLastName": {
+        "id": "1",
+        "email": "nzubennamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+        "invalidLastName": {
+        "id": "1",
+        "email": "nzubennamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "zub54",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+        "anotherInvalidLastName": {
+        "id": "1",
+        "email": "nzubennamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "zu",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+        "missingPassword": {
+        "id": "20",
+        "email": "nnamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "type": "staff",
+        "isAdmin": true
+        },
+        "emptyPassword": {
+        "email": "nzubennamani89@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123"
+        },
+        "validUserSignin": {
+        "email": "nzubennamani@gmail.com",
+        "password": "123456"
+        },
+        "invalidUserSignin": {
+        "email": "nzubennamani100@gmail.com",
+        "password": "123456"
+        },
+        "anotherInvalidUserSignin": {
+        "email": "nzubennamani@gmail.com",
+        "password": "1456"
+        },
+        "validAdminSignin": {
+        "email": "nnamani@gmail.com",
+        "password": "654321"
+        },
+        "missingSigninEmail": {
+        "password": "654321"
+        },
+        "emptySiginEmail": {
+        "email": "",
+        "password": "654321"
+        },
+        "invalidSigninAccount": {
+        "email": "alpha9@gmail.com",
+        "password": "raphael"
+        },
+        "validUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJ6dWJzIiwibGFzdE5hbWUiOiJBbHBoYSIsImVtYWlsIjoibnp1ZW5uYW1hbmlAZ21haWwuY29tIiwidHlwZSI6ImNsaWVudCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTQ4MDE1MzAsImV4cCI6MTU1NTQwNjMzMH0.0C7zaKffLv9DgmpDyViuXf_P55HgwcIwPayf4g4V2c0",
+        "invalidUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImZpcnN0TmFtZSI6Ik56dWJlY2h1a3d1IiwibGFzdE5hbWUiOiJObmFtYW5pIiwiZW1haWwiOiJubmFtYW5pQGdtYWlsLmNvbSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NDg4NDEyMywiZXhwIjoxNTU1NDg4OTIzfQ.-Gf7guTLBEWkgZ-xLQGtzblRcT7C5I065FzJKaObGwQ",
+        "validAdminToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImZpcnN0TmFtZSI6Ik56dWJlY2h1a3d1IiwibGFzdE5hbWUiOiJObmFtYW5pIiwiZW1haWwiOiJubmFtYW5pQGdtYWlsLmNvbSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NDg4NDEyMywiZXhwIjoxNTU1NDg4OTIzfQ.-Gf7guTLBEWkgZ-xLQGtzblRcT7C5I065FzJKaObGwQ",
+        "invalidAdminToken":  "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJ6dWJzIiwibGFzdE5hbWUiOiJBbHBoYSIsImVtYWlsIjoibnp1ZW5uYW1hbmlAZ21haWwuY29tIiwidHlwZSI6ImNsaWVudCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTQ4MDE1MzAsImV4cCI6MTU1NTQwNjMzMH0.0C7zaKffLv9DgmpDyViuXf_P55HgwcIwPayf4g4V2c0",   
+        "anotherInvalidAdminToken": "bearer aninvalidToken"
+    },
+
+    "Accounts": {
+        "validAccount": {
+        "id": "123",
+        "accountNumber": "23451",
+        "ownerId": "2",
+        "type": "current",
+        "status": "dormant",
+        "openingBalance": "0",
+        "createdOn": "12/04/2019"
+        },
+        "anotherValidAccount": {
+        "id": "123",
+        "accountNumber": "12345",
+        "ownerId": "2",
+        "type": "current",
+        "status": "active",
+        "openingBalance": "0",
+        "createdOn": "12/04/2019"
+        },
+        "anotherInvalidAccount": {
+        "id": "123",
+        "accountNumber": "23451",
+        "ownerId": "2",
+        "type": "current",
+        "status": "",
+        "openingBalance": "0",
+        "createdOn": "12/04/2019"
+        },
+        "invalidStatus": {
+        "id": "123",
+        "accountNumber": "23451",
+        "ownerId": "2",
+        "type": "current",
+        "status": "1234",
+        "openingBalance": "0",
+        "createdOn": "12/04/2019"
+        },
+        "invalidAccount": {
+        "id": "123",
+        "accountNumber": "23451",
+        "ownerId": "2",
+        "type": "",
+        "status": "dormant",
+        "openingBalance": "0",
+        "createdOn": "12/04/2019"
+        },
+        "createNewAccount": {
+        "type": "savings",
+        "openingBalance": "0"
+        },
+        "invalidNewAccount": {
+        "type": "",
+        "openingBalance": "0"
+        },
+        "anotherInvalidNewAccount": {
+        "type": "1234",
+        "openingBalance": "0"
+        },
+        "missingOpeningBalance": {
+        "type": "savings"
+        },
+        "invalidOpeningBalance": {
+        "type": "savings",
+        "openingBalance": "two"
+        },
+        "patchAccount": {
+        "status": "savings"
+        }
+    },
+
+    "Transactions": {
+    "validTransaction": {
+        "amount": 5000
+    },
+    "invalidTransaction": {
+
+    },
+    "anotherInvalidTransaction": {
+        "amount": "abcde"
+    },
+    "insufficientBalance": {
+        "amount": "1000000"
+    }
+    } 
+}
+
