@@ -44,7 +44,7 @@ export default class TransactionController {
       }
       const oldBalance = openingBalance;
       if (oldBalance <= 0 && oldBalance < amount) {
-        return res.status(400).json({status: 400, error: 'You have insufficient balance' });
+        return res.status(400).json({ status: 400, error: 'You have insufficient balance' });
       }
 
       const accountBalance = oldBalance - amount;
@@ -74,29 +74,29 @@ export default class TransactionController {
   static credit(req, res) {
     jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
       if (err) {
-        return res.status(403).json({ error: 'Forbidden' });
+        return res.status(403).json({ status: 403, error: 'Forbidden' });
       }
-  
+
       const { id, isAdmin } = authData;
       if (isAdmin === false) {
-        return res.status(403).json({error: 'Only Admin is authorized'});
+        return res.status(403).json({ status: 403, error: 'Only Admin is authorized'});
       }
-  
+
       const { accountNumber } = req.params;
 
       const checkAccountNumber = account.findAccount(accountNumber);
       if (!checkAccountNumber) {
-        return res.status(404).json({ error: 'Account Number does not exist' });
+        return res.status(404).json({ status: 404, error: 'Account Number does not exist' });
       }
 
       const { status, openingBalance } = checkAccountNumber;
       if (status === 'dormant') {
-        return res.status(400).json({ error: 'This account is dormant, please activate' });
+        return res.status(400).json({ status: 400, error: 'This account is dormant, please activate' });
       }
-    
+
       const { amount } = req.body;
       if (!amount || amount === 'undefined') {
-        return res.status(400).json({ error: 'Please specify an amount' });
+        return res.status(400).json({ status: 400, error: 'Please specify an amount' });
       }
       const oldBalance = openingBalance;
 

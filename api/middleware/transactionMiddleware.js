@@ -18,7 +18,7 @@ export default class validateTransactions {
     }
     const numericRegExp = /^[0-9]+$/;
     if (!amount.match(numericRegExp)) {
-      return res.status(400).json({status: 400, error: 'Please enter a valid amount' });
+      return res.status(400).json({ status: 400, error: 'Please enter a valid amount' });
     }
     next();
   }

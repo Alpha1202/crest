@@ -1,0 +1,59 @@
+{
+    "validUser": {
+    "id": "1",
+    "email": "nzubennamani@gmail.com",
+    "firstName": "Nzubechukwu",
+    "lastName": "Nnamani",
+    "password": "123456",
+    "type": "client",
+    "isAdmin": false
+    },
+
+    "validAdmin": {
+        "id": "20",
+        "email": "nnamani@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "654321",
+        "type": "staff",
+        "isAdmin": true
+    },
+
+    "invalidUser": {
+        "id": "1",
+        "email": "nzubennamani@gmail.com",
+        "firstName": "",
+        "lastName": "Nnamani",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+    
+        "invalidAdmin": {
+        "id": "20",
+        "email": "nnamani@gmail.com",
+        "firstName": "",
+        "lastName": "Nnamani",
+        "password": "654321",
+        "type": "staff",
+        "isAdmin": true
+        },
+        "validAccount": {
+        "id": "123",
+        "accountNumber": "23451",
+        "ownerId": "2",
+        "type": "current",
+        "status": "dormant",
+        "openingBalance": "0",
+        "createdOn": "12/04/2019"
+        },
+        "invalidAccount": {
+        "id": "123",
+        "accountNumber": "23451",
+        "ownerId": "2",
+        "type": "",
+        "status": "dormant",
+        "openingBalance": "0",
+        "createdOn": "12/04/2019"
+        }
+}

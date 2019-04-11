@@ -9,6 +9,7 @@ usersRouter.post('/auth/signup',
   validate.validateEmail,
   validate.validateFirstName,
   validate.validateLastName,
+  validate.validatePassword,
   user.signup);
 
 

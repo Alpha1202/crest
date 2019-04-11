@@ -21,7 +21,8 @@ export default class UserController {
     const { email, firstName, lastName, password } = req.body;
     const found = someUser.find(aUser => aUser.email === email);
     if (found) {
-      return res.status(400).json({ error: 'Email already exists' });
+      return res.status(400).json({status: 400,
+        error: 'Email already exists' });
     }
     const isAdmin = req.body.isAdmin || false;
 
@@ -46,7 +47,8 @@ export default class UserController {
         },
       });
     }
-    return res.status(400).json({ error: 'Registration failed, try again' });
+    return res.status(400).json({status: 400,
+      error: 'Registration failed, try again' });
   }
 
 
