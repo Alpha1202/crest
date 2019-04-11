@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "start:dev": "nodemon --exec babel-node ./server.js",
-    "build": "babel api --out-dir dist",
+    "build": "@babel/core api --out-dir dist",
     "test": "nyc mocha --require @babel/register --recursive api/tests/ --exit",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
@@ -54,5 +54,8 @@
     "mocha": "^6.0.2",
     "nodemon": "^1.18.10",
     "nyc": "^13.3.0"
+  },
+  "engines": {
+    "node": "10.15.0"
   }
 }
