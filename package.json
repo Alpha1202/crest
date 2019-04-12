@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "start:dev": "nodemon --exec babel-node ./server.js",
-    "build-babel": "babel api --out-dir dist",
+    "build-babel": "babel api",
     "build": "npm run clean && npm run build-babel",
     "test": "nyc mocha --require @babel/register --recursive api/tests/ --exit",
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
