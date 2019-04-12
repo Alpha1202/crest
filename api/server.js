@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyparser from 'body-parser';
 import dotenv from 'dotenv';
-import router from './api/routes';
+import router from './routes';
 
 dotenv.config();
 
