@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../../../server';
+import app from '../../server';
 import mockData from '../mockData.json';
 
 process.env.NODE_ENV = 'test';
