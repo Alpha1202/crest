@@ -12,7 +12,8 @@
     "coveralls-coverage": "coveralls < lcov.info",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "babel-build": "babel api -d dist",
-    "clean": "rm -rf dist && mkdir dist"
+    "clean": "rm -rf dist && mkdir dist",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -46,7 +47,6 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-watch": "^7.0.0",
     "chai": "^4.2.0",
