@@ -14,7 +14,6 @@ html {
 body {
     background:  #ccc;
     margin: 0;
-    line-height: 1.4;
 }
 html, body, .top-box {
     height: 100%;
@@ -36,6 +35,7 @@ html, body, .top-box {
     justify-items: center;
     padding: 0.5rem; 
     position: fixed;
+    z-index: 1;
 }
 .top-box-a{
         grid-area: top-box-a;
@@ -174,17 +174,281 @@ table{
     text-align: center;
     padding: 1rem;
 } 
-
 /* media queries */
- @media(max-width: 500px) {
+@media(min-width: 1024px) and (max-width: 1480px) {
+    body {
+        overflow-x: hidden;
+     }
+     .wrapper {
+         display: flex;
+     }
+     .top-box {
+         display: none;
+     }
+     .showcase {
+        
+         width: 100%;
+         display: grid;
+         max-height: 100%;
+     }
+     .showcase .header { 
+         
+         max-width: 100%;
+         display: flex;
+         margin-left: -0em;
+     }
+     .showcase .header span{
+         margin-top: 1.6rem;
+         margin-left: 0.5rem;
+         display: block;
+     }
+    .top-box {
+        display: none;
+    }
+    .top-container .boxes{
+        display: flex;
+     }
+    .top-container .box-a {
+        min-width: 30%;
+        display: flex;
+        margin-right: -1rem;
+        margin-top: 2rem;
+        margin-left: 6rem;
+    }
+    .top-container .box-b {
+        min-width: 30%;
+        display: flex;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        margin-left: 3rem;
+    }
+    .box-account .box {
+        margin-right: 1.2rem;
+        margin-top: -2rem;
+        padding-bottom: 1rem;
+        padding-right: 0.5rem;
+        margin-left: 3rem;
+    }
+    .boxes.big {
+        display: none;
+    }
+    .boxes.boxes-small.small {
+        display: grid;
+        margin-right: 1.3rem;
+        margin-top: 2rem;
+        padding-bottom: 1rem;
+        padding-right: 0.5rem;
+        margin-left: 2rem;
+    }
+    .boxes.small div.box {
+        display: grid;
+        margin-right: -1rem;
+        margin-top: 2rem;
+        padding-bottom: 3rem;
+        padding-right: 2rem;
+        margin-left: 0rem;
+    }
+    .boxes.small div.box h3 {
+        margin-top: -1.4rem;
+        margin-left: -10rem;
+    }
+    .boxes.small div.box table {
+        margin-left: -1rem;
+        margin-top: -20px;  
+        padding-bottom: 14px;
+    }
+    
+}
+@media(min-width: 821px) and (max-width: 1024px) {
+    body {
+        overflow-x: hidden;
+     }
+     .wrapper {
+         display: flex;
+     }
+     .top-box {
+         display: none;
+     }
+     .showcase {
+        
+         width: 100%;
+         display: grid;
+         max-height: 100%;
+     }
+     .showcase .header { 
+         
+         max-width: 100%;
+         display: flex;
+         margin-left: -0em;
+     }
+     .showcase .header span{
+         margin-top: 1.6rem;
+         margin-left: 0.5rem;
+         display: block;
+     }
+    .top-box {
+        display: none;
+    }
+    .top-container .boxes{
+        display: flex;
+     }
+    .top-container .box-a {
+        min-width: 30%;
+        display: flex;
+        margin-right: -1rem;
+        margin-top: 2rem;
+        margin-left: 6rem;
+    }
+    .top-container .box-b {
+        min-width: 30%;
+        display: flex;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        margin-left: 3rem;
+    }
+    .box-account .box {
+        margin-right: 1.2rem;
+        margin-top: -2rem;
+        padding-bottom: 1rem;
+        padding-right: 0.5rem;
+        margin-left: 3rem;
+    }
+    .boxes.big {
+        display: none;
+    }
+    .boxes.boxes-small.small {
+        display: grid;
+        margin-right: 1.3rem;
+        margin-top: 2rem;
+        padding-bottom: 1rem;
+        padding-right: 0.5rem;
+        margin-left: 2rem;
+    }
+    .boxes.small div.box {
+        display: grid;
+        margin-right: -1rem;
+        margin-top: 2rem;
+        padding-bottom: 3rem;
+        padding-right: 2rem;
+        margin-left: 0rem;
+    }
+    .boxes.small div.box h3 {
+        margin-top: -1.4rem;
+        margin-left: -10rem;
+    }
+    .boxes.small div.box table {
+        margin-left: -1rem;
+        margin-top: -20px;  
+        padding-bottom: 14px;
+    }
+    
+}
+@media(min-width: 681px) and (max-width: 820px) {
+    body {
+        overflow-x: hidden;
+     }
+     .wrapper {
+         
+         display: flex;
+     }
+     .top-box {
+         display: none;
+     }
+     .showcase {
+        
+         width: 100%;
+         display: grid;
+         max-height: 100%;
+     }
+     .showcase .header { 
+         
+         max-width: 100%;
+         display: flex;
+         margin-left: -0em;
+     }
+     .showcase .header span{
+         margin-top: 1.6rem;
+         margin-left: 0.5rem;
+         display: block;
+     }
+    .top-box {
+        display: none;
+    }
+    .top-container .boxes{
+        display: flex;
+     }
+    .top-container .box-a {
+        min-width: 30%;
+        display: flex;
+        margin-right: -1rem;
+        margin-top: 2rem;
+        margin-left: 6rem;
+    }
+    .top-container .box-b {
+        min-width: 30%;
+        display: flex;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        margin-left: 3rem;
+    }
+    .box-account .box {
+        margin-right: 1.2rem;
+        margin-top: -2rem;
+        padding-bottom: 1rem;
+        padding-right: 0.5rem;
+        margin-left: 3rem;
+    }
+    .boxes.big {
+        display: none;
+    }
+    .boxes.boxes-small.small {
+        display: grid;
+        margin-right: 1.3rem;
+        margin-top: 2rem;
+        padding-bottom: 1rem;
+        padding-right: 0.5rem;
+        margin-left: 2rem;
+    }
+    .boxes.small div.box {
+        display: grid;
+        margin-right: -1rem;
+        margin-top: 2rem;
+        padding-bottom: 3rem;
+        padding-right: 2rem;
+        margin-left: 0rem;
+    }
+    .boxes.small div.box h3 {
+        margin-top: -1.4rem;
+        margin-left: -10rem;
+    }
+    .boxes.small div.box table {
+        margin-left: -1rem;
+        margin-top: -20px;  
+        padding-bottom: 14px;
+    }
+    
+}
+
+@media(min-width: 500px) and (max-width: 680px) {
+    body {
+       overflow-x: hidden;
+    }
+    .wrapper {
+        
+        display: flex;
+    }
     .top-box {
         display: none;
     }
     .showcase {
-    
+        width: 100%;
+        display: grid;
+        max-height: 100%;
     }
     .showcase .header {
-        margin-left: 1px;
+        max-width: 100%;
+        display: flex;
+        margin-left: -0em;
     }
     .showcase .header span{
         margin-top: 1.6rem;
@@ -197,19 +461,20 @@ table{
         padding-bottom: 1rem;
         padding-right: 0.5rem;
     }
+    .top-container .boxes{
+       display: flex;
+    }
     .top-container .box-a {
-        margin-right: 5rem;
+        display: flex;
+        margin-right: 1rem;
         margin-top: 2rem;
-        padding-bottom: 1rem;
-        padding-right: 0.5rem;
-        margin-left: 5rem;
+        margin-left: 2em;
     }
     .top-container .box-b {
-        margin-right: 5rem;
-        margin-top: -5rem;
-        padding-bottom: 1rem;
-        padding-right: 0.5rem;
-        margin-left: 5rem;
+        display: flex;
+        margin-right: 3rem;
+        margin-top: 2rem;
+        margin-left: 4em;
     }
     .box-account .box {
         margin-right: 1.2rem;
@@ -251,7 +516,6 @@ table{
         padding-bottom: 14px;
     }
     .boxes.small div.box span table tr th {
-        /* background-color: red; */
      text-align: center;
         padding: 2px;
         margin-left: 5px;
@@ -277,13 +541,26 @@ table{
         padding: 1rem;
     } 
 } 
-
-/* @media(min-width: 512px) and (max-width: 815px) {
+@media(min-width: 200px) and (max-width: 499px) {
+    body {
+       overflow-x: hidden;
+    }
+    .wrapper {
+        
+        display: flex;
+    }
     .top-box {
         display: none;
     }
+    .showcase {
+        width: 100%;
+        display: grid;
+        max-height: 100%;
+    }
     .showcase .header {
-        margin-left: -5rem;
+        max-width: 100%;
+        display: flex;
+        margin-left: -0em;
     }
     .showcase .header span{
         margin-top: 1.6rem;
@@ -291,26 +568,25 @@ table{
         display: block;
     }
     .top-container {
-        display: grid;
-        grid-template-columns: 1fr;
-        margin-right: -1.2rem;
+        margin-right: -3rem;
         margin-top: 2rem;
         padding-bottom: 1rem;
         padding-right: 0.5rem;
+    }
+    .top-container .boxes{
+       display: flex;
     }
     .top-container .box-a {
-        margin-right: 1.2rem;
+        display: flex;
+        margin-right: 1rem;
         margin-top: 2rem;
-        padding-bottom: 1rem;
-        padding-right: 0.5rem;
-        margin-left: 3rem;
+        margin-left: 2em;
     }
     .top-container .box-b {
-        margin-right: 1.2rem;
-        margin-top: -5rem;
-        padding-bottom: 1rem;
-        padding-right: 0.5rem;
-        margin-left: 3rem;
+        display: flex;
+        margin-right: 3rem;
+        margin-top: 2rem;
+        margin-left: 4em;
     }
     .box-account .box {
         margin-right: 1.2rem;
@@ -318,6 +594,10 @@ table{
         padding-bottom: 1rem;
         padding-right: 0.5rem;
         margin-left: 3rem;
+    }
+    .div-box {
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
     }
     .boxes.big {
         display: none;
@@ -347,9 +627,8 @@ table{
         margin-top: -20px;  
         padding-bottom: 14px;
     }
-    .boxes.small div.box span table tr th { */
-        /* background-color: red; */
-        /* text-align: center;
+    .boxes.small div.box span table tr th {
+     text-align: center;
         padding: 2px;
         margin-left: 5px;
         margin-bottom: 2px;
@@ -368,10 +647,10 @@ table{
     footer {
         width: 100%;
         margin-top: 2rem;
+        margin-left: 3rem;
         background: var(--dark);
         color: var(--light);
         text-align: center;
-        padding: 1rem;
-    }
-} */
-
+        /* padding: 1rem; */
+    } 
+} 
