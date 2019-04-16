@@ -29,7 +29,6 @@ img {
    
 }
 .wrapper {
-    /* background-color: red; */
     display: grid;
     grid-gap: 20px;
 }
@@ -176,7 +175,6 @@ div.header-text p {
     padding: 2rem;
     grid-template-areas: 
        'top-box-a showcase';
-       /* 'top-box-b showcase showcase '; */
 }
 /* Showcase */
 .showcase {
@@ -253,7 +251,6 @@ div.header-text p {
     box-shadow: var(--shadow);
     padding: 1.5rem; 
     margin-left: 10px;
-    /* max-width: 40%; */
 }
 .top-box .side-header {
     font-size: 1.5rem;
@@ -291,8 +288,6 @@ span.badge {
     font-size: 2rem;
 }
 .list .top-box {
-  /* background: var(--primary); */
-  /* background: red; */
   display: grid;
   align-items: center;
   justify-items: center;
@@ -300,7 +295,6 @@ span.badge {
   padding: 1.5rem; 
   margin-left: 10px;
   margin-right: 10px;
-  /* max-width: 40%; */
 }
 /* footer */
 footer {
