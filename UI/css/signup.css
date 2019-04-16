@@ -1,23 +1,23 @@
-#signin {
+    #signin {
     width: 80%; 
     padding-bottom: 0.6rem;
-}
-#sigin form {
+    }
+    #sigin form {
     width: 80%;
     padding-bottom: 0.6rem;
-}
-#signin .logo {
+    }
+    #signin .logo {
     margin-bottom: 2vh; 
-}
-#signin .logo img {
+    }
+    #signin .logo img {
     width: 120px;
-}
-#signin label {
+    }
+    #signin label {
     font-size: 0.9rem;
     line-height: 1rem;
     font-weight: 500;
-}
-#signin .text-input {
+    }
+    #signin .text-input {
     margin-bottom: 1.3rem;
     width: 100%;
     border-radius: 2px;
@@ -26,38 +26,38 @@
     color: #ccc;
     padding: 0.5rem, 1rem;
     line-height: 1.3rem;
-}
-#signin .primary-btn {
+    }
+    #signin .primary-btn {
     width: 100%;
-}
-#signin .secondary-btn,
- .or,
- .links {
-     width: 60%;
- }
- #signin .links a {
-     display: block;
-     color: #fff;
-     text-decoration: none;
-     margin-top: 1rem;
-     margin-bottom: 1rem;
-     text-align: center;
-     font-size: 0.9rem;
-     
- }
- #signin .or {
-     display: flex;
-     flex-direction: row;
-     margin-bottom: 1.2rem;
-     align-items: center
- }
- #signin .or .bar {
-     flex: auto;
-     border: none;
-     height: 1px;
-     background: #aaaaaa;
- }
- #signin .or span {
-     color: #ccc;
-     padding: 0 0.8rem;
- }
+    }
+    #signin .secondary-btn,
+    .or,
+    .links {
+    width: 60%;
+    }
+    #signin .links a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+
+    }
+    #signin .or {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.2rem;
+    align-items: center
+    }
+    #signin .or .bar {
+    flex: auto;
+    border: none;
+    height: 1px;
+    background: #aaaaaa;
+    }
+    #signin .or span {
+    color: #ccc;
+    padding: 0 0.8rem;
+    }
