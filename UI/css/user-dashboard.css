@@ -56,6 +56,9 @@ html, body, .top-box {
 .left-links {
     padding-top: 1rem;
 }
+.selected{
+    box-shadow: var(--shadow);
+}
 .left-links ul li {
     padding-bottom: 0;
     margin-bottom: 4rem;
@@ -84,8 +87,8 @@ html, body, .top-box {
     margin-left: 4.1rem; 
     justify-content: flex-start;
     background-color: var(--style);
-    position: fixed;
     width: 100%;
+    float: right;
 }
 .showcase .header span{
     margin-top: 1.6rem;
@@ -100,8 +103,16 @@ html, body, .top-box {
 }
 .top-container {
     display: grid;
-    margin-left: -1.3rem;
     margin-top: 2rem;
+}
+.right{
+    float: right;
+    margin-top: 5rem;
+    margin-right: 5rem;
+    text-align: center;
+}
+.right p {
+    font-size: 1.2rem;
 }
 /* Boxes */
 .top-container .boxes {
@@ -137,10 +148,14 @@ section.box-account {
     box-shadow: var(--shadow);
     margin: 1.5rem 8rem 0rem 8rem;
 } 
+.box h3{
+    color: red;
+    font-size: 2rem;
+}
 table{
     border-collapse: collapse;
     width: 90%;
-    margin-left: 1rem
+    margin-left: 1.7rem
  }
  table tr th {
      padding: 1rem;
@@ -165,9 +180,60 @@ table{
      color: var(--light);
  }
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 15px;
+    overflow: auto;
+    background: transparent;
+    background-color: fade(rgb(141, 138, 138), 88%);
+    z-index: 1;
+}
+.modal-dialog {
+    position: relative;
+    max-width: 500px;
+    padding: 20px;
+    margin: auto;
+    border-radius: 4px;
+    background-color: var(--dark);
+}
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 0;
+    border: none;
+    color: #ccc;
+    background-color: transparent;
+    background-image: none;
+}
+.modal-close:focus {
+    outline: 0;
+}
+.modal-header {
+    border-bottom: 1px solid #e2e2e2;
+}
+.modal-title {
+    margin: 0 0 15px;
+}
+.modal-content {
+    padding: 10px 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgb(236, 229, 229);
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 500;
+}
+
 /* footer */
 
  footer {
+     display: none;
     margin-top: 2rem;
     background: var(--dark);
     color: var(--light);
