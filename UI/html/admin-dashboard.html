@@ -1,88 +1,94 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/admin-dashboard.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="../css/admin-dashboard.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
+
 <body>
-    <div class="wrapper">
-        <div class="head">
-            <div class="header">
-                
-                <div class="header-text"><a href="./index.html"><img src="../images/logo (2).png" alt="">
-                    <p>Crest Finance</p></a></div>
-                <div class="header-links">
-                    <ul>
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="./users.html">Users</a></li>
-                        <li><a href="./users.html">Active Accounts</a></li>
-                        <li><a href="./users.html">Deactivated Accounts</a></li>
-                    </ul>
-                </div>
-                <div class="header-logout"><a href="./admin.html">Create Admin</a></div>
-                <div class="header-logout"><a href="./admin.html">Logout</a></div>
-                <div class="header-greeting">Welcome, <span>Admin</span></div>
-            </div>
-            <div class="header-layer">
-                <div class="dashboard">
-                    <i class="fas fa-cog"></i>Dashboard
-                </div>
-                <!-- dropdown -->
-                <!-- <div class="dropdown">
-                    <button class="dropbtn">Content<i class="fas fa-sort-down"></i></button>
-                    <div class="dropdown-content">
-                    <a href="./singleuser.html">Activate</a>
-                    <a href="./singleuser.html">Deactivate</a>
-                    <a href="./singleuser.html">Credit</a>
-                    <a href="./singleuser.html">Debit</a>
-                    <a href="./singleuser.html">Delete</a>
-                    </div>
-                  </div> -->
-            </div>
+  <div class="wrapper">
+    <div class="head">
+      <div class="header">
+
+        <div class="header-text"><a href="./homepage.html"><img src="../images/logo (2).png" alt="">
+            <p>Banka</p>
+          </a></div>
+        <div class="header-links big-screen">
+          <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="./users.html">Users</a></li>
+            <li><a href="./users.html">Active Accounts</a></li>
+            <li><a href="./users.html">Deactivated Accounts</a></li>
+          </ul>
         </div>
-        <div class="dashboard-layer">
-            <p>Dashboard</p>
+        <div class="header-greeting big-screen">Welcome, <span>Admin</span></div>
+
+        <!-- dropdown -->
+        <div class="dropdown">
+          <button class="dropbtn">Actions<i class="fas fa-sort-down"></i></button>
+          <div class="dropdown-content">
+            <div class="header-logout"><a href="#">Create Admin</a></div>
+            <div class="header-logout"><a href="./homepage.html">Logout</a></div>
+          </div>
         </div>
-       
-       <section class="top-container">
-           <header class="showcase">
-               <div class="showcase-header"><h3>Overview</h3></div>
-               <div class="box">
-                <a href="./users.html"><i class="fas fa-users">Users</i></a>
-                <h3>300</h3>
-            </div>
-            <div class="box">
-                <a href="./users.html"><i class="fas fa-chart-line">Active Accounts</i></a>
-                <h3>300</h3>
-            </div>
-            <div class="box">
-                <a href="./users.html"><i class="fas fa-bell-slash">Deactivated Accounts</i></a>
-                <h3>300</h3>
-            </div>
-           </header>
-           <div class="top-box top-box-a">
-            <div class="side-header"><h3>Dashboard</h3></div><hr>
-            <div class="side-nav">
-                <a href="./users.html"><i class="fas fa-users">Users</i>
-                    <span class="badge">3</span></a>
-            </div>
-            <div class="side-nav">
-                <a href="./users.html"><i class="fas fa-chart-line">Active Accounts</i>
-                    <span class="badge">3</span></a>
-            </div>
-            <div class="side-nav">
-                <a href="./users.html"><i class="fas fa-bell-slash">Deactivated Accounts</i>
-                    <span class="badge">3</span></a>
-            </div>
-           </div>
-       </section>
-       <footer>
-           <p>Made with love</p>
-       </footer>
+      </div>
+
+      <div class="header-layer">
+        <div class="dashboard">
+          <i class="fas fa-cog"></i>Dashboard
+        </div>
+
+
+      </div>
     </div>
+
+
+    <section class="top-container">
+      <header class="showcase">
+        <div class="showcase-header">
+          <h3>Overview</h3>
+        </div>
+        <div class="box">
+          <a href="./users.html"><i class="fas fa-users">Users</i></a>
+          <h3>300</h3>
+        </div>
+        <div class="box">
+          <a href="./users.html"><i class="fas fa-chart-line">Active Accounts</i></a>
+          <h3>300</h3>
+        </div>
+        <div class="box">
+          <a href="./users.html"><i class="fas fa-bell-slash">Deactivated Accounts</i></a>
+          <h3>300</h3>
+        </div>
+      </header>
+      <div class="top-box top-box-a">
+        <div class="side-header">
+          <h3>Dashboard</h3>
+        </div>
+        <hr>
+        <div class="side-nav">
+          <a href="./users.html"><i class="fas fa-users">Users</i>
+            <span class="badge">3</span></a>
+        </div>
+        <div class="side-nav">
+          <a href="./users.html"><i class="fas fa-chart-line">Active Accounts</i>
+            <span class="badge">3</span></a>
+        </div>
+        <div class="side-nav">
+          <a href="./users.html"><i class="fas fa-bell-slash">Deactivated Accounts</i>
+            <span class="badge">3</span></a>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <p>Made with love</p>
+    </footer>
+  </div>
 </body>
+
 </html>
