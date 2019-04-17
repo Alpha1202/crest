@@ -212,7 +212,7 @@ div.header-text p {
     box-shadow: var(--shadow);
 }
 .showcase .box:hover {
-    background: var(--dark);
+    background: var(--light);
     cursor: pointer;
 }
 
