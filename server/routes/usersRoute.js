@@ -14,7 +14,7 @@ usersRouter.post('/auth/signup',
 
 
 usersRouter.post('/auth/signin',
-  validate.verifyUser,
+  // validate.verifyUser,
   validate.validateEmail,
   validate.validatePassword,
   user.login);

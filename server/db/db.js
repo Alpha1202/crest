@@ -50,7 +50,7 @@ const createAccountTable = () => {
     owner serial NOT NULL,
     type TEXT NOT NULL,
     status TEXT NOT NULL,
-    balance FLOAT NOT NULL UNIQUE,
+    balance FLOAT NOT NULL,
     FOREIGN KEY (owner) REFERENCES users (id)
   )`;
 

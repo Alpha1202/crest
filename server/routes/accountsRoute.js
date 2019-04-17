@@ -8,7 +8,7 @@ const accountsRouter = express.Router();
 accountsRouter.post('/',
   Auth.checkToken,
   validate.validateType,
-  validate.validateOpeningBalance,
+  // validate.validateOpeningBalance,
   account.createAccount);
 
 accountsRouter.patch('/:accountNumber',

@@ -30,12 +30,12 @@ export default class validate {
      * @returns {object} a newly created user object
      */
   static validateOpeningBalance(req, res, next) {
-    const { openingBalance } = req.body;
-    if (!openingBalance || openingBalance === 'undefined' || openingBalance === '') {
+    const { balance } = req.body;
+    if (!balance || balance === 'undefined' || balance === '') {
       return res.status(400).json({ status: 400, error: 'please specify your opening Balance' });
     }
     const numericRegExp = /^[0-9]+$/;
-    if (!openingBalance.match(numericRegExp)) {
+    if (!balance.match(numericRegExp)) {
       return res.status(400).json({ status: 400, error: 'Please enter a valid amount' });
     }
     next();

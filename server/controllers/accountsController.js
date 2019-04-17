@@ -1,10 +1,8 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import Account from '../models/Accounts';
+import { config } from 'dotenv';
+import moment from 'moment';
+import db from '../db/index';
 
-dotenv.config();
-
-const account = new Account();
+config();
 
 /**
  *@class account controller
@@ -16,37 +14,48 @@ export default class AccountsController {
    * @param {object} res
    * @return {object} created account
    */
-  static createAccount(req, res) {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-      if (err) {
-        return res.status(403).json({ status: 403, error: 'Forbidden' });
-      }
-      const { firstName, lastName, email, isAdmin } = authData;
-      if (isAdmin === true) {
-        return res.status(403).json({ status: 403, error: 'Admin is not authorized' });
-      }
-      const { type } = req.body;
 
-      const saveAccount = account.create({ type });
+  static async createAccount(req, res) {
+    const { accountNumber, owner, type, status, balance } = req.body;
+    const data = `INSERT INTO
+    accounts(
+      accountNumber, 
+      createdOn,
+      owner,
+      type,
+      status,
+      balance
+      )
+      VALUES($1, $2, $3, $4, $5, $6)
+      returning *`;
 
-      if (saveAccount.saved) {
-        return res.status(201).json({
-          status: 201,
-          data: {
-            id: saveAccount.newAccount.id,
-            accountNumber: saveAccount.newAccount.accountNumber,
-            firstName,
-            lastName,
-            email,
-            type: saveAccount.newAccount.type,
-            status: saveAccount.newAccount.status,
-            openingBalance: saveAccount.newAccount.openingBalance,
-          },
-        });
-      }
-      return res.status(400).json({ status: 400, error: 'Account not created successfully' });
-    });
+    const values = [
+      accountNumber,
+      moment(new Date()),
+      owner,
+      type,
+      status,
+      balance,
+    ];
+
+    try {
+      const { rows } = await db.query(data, values);
+      console.log(rows);
+      
+      return res.status(201).json({ status: 201,
+        data: {
+          accountNumber: rows[0].accountnumber,
+          owner: rows[0].owner,
+          type: rows[0].type,
+          openingBalance: rows[0].balance,
+        },
+      })
+    } catch (error) {
+      return res.status(400).send(error);
+    }
   }
+  
+
 
   /**
    * Activate or Deactivate an account
@@ -54,56 +63,30 @@ export default class AccountsController {
    * @param {object} res
    * @return {object} PATCHed account
    */
-  static updateAccountStatus(req, res) {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-      if (err) {
-        return res.status(403).json({ status: 403, error: 'Forbidden' });
+  static async updateAccountStatus(req, res) {
+    const { accountNumber } = req.params;
+    const { status } = req.body;
+    const findOne = 'SELECT * FROM accounts WHERE accountNumber = $1';
+    const updateOne = `UPDATE accounts
+    SET status = $1
+    WHERE accountNumber = $2 returning *`;
+    try {
+      const { rows } = await db.query(findOne, [accountNumber]);
+      if (!rows[0]) {
+        return res.status(404).send({message: 'account not found'})
       }
-      const { isAdmin } = authData;
-      if (isAdmin === false) {
-        return res.status(403).json({ status: 403, error: 'Only Admin is authorized' });
-      }
-      const { accountNumber } = req.params;
-      const found = account.findAccount(accountNumber);
-      if (!found) {
-        return res.status(404).json({ status: 404, error: `Account Number ${accountNumber} does not exist` });
-      }
-      const { id, ownerId, type, status, openingBalance, createdOn } = found;
-      if (found.status === 'active') {
-        found.status = 'dormant';
-        account.save(found);
-        return res.status(200).json({
-          status: 200,
-          data: {
-            accountNumber,
-            status,
-            id,
-            ownerId,
-            type,
-            openingBalance,
-            createdOn,
-          },
-        });
-      }
-      if (found.status === 'dormant') {
-        found.status = 'active';
-        account.save(found);
-        return res.status(200).json({
-          status: 200,
-          data: {
-            accountNumber,
-            status,
-            id,
-            ownerId,
-            type,
-            openingBalance,
-            createdOn,
-          },
-        });
-      }
-    });
-  }
+      const values = [
+        status || rows[0].status,
+        accountNumber,
+      ];
 
+      const result = await db.query(updateOne, values);
+      return res.status(200).json({ status: 200, data:
+        result.rows[0]});
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  }
 
   /**
    * Delete an account
@@ -111,25 +94,17 @@ export default class AccountsController {
    * @param {object} res
    * @return {object} all accounts except the deleted account
    */
-  static deleteAccount(req, res) {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-      if (err) {
-        return res.status(403).json({ status: 403, error: 'Forbidden' });
+  static async deleteAccount(req, res) {
+    const { accountNumber } = req.params;
+    const deleteQuery = 'DELETE FROM accounts WHERE accountNumber=$1 returning *';
+    try {
+      const { rows } = await db.query(deleteQuery, [accountNumber]);
+      if (!rows[0]) {
+        return res.status(404).json({ status: 204, message: 'account not found'})
       }
-      const { isAdmin } = authData;
-      if (isAdmin === false) {
-        return res.status(403).json({ status: 403, error: 'Only Admin is authorized' });
-      }
-      const { accountNumber } = req.params;
-      const found = account.findAccount(accountNumber);
-      if (!found) {
-        return res.status(404).json({ status: 404, error: 'No account with that account number' });
-      }
-      account.deleteAccount(found);
-      return res.status(200).json({
-        status: 200,
-        message: 'Account successfully deleted',
-      });
-    });
+      return res.status(204).json({ status: 204, message: 'account deleted'});
+    } catch (error) {
+      return res.status(400).json({status: 204, error });
+    }
   }
 }

@@ -1,9 +1,6 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import User from '../models/User';
+import Helper from '../Helpers/helpers';
+import db from '../db/index';
 
-
-const user = new User();
 
 /**
  *@class user controller
@@ -16,41 +13,43 @@ export default class UserController {
      * @returns {object} a newly created user object
      */
 
-  static signup(req, res) {
-    const someUser = user.findAllUser();
-    const { email, firstName, lastName, password } = req.body;
-    const found = someUser.find(aUser => aUser.email === email);
-    if (found) {
-      return res.status(400).json({status: 400,
-        error: 'Email already exists' });
-    }
-    const isAdmin = req.body.isAdmin || false;
+  static async signup(req, res) {
+    const { email, firstName, lastName, password, type, isAdmin } = req.body;
 
-    let type;
-    isAdmin ? type = 'staff' : type = 'client';
+    const hash = Helper.hash(password);
 
-    const hash = bcrypt.hashSync(password, 10);
-    const saveUser = user.create({ email, firstName, lastName, password: hash, isAdmin, type });
+    const data = `INSERT INTO
+    users( email, firstName, lastName, password, type, isAdmin)
+    VALUES($1, $2, $3, $4, $5, $6)
+    returning *`;
+    const values = [
+      email,
+      firstName,
+      lastName,
+      hash,
+      type,
+      isAdmin,
+    ];
+    try {
+      const { rows } = await db.query(data, values);
 
-    if (saveUser.saved) {
-      const token = jwt.sign({ id: user.id, firstName, lastName, email, type, isAdmin }, process.env.JWT_SECRET, { expiresIn: '7d'});
-      return res.status(201).json({
-        status: 201,
+      const token = Helper.getToken(rows[0].id);
+      res.status(201).json({ status: 201,
         data: {
           token,
-          id: saveUser.newUser.id,
-          firstName: saveUser.newUser.firstName,
-          lastName: saveUser.newUser.lastName,
-          email: saveUser.newUser.email.toLowerCase().trim().toString(),
-          type,
-          isAdmin,
-        },
-      });
-    }
-    return res.status(400).json({status: 400,
-      error: 'Registration failed, try again' });
-  }
+          id: rows[0].id,
+          firstName: rows[0].firstname,
+          lastName: rows[0].lastname,
+          email: rows[0].email,
+        } });
 
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return res.status(400).json({ status: 400, message: 'Email already exists' });
+      }
+      return res.status(400).json({ status: 400, message: error });
+    }
+  }
 
   /**
  * Login a user
@@ -58,23 +57,31 @@ export default class UserController {
  * @param {object} res
  * @return {json} user logged in
  */
-  static login(req, res) {
-    const someUser = user.findAllUser();
-    const { email } = req.body;
-    const found = someUser.find(aUser => aUser.email === email);
-    const { id, firstName, lastName, type, isAdmin } = found;
-    const token = jwt.sign({ id, firstName, lastName, email, type: found.type, isAdmin: found.isAdmin  }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    return res.status(200).json({
-      status: 200,
-      data: {
-        token,
-        id,
-        firstName,
-        lastName,
-        email: found.email,
-        type,
-        isAdmin,
-      },
-    });
+  static async login(req, res) {
+    const { email, password } = req.body;
+
+    const data = 'SELECT * FROM users WHERE email = $1';
+    try {
+      const { rows } = await db.query(data, [email]);
+      if (!rows[0]) {
+        return res.status(400).send({message: 'email not found'});
+      }
+      if (!Helper.checkPassword(rows[0].password, password)) {
+        return res.status(400).send({ message: 'invalid password'});
+      }
+      const token = Helper.getToken(rows[0].id);
+      return res.status(200).json({ status: 200,
+        data: {
+          token,
+          id: rows[0].id,
+          firstName: rows[0].firstname,
+          lastName: rows[0].lastname,
+          email: rows[0].email,
+        },
+      });
+    } catch (error) {
+      return res.status(400).send(error);
+    }
   }
 }
+

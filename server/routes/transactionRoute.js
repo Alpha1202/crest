@@ -7,14 +7,14 @@ import validate from '../middleware/accountMiddleware';
 const transactionRouter = express.Router();
 
 transactionRouter.post('/:accountNumber/debit',
-  Auth.checkToken,
-  validate.validateAccountNumber,
+  // Auth.checkToken,
+  // validate.validateAccountNumber,
   transaction.debit);
 
 
-transactionRouter.post('/:accountNumber/credit',
-  Auth.checkToken,
-  validate.validateAccountNumber,
-  transaction.credit);
+// transactionRouter.post('/:accountNumber/credit',
+//   Auth.checkToken,
+//   validate.validateAccountNumber,
+//   transaction.credit);
 
 export default transactionRouter;
