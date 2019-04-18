@@ -15,24 +15,27 @@ export default class TransactionController {
     const { amount } = req.body;
 
     const findOne = 'SELECT * FROM accounts WHERE accountNumber = $1';
-    const debitOne = `UPDATE accounts
-      SET balance =$1
-      WHERE accountNumber = $2 returning *`;
+    // const debitOne = `UPDATE accounts
+    //   SET balance =$1
+    //   WHERE accountNumber = $2 returning *`;
     try {
       const { rows } = await db.query(findOne, [accountNumber]);
-      // console.log(rows[0])
+      console.log(accountNumber)
       if (!rows[0]) {
         return res.status(404).json({ status: 404, message: 'Account Not found'});
       }
+      const { balance } = rows[0];
+      console.log(rows[0].accountNumber)
+
       const newBalance = parseInt(rows[0].balance) - parseInt(amount);
    console.log(amount);
    
-      const values = [
-        newBalance,
-        accountNumber,
-      ];
-      const result = await db.query(debitOne, values)
-      console.log(result.rows[0]);
+      // const values = [
+      //   newBalance,
+      //   accountNumber,
+      // ];
+      // const result = await db.query(debitOne, values)
+      // console.log(result.rows[0]);
     } catch (error) {
       console.log(error);
         

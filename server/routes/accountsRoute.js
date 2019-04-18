@@ -6,8 +6,8 @@ import validate from '../middleware/accountMiddleware';
 const accountsRouter = express.Router();
 
 accountsRouter.post('/',
-  Auth.checkToken,
-  validate.validateType,
+  // Auth.checkToken,
+  // validate.validateType,
   // validate.validateOpeningBalance,
   account.createAccount);
 
