@@ -151,7 +151,7 @@ div.header-text p {
   display: block;
 }
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+  background-color: red;
 }
 /* dropdown */
 .dashboard-layer {
