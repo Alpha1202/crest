@@ -13,7 +13,7 @@ export default class validate {
      */
   static validateType(req, res, next) {
     const { type } = req.body;
-    if (!type || type === 'undefined' || type === '') {
+    if (!type) {
       return res.status(400).json({ status: 400, error: 'please enter account type, savings or current' });
     }
     const alphaRegExp = /^[a-zA-Z]+$/;

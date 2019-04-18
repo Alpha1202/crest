@@ -35,12 +35,11 @@ export default class AccountsController {
       owner,
       type,
       status,
-      balance,
+      parseFloat(balance),
     ];
 
     try {
       const { rows } = await db.query(data, values);
-      console.log(rows);
       
       return res.status(201).json({ status: 201,
         data: {
@@ -54,8 +53,6 @@ export default class AccountsController {
       return res.status(400).send(error);
     }
   }
-  
-
 
   /**
    * Activate or Deactivate an account
@@ -84,7 +81,7 @@ export default class AccountsController {
       return res.status(200).json({ status: 200, data:
         result.rows[0]});
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).send(error);
     }
   }
 
@@ -104,7 +101,7 @@ export default class AccountsController {
       }
       return res.status(204).json({ status: 204, message: 'account deleted'});
     } catch (error) {
-      return res.status(400).json({status: 204, error });
+      return res.status(500).json({status: 500, error });
     }
   }
 }

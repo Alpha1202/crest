@@ -47,7 +47,7 @@ export default class UserController {
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({ status: 400, message: 'Email already exists' });
       }
-      return res.status(400).json({ status: 400, message: error });
+      return res.status(500).json({ status: 500, error });
     }
   }
 
@@ -80,7 +80,7 @@ export default class UserController {
         },
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).json({ status: 500, error });
     }
   }
 }
