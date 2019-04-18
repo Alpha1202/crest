@@ -65,6 +65,10 @@ To run tests for the server side
 * Navigate to the project location in your terminal
 * Run `npm run test`
 
+## Links
+- Project homepage: `https://alpha1202.github.io/crest/index.html` 
+- Repository:`https://github.com/Alpha1202/crest.git`
+
 ### Contributing
 1. Fork this [repository](https://github.com/Alpha1202/crest.git) 
 2. Clone to your local environment: `https://github.com/Alpha1202/crest.git`
