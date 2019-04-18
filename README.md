@@ -68,7 +68,8 @@ To run tests for the server side
 ## Links
 - Project homepage: `https://alpha1202.github.io/crest/index.html` 
 - Repository:`https://github.com/Alpha1202/crest.git`
-- Repository:`https://crestfinance.herokuapp.com`
+- Heroku:`https://crestfinance.herokuapp.com`
+-Pivotal Tracker: `https://www.pivotaltracker.com/n/projects/2319537`
 
 ### Contributing
 1. Fork this [repository](https://github.com/Alpha1202/crest.git) 
