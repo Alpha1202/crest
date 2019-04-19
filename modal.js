@@ -1,23 +1,18 @@
 
-let modal = document.getElementById('myModal');
+let modal = document.querySelector('#myModal');
 
-let modal1 = document.getElementById('loginModal');
+let modal1 = document.querySelector('#loginModal');
 
-let modal2 = document.getElementById('adminModal');
+let modal2 = document.querySelector('#dminModal');
 
-let modalTrigger = document.getElementById('signUp');
+let modalTrigger = document.querySelector('#signUp');
 
-let adminModalTrigger = document.getElementById('admin');
+let modalTrigger2 = document.querySelector('#signUp-small');
 
-let modalTrigger2 = document.getElementById('signUp-small');
+let modalTrigger3 = document.querySelector('#login');
 
-let modalTrigger3 = document.getElementById('login');
+let modalClose = document.querySelectorAll('.modal-close');
 
-let modalClose = document.getElementsByClassName('modal-close')[0];
-
-adminModalTrigger.onclick = function(){
-modal2.style.display = 'block';
-}
 
 modalTrigger.onclick =  function(){
      modal.style.display = 'block';
@@ -31,16 +26,16 @@ modalTrigger3.onclick =   function(){
     modal1.style.display = 'block';
 }
 
- modalClose.onclick = function(){
-     modal.style.display = 'none';
- }
+//  modalClose.onclick = function(){
+//      modal.style.display = 'none';
+//  }
 
  modalClose.onclick = function(){
     modal1.style.display = 'none';
 }
-modalClose.onclick = function(){
-    modal2.style.display = 'none';
-}
+// modalClose.onclick = function(){
+//     modal2.style.display = 'none';
+// }
 
  window.onclick = function(event) {
      if (event.target == modal) {

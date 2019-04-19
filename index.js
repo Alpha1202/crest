@@ -16,8 +16,8 @@ function slide() {
     setTimeout(slide, 5000);
 }
 
-let changeClass = document.getElementById('links');
+// let changeClass = document.getElementById('links');
 
-changeClass.onclick = function select(){
-    document.getElementById('links').className = "selected"
-}
+// changeClass.onclick = function select(){
+//     document.getElementById('links').className = "selected"
+// }
