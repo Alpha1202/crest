@@ -90,15 +90,15 @@ export default class validate {
      * @params {object} res
      * @returns {object} signed in user object
      */
-  // static verifyUser(req, res, next) {
-  //   const newUser = user.findAllUser();
-  //   const found = newUser.find(auser => auser.email === req.body.email);
-  //   if (!found) {
-  //     return res.status(400).json({ status: 400, error: 'Email does not exist' });
-  //   }
-  //   if (found.password !== req.body.password) {
-  //     return res.status(400).json({ status: 400, error: 'incorrect password' });
-  //   }
-  //   next();
-  // }
+  static verifyUser(req, res, next) {
+    const newUser = user.findAllUser();
+    const found = newUser.find(auser => auser.email === req.body.email);
+    if (!found) {
+      return res.status(400).json({ status: 400, error: 'Email does not exist' });
+    }
+    if (found.password !== req.body.password) {
+      return res.status(400).json({ status: 400, error: 'incorrect password' });
+    }
+    next();
+  }
 }

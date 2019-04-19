@@ -2,13 +2,15 @@ import express from 'express';
 import account from '../controllers/accountsController';
 import Auth from '../middleware/auth';
 import validate from '../middleware/accountMiddleware';
+// import UserHelper from '../Helpers/userHelper';
 
 const accountsRouter = express.Router();
 
 accountsRouter.post('/',
-  // Auth.checkToken,
+  Auth.checkToken,
   // validate.validateType,
   // validate.validateOpeningBalance,
+  Auth.allowUserOnly,
   account.createAccount);
 
 accountsRouter.patch('/:accountNumber',

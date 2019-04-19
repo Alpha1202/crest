@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
-import  db from '../db/index';
+import db from '../db/index';
+// import TransactionHelper from '../Helpers/transactionHelper';
 
 
 config();
@@ -14,35 +15,93 @@ export default class TransactionController {
     const { accountNumber } = req.params;
     const { amount } = req.body;
 
-    const findOne = 'SELECT * FROM accounts WHERE accountNumber = $1';
-    const debit = `UPDATE accounts
-      SET balance =$1
-      WHERE accountNumber = $2 returning *`;
-    try {
-      const { rows } = await db.query(findOne, [accountNumber]);
+    const updatedAccount = 'SELECT * FROM accounts WHERE accountNumber = $1';
 
-      if (!rows[0]) {
-        return res.status(404).json({ status: 404, message: 'Account Not found'});
-      }
-      const balance = rows[0].balance - parseInt(amount, 10);
-     
-      const values = [
-        balance,
-        accountNumber,
-      ];
-
-      const result = await db.query(debit, values);
-      console.log(result.rows[0]);
-      
-    } catch (error) {
-      return res.status(400).json({ status: 400, message: error });
-    }  
+    const result = await db.query(updatedAccount, [accountNumber]);
+    const { accountnumber, createdon, balance } = result.rows[0];
+    const oldBalance = amount + balance;
     const newTransaction = `INSERT INTO
-    transactions(type, accountNumber,cashier, amount, oldBalance, newBalance)`  
+    transactions(
+      createdon,
+      type,
+      accountNumber,
+      cashier,
+      amount,
+      oldBalance,
+      newBalance)
+      VALUES($1, $2, $3, $4, $5, $6, $7)
+      returning *`;
+
+    const values = [
+      createdon,
+      'debit',
+      accountnumber,
+      2,
+      amount,
+      oldBalance,
+      balance,
+    ];
+    try {
+      const { rows } = await db.query(newTransaction, values);
+      const transactionData = rows[0];
+      return res.status(200).json({ status: 200,
+        data: {
+          transactionData,
+        },
+      });
+    } catch (err) {
+      return res.status(500).json({ status: 500, err });
+    }
+  }
+
+
+  /**
+   * 
+   */
+
+  static async credit(req, res) {
+    const { accountNumber } = req.params;
+    const { amount } = req.body;
+
+    const updatedAccount = 'SELECT * FROM accounts WHERE accountNumber = $1';
+
+    const result = await db.query(updatedAccount, [accountNumber]);
+    const { accountnumber, createdon, balance } = result.rows[0];
+    const oldBalance = balance - amount;
+    const newTransaction = `INSERT INTO
+    transactions(
+      createdon,
+      type,
+      accountNumber,
+      cashier,
+      amount,
+      oldBalance,
+      newBalance)
+      VALUES($1, $2, $3, $4, $5, $6, $7)
+      returning *`;
+
+    const values = [
+      createdon,
+      'credit',
+      accountnumber,
+      2,
+      amount,
+      oldBalance,
+      balance,
+    ];
+    try {
+      const { rows } = await db.query(newTransaction, values);
+      const transactionData = rows[0];
+      return res.status(200).json({ status: 200,
+        data: {
+          transactionData,
+        },
+      });
+    } catch (err) {
+      return res.status(500).json({ status: 500, err });
+    }
   }
 }
-
-
 
 
 // const accountBalance = oldBalance - amount;
@@ -159,3 +218,4 @@ export default class TransactionController {
 //     });
 //   }
 // }
+

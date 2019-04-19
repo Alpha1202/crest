@@ -34,11 +34,16 @@ export default class Helper {
        * @returns {object} a newly created user object
        */
 
-  static getToken(id) {
+  static getToken(id, email, firstName, lastName, type, isAdmin ) {
     const token = jwt.sign({
       userId: id,
+      email,
+      firstName,
+      lastName,
+      type,
+      isAdmin,
     },
-    process.env.JWT_SECRET, { expiresIn: '7d'},);
+    process.env.JWT_SECRET, { expiresIn: '7d'}, );
     return token;
   }
   

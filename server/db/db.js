@@ -74,7 +74,7 @@ const createTransactionTable = () => {
     id serial NOT NULL PRIMARY KEY,
     createdOn TIMESTAMP NOT NULL,
     type TEXT NOT NULL,
-    accountNumber INT NOT NULL UNIQUE,
+    accountNumber INT NOT NULL,
     cashier serial NOT NULL,
     amount INT NOT NULL,
     oldBalance FLOAT NOT NULL,

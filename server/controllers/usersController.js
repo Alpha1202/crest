@@ -32,8 +32,8 @@ export default class UserController {
     ];
     try {
       const { rows } = await db.query(data, values);
-
-      const token = Helper.getToken(rows[0].id);
+      const { id, firstname, lastname, isadmin } = rows[0];
+      const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );
       res.status(201).json({ status: 201,
         data: {
           token,
@@ -69,7 +69,8 @@ export default class UserController {
       if (!Helper.checkPassword(rows[0].password, password)) {
         return res.status(400).send({ message: 'invalid password'});
       }
-      const token = Helper.getToken(rows[0].id);
+      const { id, firstname, lastname, isadmin } = rows[0];
+      const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );
       return res.status(200).json({ status: 200,
         data: {
           token,
