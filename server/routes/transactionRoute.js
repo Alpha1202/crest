@@ -7,15 +7,19 @@ import TransactionHelper from '../Helpers/transactionHelper';
 const transactionRouter = express.Router();
 
 transactionRouter.post('/:accountNumber/debit',
-  // Auth.checkToken,
-  // validate.validateAccountNumber,
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  Auth.allowStaffOnly,
+  TransactionHelper.checkAccountStatus,
   TransactionHelper.debitAccount,
   transaction.debit);
 
 
 transactionRouter.post('/:accountNumber/credit',
-//   Auth.checkToken,
-//   validate.validateAccountNumber,
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  Auth.allowStaffOnly,
+  TransactionHelper.checkAccountStatus,
   TransactionHelper.creditAccount,
   transaction.credit);
 

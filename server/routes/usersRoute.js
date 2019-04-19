@@ -1,8 +1,6 @@
 import express from 'express';
 import user from '../controllers/usersController';
 import validate from '../middleware/userMiddlerware';
-import UserHelper from '../Helpers/userHelper';
-
 
 
 const usersRouter = express.Router();
@@ -16,10 +14,9 @@ usersRouter.post('/auth/signup',
 
 
 usersRouter.post('/auth/signin',
-  // validate.verifyUser,
   validate.validateEmail,
   validate.validatePassword,
-  // UserHelper.allowUserOnly,
+  validate.verifyUser,
   user.login);
 
 export default usersRouter;

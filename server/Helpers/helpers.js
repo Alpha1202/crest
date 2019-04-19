@@ -26,7 +26,6 @@ export default class Helper {
   static checkPassword(hash, password) {
     return bcrypt.compareSync(password, hash);
   }
-
   /**
        * Create a new user
        * @params {object} req
@@ -36,15 +35,14 @@ export default class Helper {
 
   static getToken(id, email, firstName, lastName, type, isAdmin ) {
     const token = jwt.sign({
-      userId: id,
+      id,
       email,
       firstName,
       lastName,
       type,
       isAdmin,
     },
-    process.env.JWT_SECRET, { expiresIn: '7d'}, );
+    process.env.JWT_SECRET, { expiresIn: '7d' }, );
     return token;
   }
-  
 }

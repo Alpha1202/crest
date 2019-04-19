@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import moment from 'moment';
+import jwt from 'jsonwebtoken';
 import db from '../db/index';
 
 config();
@@ -16,7 +17,15 @@ export default class AccountsController {
    */
 
   static async createAccount(req, res) {
-    const { accountNumber, owner, type, status, balance } = req.body;
+    const accountNumberPrefix = '00';
+    const generateAccountNumber = Date.now();
+    const newAccountNumber = accountNumberPrefix + generateAccountNumber;
+    
+    const { type } = req.body;
+    const authData = jwt.verify(req.token, process.env.JWT_SECRET);
+    const { id, firstName, lastName, email } = authData;
+
+    
     const data = `INSERT INTO
     accounts(
       accountNumber, 
@@ -28,31 +37,29 @@ export default class AccountsController {
       )
       VALUES($1, $2, $3, $4, $5, $6)
       returning *`;
-
     const values = [
-      accountNumber,
+      newAccountNumber,
       moment(new Date()),
-      owner,
+      id,
       type,
-      status,
-      parseFloat(balance),
+      'dormant',
+      0,
     ];
-
-    try {
-      const { rows } = await db.query(data, values);
-      
-      return res.status(201).json({ status: 201,
-        data: {
-          accountNumber: rows[0].accountnumber,
-          owner: rows[0].owner,
-          type: rows[0].type,
-          openingBalance: rows[0].balance,
-        },
-      })
-    } catch (error) {
-      return res.status(400).send(error);
-    }
-  }
+    const { rows } = await db.query(data, values);
+   
+    res.status(201).json({ 
+      status: 201,
+      data: {
+        accountNumber: rows[0].accountnumber,
+        firstName,
+        lastName,
+        email,
+        type: rows[0].type,
+        openingBalance: rows[0].balance,
+      },
+    });
+  };
+  
 
   /**
    * Activate or Deactivate an account
@@ -70,7 +77,7 @@ export default class AccountsController {
     try {
       const { rows } = await db.query(findOne, [accountNumber]);
       if (!rows[0]) {
-        return res.status(404).send({message: 'account not found'})
+        return res.status(404).json({ status: 404, error: 'account not found'});
       }
       const values = [
         status || rows[0].status,
@@ -78,8 +85,8 @@ export default class AccountsController {
       ];
 
       const result = await db.query(updateOne, values);
-      return res.status(200).json({ status: 200, data:
-        result.rows[0]});
+      return res.status(200).json({ status: 200,
+        data: result.rows[0] });
     } catch (error) {
       return res.status(500).send(error);
     }
@@ -97,9 +104,9 @@ export default class AccountsController {
     try {
       const { rows } = await db.query(deleteQuery, [accountNumber]);
       if (!rows[0]) {
-        return res.status(404).json({ status: 204, message: 'account not found'})
+        return res.status(404).json({ status: 404, message: 'account not found'});
       }
-      return res.status(204).json({ status: 204, message: 'account deleted'});
+      return res.status(204).json({ status: 204, message: 'Account deleted successfully'});
     } catch (error) {
       return res.status(500).json({status: 500, error });
     }

@@ -63,15 +63,14 @@ export default class UserController {
     const data = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await db.query(data, [email]);
-      if (!rows[0]) {
-        return res.status(400).send({message: 'email not found'});
-      }
+    
       if (!Helper.checkPassword(rows[0].password, password)) {
         return res.status(400).send({ message: 'invalid password'});
       }
       const { id, firstname, lastname, isadmin } = rows[0];
       const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );
-      return res.status(200).json({ status: 200,
+      return res.status(200).json({ 
+        status: 200,
         data: {
           token,
           id: rows[0].id,
@@ -84,5 +83,5 @@ export default class UserController {
       return res.status(500).json({ status: 500, error });
     }
   }
-}
 
+}

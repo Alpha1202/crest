@@ -4,6 +4,30 @@ import db from '../db/index';
 config();
 
 export default class TransactionHelper {
+
+  /**
+   * 
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
+  static async checkAccountStatus(req, res, next) {
+    const { accountNumber } = req.params;
+
+    const findOne = 'SELECT * FROM accounts WHERE accountNumber = $1';
+    const { rows } = await db.query(findOne, [accountNumber]);
+    const { status } = rows[0];
+
+    if (status === 'dormant' || !status === 'active') {
+      return res.status(400).json({
+        status: 400,
+        error: 'This account is not active, please activate'
+      })
+    }
+    next();
+
+  
+  }
   /**
    * verify account number and account balance for a debit transaction
    * and update the account
@@ -19,8 +43,7 @@ export default class TransactionHelper {
       WHERE accountNumber = $2 returning *`;
     try {
       const { rows } = await db.query(findOne, [accountNumber]);
-      // console.log(rows[0]);
-      
+
       if (!rows[0]) {
         return res.status(404).json({ status: 404, message: 'Account Not found'});
       }
