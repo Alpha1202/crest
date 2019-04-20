@@ -126,4 +126,19 @@ export default class AccountsController {
     }
   }
 
+  /**
+   * 
+   */
+  static async getOneAccount(req, res) {
+    const { accountNumber } = req.params;
+    const findOneAccount = 'SELECT * FROM accounts WHERE accountnumber = $1';
+
+    try {
+      const { rows } = await db.query(findOneAccount, [accountNumber]);
+      return res.status(200).json({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).json({ status: 500, error })
+    }
+  }
+
 }

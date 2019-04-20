@@ -32,4 +32,11 @@ accountsRouter.get('/:accountNumber/transactions',
   validate.checkAccountNumber,
   account.getAccountTransactionsHistory);
 
+accountsRouter.get('/:accountNumber',
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  validate.checkAccountNumber,
+  account.getOneAccount);
+
+
 export default accountsRouter;
