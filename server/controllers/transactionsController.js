@@ -102,5 +102,24 @@ export default class TransactionController {
       return res.status(500).json({ status: 500, err });
     }
   }
+
+
+  /**
+   * 
+   */
+
+  static async getAtransaction(req, res) {
+    const { transactionId } = req.params;
+
+    const findAtransaction = 'SELECT * FROM transactions WHERE id = $1';
+
+    try {
+      const { rows } = await db.query(findAtransaction, [transactionId]);
+      return res.status(200).json({ status: 200, data: rows[0] });
+    } catch (error) {
+      return res.status(500).json({ status: 500, error });
+       
+    }
+  }
 }
 

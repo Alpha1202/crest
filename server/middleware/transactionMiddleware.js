@@ -1,5 +1,8 @@
 /* eslint-disable consistent-return */
+import { config } from 'dotenv';
+import db from '../db/index';
 
+config();
 
 /**
      *@class validate
@@ -19,6 +22,26 @@ export default class validateTransactions {
     const numericRegExp = /^[0-9]+$/;
     if (!amount.match(numericRegExp)) {
       return res.status(400).json({ status: 400, error: 'Please enter a valid amount' });
+    }
+    next();
+  }
+
+  /**
+   *
+   */
+
+  static async checkTransactionId(req, res, next) {
+    const { transactionId } = req.params;
+
+    const findOne = 'SELECT * FROM transactions WHERE id = $1';
+
+    try {
+      const { rows } = await db.query(findOne, [transactionId]);
+      if (rows[0] === undefined) {
+        return res.status(400).json({ status: 400, error: 'TransactionId not found'});
+      }
+    } catch (error) {
+      return res.status(500).json({ status: 500, error });
     }
     next();
   }
