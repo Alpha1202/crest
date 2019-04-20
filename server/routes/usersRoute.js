@@ -1,6 +1,7 @@
 import express from 'express';
 import user from '../controllers/usersController';
 import validate from '../middleware/userMiddlerware';
+import Auth from '../middleware/auth';
 
 
 const usersRouter = express.Router();
@@ -18,5 +19,12 @@ usersRouter.post('/auth/signin',
   validate.validatePassword,
   validate.verifyUser,
   user.login);
+
+usersRouter.get('/:email/accounts',
+  Auth.checkToken,
+  validate.validateEmailParam,
+  validate.checkEmail,
+  user.getUserAccountList);
+
 
 export default usersRouter;

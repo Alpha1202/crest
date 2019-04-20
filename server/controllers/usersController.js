@@ -83,5 +83,19 @@ export default class UserController {
       return res.status(500).json({ status: 500, error });
     }
   }
+  /**
+ * 
+ */
 
+  static async getUserAccountList(req, res) {
+    const { email } = req.params;
+
+    const findUserAccountList = 'SELECT * FROM accounts WHERE owneremail = $1';
+    try {
+      const { rows } = await db.query(findUserAccountList, [email]);
+      return res.status(200).json({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).json({ status: 500, error });
+    }
+  }
 }
