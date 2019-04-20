@@ -1,4 +1,8 @@
 /* eslint-disable consistent-return */
+import { config } from 'dotenv';
+import db from '../db/index';
+
+config();
 
 
 /**
@@ -59,11 +63,33 @@ export default class validate {
     next();
   }
 
+  /**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
   static validateAccountNumber(req, res, next) {
     const { accountNumber } = req.params;
     const numericRegExp = /^[0-9]+$/;
     if (!accountNumber.match(numericRegExp)) {
       return res.status(400).json({ status: 400, error: 'Please enter a valid account Number' });
+    }
+    next();
+  }
+
+  /**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+  static async checkAccountNumber(req, res, next) {
+    const { accountNumber } = req.params;
+    const findAccountNumber = 'SELECT * FROM accounts WHERE accountnumber = $1';
+    const { rows } = await db.query(findAccountNumber, [accountNumber]);   
+    if (rows[0] === undefined) {
+      return res.status(404).json({ status: 404, error: 'Cannot find your account number' });
     }
     next();
   }
