@@ -101,4 +101,39 @@ export default class validate {
     }
     next();
   }
+
+  /**
+     * validates inputs for creating a new user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created user object
+     */
+  static validateEmailParam(req, res, next) {
+    const { email } = req.params;
+    if (!email || email === 'undefined' || email === '') {
+      return res.status(400).json({ status: 400, error: 'Please enter your email' });
+    }
+    const emailExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!email.match(emailExp)) {
+      return res.status(400).json({ status: 400, error: 'Invalid Email' });
+    }
+    next();
+  }
+
+  /**
+     * validates inputs for creating a new user
+     * @params {object} req
+     * @params {object} res
+     * @returns {object} a newly created user object
+     */
+    static async checkEmail(req, res, next) {
+      const { email } = req.params;
+      const findOne = 'SELECT * FROM users WHERE email = $1';
+
+      const { rows } = await db.query(findOne, [email]);
+      if (!rows[0]) {
+        return res.status(404).json({ status: 404, error: 'Email does not exist'});
+      }
+      next();
+    }
 }
