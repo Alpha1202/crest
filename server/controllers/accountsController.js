@@ -147,10 +147,18 @@ export default class AccountsController {
    */
 
   static async getAllAccount(req, res) {
+    const { status } = req.query;
+
     const findAllAccount = 'SELECT * FROM accounts';
     try {
       const { rows } = await db.query(findAllAccount);
-      return res.status(200).json({ status: 200, data: rows });
+      if (!status) {
+        return res.status(200).json({ status: 200, data: rows });
+      }
+      if (status === 'active') {
+        const activeAccounts = rows.filter(someAccounts => someAccounts.status === 'active');
+        return res.status(200).json({ status: 200, data: activeAccounts });
+      }
     } catch (error) {
       return res.status(500).json({ status: 500, error });
     }
