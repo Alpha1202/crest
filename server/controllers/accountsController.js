@@ -159,6 +159,11 @@ export default class AccountsController {
         const activeAccounts = rows.filter(someAccounts => someAccounts.status === 'active');
         return res.status(200).json({ status: 200, data: activeAccounts });
       }
+      if (status === 'dormant') {
+        const dormantAccounts = rows.filter(someAccounts => someAccounts.status === 'dormant');
+        return res.status(200).json({ status: 200, data: dormantAccounts });
+      }
+      return res.status(400).json({ status: 400, message: 'Please specify active or dormant'});
     } catch (error) {
       return res.status(500).json({ status: 500, error });
     }
