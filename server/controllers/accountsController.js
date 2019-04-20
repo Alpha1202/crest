@@ -111,4 +111,19 @@ export default class AccountsController {
       return res.status(500).json({status: 500, error });
     }
   }
+
+  /**
+   * 
+   */
+  static async getAccountTransactionsHistory(req, res) {
+    const { accountNumber } = req.params;
+    const findTransactionsHistory = 'SELECT * FROM transactions WHERE accountnumber = $1';
+    try {
+      const { rows } = await db.query(findTransactionsHistory, [accountNumber]);
+      return res.status(200).json({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).json({ status: 500, error });
+    }
+  }
+
 }

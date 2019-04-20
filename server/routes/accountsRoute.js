@@ -26,5 +26,10 @@ accountsRouter.delete('/:accountNumber',
   Auth.allowStaffOnly,
   account.deleteAccount);
 
+accountsRouter.get('/:accountNumber/transactions',
+  Auth.checkToken,
+  validate.validateAccountNumber,
+  validate.checkAccountNumber,
+  account.getAccountTransactionsHistory);
 
 export default accountsRouter;
