@@ -77,7 +77,7 @@ export default class AccountsController {
     try {
       const { rows } = await db.query(findOne, [accountNumber]);
       if (!rows[0]) {
-        return res.status(404).json({ status: 404, error: 'account not found'});
+        return res.status(404).json({ status: 404, error: 'account not found' });
       }
       const values = [
         status || rows[0].status,
@@ -104,11 +104,11 @@ export default class AccountsController {
     try {
       const { rows } = await db.query(deleteQuery, [accountNumber]);
       if (!rows[0]) {
-        return res.status(404).json({ status: 404, message: 'account not found'});
+        return res.status(404).json({ status: 404, message: 'account not found' });
       }
-      return res.status(204).json({ status: 204, message: 'Account deleted successfully'});
+      return res.status(204).json({ status: 204, message: 'Account deleted successfully' });
     } catch (error) {
-      return res.status(500).json({status: 500, error });
+      return res.status(500).json({ status: 500, error });
     }
   }
 
@@ -137,8 +137,22 @@ export default class AccountsController {
       const { rows } = await db.query(findOneAccount, [accountNumber]);
       return res.status(200).json({ status: 200, data: rows });
     } catch (error) {
-      return res.status(500).json({ status: 500, error })
+      return res.status(500).json({ status: 500, error });
     }
   }
 
+
+  /**
+   * 
+   */
+
+  static async getAllAccount(req, res) {
+    const findAllAccount = 'SELECT * FROM accounts';
+    try {
+      const { rows } = await db.query(findAllAccount);
+      return res.status(200).json({ status: 200, data: rows });
+    } catch (error) {
+      return res.status(500).json({ status: 500, error });
+    }
+  }
 }

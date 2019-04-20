@@ -38,5 +38,9 @@ accountsRouter.get('/:accountNumber',
   validate.checkAccountNumber,
   account.getOneAccount);
 
+accountsRouter.get('/',
+  Auth.checkToken,
+  account.getAllAccount);
+
 
 export default accountsRouter;
