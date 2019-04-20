@@ -1,3 +1,8 @@
+import { config } from 'dotenv';
+import jwt from 'jsonwebtoken';
+
+config();
+
 
 /**
      *@class Auth
@@ -18,10 +23,46 @@ export default class Auth {
         req.token = bearerToken;
         next();
       } else {
-        res.status(403).json({status: 403, error: 'You are not authorised' });
+        res.status(403).json({ status: 403, error: 'You are not authorised' });
       }
     } catch (error) {
-      res.status(400).json({status: 400, error: 'Access token not valid' });
+      res.status(500).json({ status: 500, error: 'Access token not valid' });
     }
+  }
+
+  /**
+ * checks the type of user
+ */
+  static allowUserOnly(req, res, next) {
+
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      if (err) {
+        return res.status(403).json({ status: 403, error: 'Forbidden' });
+      }
+      const { type } = authData;
+      if (type === 'admin' || type === 'staff') {
+        return res.status(403).json({ status: 403, error: 'Admin is not authorized' });
+      }
+      next();
+    });
+    
+  }
+
+  /**
+ * checks the staff
+ */
+  static allowStaffOnly(req, res, next) {
+
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      if (err) {
+        return res.status(403).json({ status: 403, error: 'Forbidden' });
+      }
+      const { type } = authData;
+      if (type === 'client') {
+        return res.status(403).json({ status: 403, error: 'Only Admin is authorized' });
+      }
+      next();
+    });
+  
   }
 }

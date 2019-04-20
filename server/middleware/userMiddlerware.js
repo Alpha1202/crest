@@ -1,7 +1,8 @@
 /* eslint-disable consistent-return */
-import User from '../models/User';
+import { config } from 'dotenv';
+import db from '../db/index';
 
-const user = new User();
+config();
 
 /**
      *@class validate
@@ -90,14 +91,13 @@ export default class validate {
      * @params {object} res
      * @returns {object} signed in user object
      */
-  static verifyUser(req, res, next) {
-    const newUser = user.findAllUser();
-    const found = newUser.find(auser => auser.email === req.body.email);
-    if (!found) {
-      return res.status(400).json({ status: 400, error: 'Email does not exist' });
-    }
-    if (found.password !== req.body.password) {
-      return res.status(400).json({ status: 400, error: 'incorrect password' });
+  static async verifyUser(req, res, next) {
+    const { email } = req.body;
+    const findOne = 'SELECT * FROM users WHERE email = $1';
+
+    const { rows } = await db.query(findOne, [email]);
+    if (!rows[0]) {
+      return res.status(404).json({ status: 404, error: 'Email does not exist'});
     }
     next();
   }

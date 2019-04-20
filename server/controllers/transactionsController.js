@@ -1,14 +1,8 @@
-import uuid from 'uuid';
+import { config } from 'dotenv';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import Transaction from '../models/Transactions';
-import Account from '../models/Accounts';
+import db from '../db/index';
 
-
-dotenv.config();
-
-const transaction = new Transaction();
-const account = new Account();
+config();
 
 export default class TransactionController {
   /** POST a debit transaction
@@ -16,112 +10,97 @@ export default class TransactionController {
      * @param {object} res
     */
 
-  static debit(req, res) {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-      if (err) {
-        return res.status(403).json({status: 403, error: 'Forbidden' });
-      }
+  static async debit(req, res) {
+    const { accountNumber } = req.params;
+    const { amount } = req.body;
 
-      const { id, isAdmin } = authData;
-      if (isAdmin === false) {
-        return res.status(403).json({ status: 403, error: 'Only Admin is authorized'});
-      }
+    const authData = jwt.verify(req.token, process.env.JWT_SECRET);
+    const { id } = authData;
 
-      const { accountNumber } = req.params;
-      const checkAccountNumber = account.findAccount(accountNumber);
-      if (!checkAccountNumber) {
-        return res.status(404).json({status: 404, error: 'Account Number does not exist' });
-      }
+    const updatedAccount = 'SELECT * FROM accounts WHERE accountNumber = $1';
 
+    const result = await db.query(updatedAccount, [accountNumber]);
+    const { accountnumber, createdon, balance } = result.rows[0];
+    const oldBalance = parseInt(amount, 10) + parseInt(balance, 10);
+    const newTransaction = `INSERT INTO
+    transactions(
+      createdon,
+      type,
+      accountNumber,
+      cashier,
+      amount,
+      oldBalance,
+      newBalance)
+      VALUES($1, $2, $3, $4, $5, $6, $7)
+      returning *`;
 
-      const { status, openingBalance } = checkAccountNumber;
-      if (status === 'dormant') {
-        return res.status(400).json({status: 400, error: 'This account is dormant, please activate' });
-      }
-      const { amount } = req.body;
-      if (!amount || amount === 'undefined') {
-        return res.status(400).json({status: 400, error: 'Please specify an amount' });
-      }
-      const oldBalance = openingBalance;
-      if (oldBalance <= 0 && oldBalance < amount) {
-        return res.status(400).json({ status: 400, error: 'You have insufficient balance' });
-      }
-
-      const accountBalance = oldBalance - amount;
-      checkAccountNumber.openingBalance = accountBalance;
-
-      const debitTransaction = transaction.debit(amount);
-      if (debitTransaction.saved) {
-        return res.status(200).json({
-          status: 200,
-          data: {
-            transactionId: uuid.v4(),
-            accountNumber,
-            amount,
-            cashier: id,
-            transactionType: 'debit',
-            accountBalance,
-          },
-        });
-      }
-      return res.status(400).json({
-        status: 400,
-        error: 'Debit transaction failed',
+    const values = [
+      createdon,
+      'debit',
+      accountnumber,
+      id,
+      parseInt(amount, 10),
+      oldBalance,
+      balance,
+    ];
+    try {
+      const { rows } = await db.query(newTransaction, values);
+      return res.status(200).json({ status: 200,
+        data: rows[0]
+        
       });
-    });
+    } catch (err) {
+      return res.status(500).json({ status: 500, err });
+    }
   }
 
-  static credit(req, res) {
-    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-      if (err) {
-        return res.status(403).json({ status: 403, error: 'Forbidden' });
-      }
 
-      const { id, isAdmin } = authData;
-      if (isAdmin === false) {
-        return res.status(403).json({ status: 403, error: 'Only Admin is authorized'});
-      }
+  /**
+   * 
+   */
 
-      const { accountNumber } = req.params;
+  static async credit(req, res) {
+    const { accountNumber } = req.params;
+    const { amount } = req.body;
+    const convertedAmount = parseFloat(amount);
+    const authData = jwt.verify(req.token, process.env.JWT_SECRET);
+    const { id } = authData;
 
-      const checkAccountNumber = account.findAccount(accountNumber);
-      if (!checkAccountNumber) {
-        return res.status(404).json({ status: 404, error: 'Account Number does not exist' });
-      }
 
-      const { status, openingBalance } = checkAccountNumber;
-      if (status === 'dormant') {
-        return res.status(400).json({ status: 400, error: 'This account is dormant, please activate' });
-      }
+    const updatedAccount = 'SELECT * FROM accounts WHERE accountNumber = $1';
 
-      const { amount } = req.body;
-      if (!amount || amount === 'undefined') {
-        return res.status(400).json({ status: 400, error: 'Please specify an amount' });
-      }
-      const oldBalance = openingBalance;
+    const result = await db.query(updatedAccount, [accountNumber]);
+    const { accountnumber, createdon, balance } = result.rows[0];
+    const oldBalance = parseFloat(balance) - parseFloat(amount);
+    const newTransaction = `INSERT INTO
+    transactions(
+      createdon,
+      type,
+      accountNumber,
+      cashier,
+      amount,
+      oldBalance,
+      newBalance)
+      VALUES($1, $2, $3, $4, $5, $6, $7)
+      returning *`;
 
-      const accountBalance = parseFloat(oldBalance) + parseFloat(amount);
-
-      checkAccountNumber.openingBalance = accountBalance;
-
-      const creditTransaction = transaction.credit(amount);
-      if (creditTransaction.saved) {
-        return res.status(200).json({
-          status: 200,
-          data: {
-            transactionId: uuid.v4(),
-            accountNumber,
-            amount,
-            cashier: id,
-            transactionType: 'Credit',
-            accountBalance: parseFloat(accountBalance),
-          },
-        });
-      }
-      return res.status(400).json({
-        status: 400,
-        error: 'Credit transaction failed',
+    const values = [
+      createdon,
+      'credit',
+      accountnumber,
+      id,
+      convertedAmount,
+      oldBalance,
+      balance,
+    ];
+    try {
+      const { rows } = await db.query(newTransaction, values);
+      return res.status(200).json({ status: 200,
+        data: rows[0]
       });
-    });
+    } catch (err) {
+      return res.status(500).json({ status: 500, err });
+    }
   }
 }
+

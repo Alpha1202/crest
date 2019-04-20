@@ -14,9 +14,9 @@ usersRouter.post('/auth/signup',
 
 
 usersRouter.post('/auth/signin',
-  validate.verifyUser,
   validate.validateEmail,
   validate.validatePassword,
+  validate.verifyUser,
   user.login);
 
 export default usersRouter;

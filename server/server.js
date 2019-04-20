@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyparser from 'body-parser';
 import { config } from 'dotenv';
-import debug from 'debug';
 import router from './routes';
 
 config();
@@ -22,7 +21,7 @@ app.use('/api/v1', router);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  debug('server')('server is running');
+  console.log('server is running');
 });
 
 export default app;

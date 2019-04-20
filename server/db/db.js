@@ -45,12 +45,12 @@ const createAccountTable = () => {
   const tableData = `CREATE TABLE IF NOT EXISTS
   accounts(
     id serial NOT NULL PRIMARY KEY,
-    accountNumber INT NOT NULL UNIQUE,
+    accountNumber BIGINT NOT NULL UNIQUE,
     createdOn TIMESTAMP NOT NULL,
     owner serial NOT NULL,
     type TEXT NOT NULL,
     status TEXT NOT NULL,
-    balance FLOAT NOT NULL UNIQUE,
+    balance FLOAT NOT NULL,
     FOREIGN KEY (owner) REFERENCES users (id)
   )`;
 
@@ -74,9 +74,9 @@ const createTransactionTable = () => {
     id serial NOT NULL PRIMARY KEY,
     createdOn TIMESTAMP NOT NULL,
     type TEXT NOT NULL,
-    accountNumber INT NOT NULL UNIQUE,
+    accountNumber BIGINT NOT NULL,
     cashier serial NOT NULL,
-    amount INT NOT NULL,
+    amount BIGINT NOT NULL,
     oldBalance FLOAT NOT NULL,
     newBalance FLOAT NOT NULL,
     FOREIGN KEY (cashier) REFERENCES users (id)
