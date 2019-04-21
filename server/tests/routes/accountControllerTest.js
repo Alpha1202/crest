@@ -45,7 +45,7 @@ describe('API Routes Test: ', () => {
         });
     });
 
-    it('should allow an admin to create a new user account when all conditions are met', (done) => {
+    it('should not allow an admin to create a new user account when all conditions are met', (done) => {
       chai.request(app)
         .post('/api/v1/accounts')
         .set({ Authorization: validAdminToken })
@@ -94,35 +94,16 @@ describe('API Routes Test: ', () => {
           });
       });
 
-    it('should not allow a user create a bank acount when opening Balance is not specified or is missing',
+    it('should allow a user create a bank acount when opening Balance is not specified or is missing',
       (done) => {
         chai.request(app)
           .post('/api/v1/accounts')
           .set({ Authorization: validUserToken })
           .send(missingOpeningBalance)
           .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.have.property('error')
-              .eql('please specify your opening Balance');
+            res.should.have.status(201);
             res.body.should.have.property('status')
-              .eql(400);
-            res.body.should.be.a('object');
-            done();
-          });
-      });
-
-    it('should not allow a user create a bank acount when opening Balance is not a valid amount',
-      (done) => {
-        chai.request(app)
-          .post('/api/v1/accounts')
-          .set({ Authorization: validUserToken })
-          .send(invalidOpeningBalance)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.have.property('error')
-              .eql('Please enter a valid amount');
-            res.body.should.have.property('status')
-              .eql(400);
+              .eql(201);
             res.body.should.be.a('object');
             done();
           });
@@ -133,7 +114,7 @@ describe('API Routes Test: ', () => {
 describe('PATCH: /api/v1/accounts/:accountNumber', () => {
   it('should patch an account when all conditions are met', (done) => {
     chai.request(app)
-      .patch('/api/v1/accounts/23451')
+      .patch('/api/v1/accounts/1555747011471')
       .set({ Authorization: validAdminToken })
       .send(validAccount)
       .end((err, res) => {
@@ -188,7 +169,7 @@ describe('PATCH: /api/v1/accounts/:accountNumber', () => {
             res.body.should.have.property('status').eql(404);
             res.body.should.be.a('object');
             res.body.should.have.property('error')
-              .eql('Account Number 2345561 does not exist');
+              .eql('Cannot find your account number');
             done();
           });
       });
@@ -246,23 +227,6 @@ describe('PATCH: /api/v1/accounts/:accountNumber', () => {
     });
 
     describe('DELETE: /api/v1/accounts/:accountNumber', () => {
-      it('should delete an account when all conditions are met', (done) => {
-        chai.request(app)
-          .delete('/api/v1/accounts/23451')
-          .set({ Authorization: validAdminToken })
-          .send(validAccount)
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.have.property('status').eql(200);
-            res.body.should.be.a('object');
-            res.body.should.have.property('message')
-              .eql('Account successfully deleted');
-            done();
-          });
-      });
-    });
-
-    describe('DELETE: /api/v1/accounts/:accountNumber', () => {
       it('should not delete an account when an invalid token is passed', (done) => {
         chai.request(app)
           .delete('/api/v1/accounts/23451')
@@ -307,7 +271,7 @@ describe('PATCH: /api/v1/accounts/:accountNumber', () => {
             res.body.should.have.property('status').eql(404);
             res.body.should.be.a('object');
             res.body.should.have.property('error')
-              .eql('No account with that account number');
+              .eql('Cannot find your account number');
             done();
           });
       });

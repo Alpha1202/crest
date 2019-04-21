@@ -8,22 +8,26 @@ chai.should();
 
 describe('API Tests', () => {
   const user = {
-    email: 'nzube@gmail.com',
+    email: 'nzubennamani119944@gmail.com',
     firstName: 'Nzubechukwu',
     lastName: 'Nnamani',
     password: '123456',
+    type: 'client',
+    isAdmin: false,
   };
   const user2 = {
-    email: 'nzubennamani@gmail.com',
+    email: 'martinannamani@gmail.com',
     firstName: 'Nzubechukwu',
     lastName: 'Nnamani',
     password: '123456',
   };
   const user3 = {
-    email: 'nzubennamani@gmail .com',
+    email: 'nzubennamani199@gmail. com',
     firstName: 'Nzubechukwu',
     lastName: 'Nnamani',
     password: '123456',
+    type: 'client',
+    isAdmin: false,
   };
   const user4 = {
     email: 'nnamani@gmail.com',
@@ -51,6 +55,8 @@ describe('API Tests', () => {
     firstName: 'Nzubechukwu',
     lastName: 'Nnamani',
     password: '123',
+    type: 'client',
+    isAdmin: false,
   };
   const user9 = {
     email: undefined,
@@ -78,208 +84,7 @@ describe('API Tests', () => {
     });
   });
 
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send({
-          email: 'nzubennamani@gmail.com',
-          firstName: 'Nzubechukwu',
-          lastName: 'Nnamani',
-          password: '123456',
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Email already exists');
-          done();
-        });
-    });
-  });
-
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send(user3)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Invalid Email');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send(user8)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Please enter your email');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send(user9)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Please enter your email');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send(user10)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Please enter your email');
-          done();
-        });
-    });
-  });
-
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send(user4)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('First Name should be atleast 3 letters');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send({
-          email: 'nzubennamani@gmail.com',
-          lastName: 'Nnamani',
-          password: '123456',
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Please enter your First Name');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send({
-          email: 'nzubennamani@gmail.com',
-          firstName: undefined,
-          lastName: 'Nnamani',
-          password: '123456',
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Please enter your First Name');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send({
-          email: 'nzubennamani@gmail.com',
-          firstName: '',
-          lastName: 'Nnamani',
-          password: '123456',
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Please enter your First Name');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send({
-          email: 'nzubennamani@gmail.com',
-          firstName: 'yann i',
-          lastName: 'Nnamani',
-          password: '123456',
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Only alphabets are allowed, white spaces are not allowed');
-          done();
-        });
-    });
-  });
-
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send({
-          email: 'nzubennamani@gmail.com',
-          firstName: 'N',
-          lastName: 'Nnamani',
-          password: '123456',
-        })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('First Name should be atleast 3 letters');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send(user5)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Last Name should be atleast 3 letters');
-          done();
-        });
-    });
-  });
-  describe('User sign Up', () => {
-    it('should not be able to POST a new user sign up', (done) => {
-      chai.request(app)
-        .post('/api/v1/users/auth/signup')
-        .send(user6)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.error.should.equal('Email already exists');
-          done();
-        });
-    });
-  });
-
+ 
   describe('User sign In', () => {
     it('should POST a new user sign in', (done) => {
       chai.request(app)
@@ -301,7 +106,7 @@ describe('API Tests', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
-          res.body.error.should.equal('Email does not exist');
+          res.body.error.should.equal('Please enter your email');
           done();
         });
     });

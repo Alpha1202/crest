@@ -72,6 +72,7 @@ export default class TransactionController {
     const result = await db.query(updatedAccount, [accountNumber]);
     const { accountnumber, createdon, balance } = result.rows[0];
     const oldBalance = parseFloat(balance) - parseFloat(amount);
+    
     const newTransaction = `INSERT INTO
     transactions(
       createdon,
