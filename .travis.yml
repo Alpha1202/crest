@@ -6,12 +6,6 @@ cache:
     - "node_modules"
 services:
   - postgresql
-env: 
-  NODE_ENV=test
-  DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/travis_ci_test
-env:
-  global:
-  - PGPORT=5433
 before_install: cd ./server
 install:
     - npm install
