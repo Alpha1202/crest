@@ -11,7 +11,7 @@
     "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
     "coveralls-coverage": "coveralls < lcov.info",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "babel-build": "babel api --ignore ./server/tests/* -d dist",
+    "babel-build": "babel server --ignore ./server/tests/* -d dist",
     "clean": "rm -rf dist && mkdir dist",
     "postinstall": "npm run build"
   },
