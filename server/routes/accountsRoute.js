@@ -17,6 +17,7 @@ accountsRouter.patch('/:accountNumber',
   validate.validateAccountNumber,
   validate.validateStatus,
   Auth.allowStaffOnly,
+  validate.checkAccountNumber,
   account.updateAccountStatus);
 
 
@@ -24,6 +25,7 @@ accountsRouter.delete('/:accountNumber',
   Auth.checkToken,
   validate.validateAccountNumber,
   Auth.allowStaffOnly,
+  validate.checkAccountNumber,
   account.deleteAccount);
 
 accountsRouter.get('/:accountNumber/transactions',

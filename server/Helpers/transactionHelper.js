@@ -21,7 +21,7 @@ export default class TransactionHelper {
     if (status === 'dormant' || !status === 'active') {
       return res.status(400).json({
         status: 400,
-        error: 'This account is not active, please activate'
+        error: 'This account is not active, please activate',
       })
     }
     next();

@@ -65,7 +65,7 @@ export default class UserController {
       const { rows } = await db.query(data, [email]);
     
       if (!Helper.checkPassword(rows[0].password, password)) {
-        return res.status(400).send({ message: 'invalid password'});
+        return res.status(400).send({ status: 400, error: 'invalid password'});
       }
       const { id, firstname, lastname, isadmin } = rows[0];
       const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );

@@ -1,4 +1,7 @@
-const debug = require('debug');
+// I used a resource to setup this database connection.
+// here is the link: https://www.codementor.io/olawalealadeusi896/building-a-simple-api-with-nodejs-expressjs-postgresql-db-and-jwt-3-mke10c5c5
+
+
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 
@@ -27,12 +30,13 @@ const createUserTable = () => {
     isAdmin BOOLEAN
   )`;
 
-  return pool.query(tableData)
+  pool.query(tableData)
     .then((res) => {
+      console.log(res);
       pool.end();
-      return res;
     })
     .catch((error) => {
+      console.log(error);
       pool.end();
       return error;
     });
@@ -54,14 +58,15 @@ const createAccountTable = () => {
     FOREIGN KEY (owner) REFERENCES users (id)
   )`;
 
-  return pool.query(tableData)
+  pool.query(tableData)
     .then((res) => {
+      console.log(res);
+      
       pool.end();
-      return res;
     })
     .catch((error) => {
+      console.log(error);
       pool.end();
-      return error;
     });
 };
 
@@ -82,15 +87,14 @@ const createTransactionTable = () => {
     FOREIGN KEY (cashier) REFERENCES users (id)
   )`;
 
-
-  return pool.query(tableData)
+  pool.query(tableData)
     .then((res) => { 
+      console.log(res);
       pool.end();
-      return res;
     })
     .catch((error) => {
+      console.log(error);
       pool.end();
-      return error;
     });
 };
 
@@ -98,15 +102,15 @@ const createTransactionTable = () => {
   * Drop user Tables
 */
 
-const dropUserTables = () => {
+const dropUserTable = () => {
   const tableData = 'DROP TABLE IF EXISTS users returning *';
   pool.query(tableData)
     .then((res) => {
-      debug('db')(res);
+      console.log(res);
       pool.end();
     })
     .catch((error) => {
-      debug('db')(error);
+      console.log(error);
       pool.end();
     });
 };
@@ -115,15 +119,15 @@ const dropUserTables = () => {
   * Drop Account Tables
 */
 
-const dropAccountTables = () => {
+const dropAccountTable = () => {
   const tableData = 'DROP TABLE IF EXISTS accounts returning *';
   pool.query(tableData)
     .then((res) => {
-      debug('db')(res);
+      console.log(res);
       pool.end();
     })
     .catch((error) => {
-      debug('db')(error);
+      console.log(error);
       pool.end();
     });
 };
@@ -132,15 +136,15 @@ const dropAccountTables = () => {
   * Drop Transaction Tables
 */
 
-const dropTransactionTables = () => {
-  const tableData = 'DROP TABLE IF EXISTS transaction returning *';
+const dropTransactionTable = () => {
+  const tableData = 'DROP TABLE IF EXISTS transactions returning *';
   pool.query(tableData)
     .then((res) => {
-      debug('db')(res);
+      console.log(res);
       pool.end();
     })
     .catch((error) => {
-      debug('db')(error);
+      console.log(error);
       pool.end();
     });
 };
@@ -160,13 +164,13 @@ const createAllTables = () => {
  * Drop All tables
  */
 const dropAllTables = () => {
-  dropUserTables();
-  dropAccountTables();
-  dropTransactionTables();
+  dropUserTable();
+  dropAccountTable();
+  dropTransactionTable();
 };
 
 pool.on('remove', () => {
-  debug('db')('tables removed');
+  console.log('tables removed');
   process.exit(0);
 });
 
@@ -175,9 +179,9 @@ module.exports = {
   createAccountTable,
   createTransactionTable,
   createAllTables,
-  dropUserTables,
-  dropAccountTables,
-  dropTransactionTables,
+  dropUserTable,
+  dropAccountTable,
+  dropTransactionTable,
   dropAllTables,
 };
 

@@ -12,8 +12,8 @@ chai.use(chaiHttp);
 chai.should();
 
 const {
-  validUser,
-  validAdmin,
+  validUser1,
+  validAdmin1,
   validUserSignup,
   validAdminSignup,
   invalidEmail,
@@ -37,7 +37,7 @@ describe('API Route Test: ', () => {
     it('should create a new user account when all conditions are met', (done) => {
       chai.request(app)
         .post('/api/v1/users/auth/signup')
-        .send(validUserSignup)
+        .send(validUser1)
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.have.property('status').eql(201);
@@ -49,7 +49,7 @@ describe('API Route Test: ', () => {
     it('should create a new Admin/staff user account when all conditions are met', (done) => {
       chai.request(app)
         .post('/api/v1/users/auth/signup')
-        .send(validAdminSignup)
+        .send(validAdmin1)
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.have.property('status').eql(201);
@@ -62,10 +62,10 @@ describe('API Route Test: ', () => {
       (done) => {
         chai.request(app)
           .post('/api/v1/users/auth/signup')
-          .send(validUser)
+          .send(validUserSignup)
           .end((err, res) => {
             res.should.have.status(400);
-            res.body.should.have.property('error')
+            res.body.should.have.property('message')
               .eql('Email already exists');
             res.body.should.have.property('status')
               .eql(400);
@@ -78,10 +78,10 @@ describe('API Route Test: ', () => {
       (done) => {
         chai.request(app)
           .post('/api/v1/users/auth/signup')
-          .send(validAdmin)
+          .send(validAdminSignup)
           .end((err, res) => {
             res.should.have.status(400);
-            res.body.should.have.property('error')
+            res.body.should.have.property('message')
               .eql('Email already exists');
             res.body.should.have.property('status')
               .eql(400);
@@ -269,8 +269,8 @@ describe('API Route Test: ', () => {
         .post('/api/v1/users/auth/signin')
         .send(invalidUserSignin)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.have.property('status').eql(400);
+          res.should.have.status(404);
+          res.body.should.have.property('status').eql(404);
           res.body.should.be.a('object');
           res.body.should.have.property('error')
             .eql('Email does not exist');
@@ -287,7 +287,7 @@ describe('API Route Test: ', () => {
           res.body.should.have.property('status').eql(400);
           res.body.should.be.a('object');
           res.body.should.have.property('error')
-            .eql('incorrect password');
+            .eql('invalid password');
           done();
         });
     });
@@ -300,7 +300,7 @@ describe('API Route Test: ', () => {
           .end((err, res) => {
             res.should.have.status(400);
             res.body.should.have.property('error')
-              .eql('Email does not exist');
+              .eql('Invalid Email');
             res.body.should.have.property('status')
               .eql(400);
             res.body.should.be.a('object');
@@ -316,7 +316,7 @@ describe('API Route Test: ', () => {
           .end((err, res) => {
             res.should.have.status(400);
             res.body.should.have.property('error')
-              .eql('Email does not exist');
+              .eql('Please enter your email');
             res.body.should.have.property('status')
               .eql(400);
             res.body.should.be.a('object');

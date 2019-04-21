@@ -23,14 +23,14 @@ export default class AccountsController {
     
     const { type } = req.body;
     const authData = jwt.verify(req.token, process.env.JWT_SECRET);
-    const { id, firstName, lastName, email } = authData;
+    const { firstName, lastName, email } = authData;
 
     
     const data = `INSERT INTO
     accounts(
       accountNumber, 
       createdOn,
-      owner,
+      owneremail,
       type,
       status,
       balance
@@ -40,7 +40,7 @@ export default class AccountsController {
     const values = [
       newAccountNumber,
       moment(new Date()),
-      id,
+      email,
       type,
       'dormant',
       0,
@@ -59,7 +59,6 @@ export default class AccountsController {
       },
     });
   };
-  
 
   /**
    * Activate or Deactivate an account

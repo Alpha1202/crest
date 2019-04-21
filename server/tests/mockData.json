@@ -1,10 +1,20 @@
 {
     "Users": {
         "validUser": {
-        "email": "nzubennamani@gmail.com",
+        "email": "odinnaka@gmail.com",
         "firstName": "Nzubechukwu",
         "lastName": "Nnamani",
-        "password": "123456"
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+        "validUser1": {
+        "email": "odinnaka231244@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
         },
         "validAdmin": {
         "email": "nnamani@gmail.com",
@@ -13,17 +23,28 @@
         "password": "654321",
         "isAdmin": true
         },
-        "validUserSignup": {
-        "email": "nzubennamani1@gmail.com",
-        "firstName": "Nzubechukwu",
-        "lastName": "Nnamani",
-        "password": "123456"
-        },
-        "validAdminSignup": {
-        "email": "nnamani9@gmail.com",
+        "validAdmin1": {
+        "email": "nnamani1432@gmail.com",
         "firstName": "Nzubechukwu",
         "lastName": "Nnamani",
         "password": "654321",
+        "type": "staff",
+        "isAdmin": false
+        },
+        "validUserSignup": {
+        "email": "nzubennamani199@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456",
+        "type": "client",
+        "isAdmin": false
+        },
+        "validAdminSignup": {
+        "email": "chidera@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "654321",
+        "type": "staff",
         "isAdmin": true
         },
         "invalidUser": {
@@ -116,7 +137,7 @@
         "password": "123"
         },
         "validUserSignin": {
-        "email": "nzubennamani@gmail.com",
+        "email": "martinannamani@gmail.com",
         "password": "123456"
         },
         "invalidUserSignin": {
@@ -128,8 +149,8 @@
         "password": "1456"
         },
         "validAdminSignin": {
-        "email": "nnamani@gmail.com",
-        "password": "654321"
+        "email": "chidinmannamani@gmail.com",
+        "password": "123456"
         },
         "missingSigninEmail": {
         "password": "654321"
@@ -142,18 +163,18 @@
         "email": "alpha9@gmail.com",
         "password": "raphael"
         },
-        "validUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJ6dWJzIiwibGFzdE5hbWUiOiJBbHBoYSIsImVtYWlsIjoibnp1ZW5uYW1hbmlAZ21haWwuY29tIiwidHlwZSI6ImNsaWVudCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTQ4MDE1MzAsImV4cCI6MTU1NTQwNjMzMH0.0C7zaKffLv9DgmpDyViuXf_P55HgwcIwPayf4g4V2c0",
+        "validUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoiamVzdXNkZXNhdmlvdXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiTnp1YmVjaHVrd3UiLCJsYXN0TmFtZSI6Ik5uYW1hbmkiLCJ0eXBlIjoiY2xpZW50IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU1NTcwNDU2NSwiZXhwIjoxNTU2MzA5MzY1fQ.yQFc15oKumMo6eQNdq05On7stkOnHSKCXa8KeoIBJtE",
         "invalidUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImZpcnN0TmFtZSI6Ik56dWJlY2h1a3d1IiwibGFzdE5hbWUiOiJObmFtYW5pIiwiZW1haWwiOiJubmFtYW5pQGdtYWlsLmNvbSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NDg4NDEyMywiZXhwIjoxNTU1NDg4OTIzfQ.-Gf7guTLBEWkgZ-xLQGtzblRcT7C5I065FzJKaObGwQ",
-        "validAdminToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImZpcnN0TmFtZSI6Ik56dWJlY2h1a3d1IiwibGFzdE5hbWUiOiJObmFtYW5pIiwiZW1haWwiOiJubmFtYW5pQGdtYWlsLmNvbSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NDg4NDEyMywiZXhwIjoxNTU1NDg4OTIzfQ.-Gf7guTLBEWkgZ-xLQGtzblRcT7C5I065FzJKaObGwQ",
+        "validAdminToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoibWFyeW1vdGhlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJOenViZWNodWt3dSIsImxhc3ROYW1lIjoiTm5hbWFuaSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTU3MDU5MjcsImV4cCI6MTU1NjMxMDcyN30.vIPoYm2EIuixbv_-lq5s8M-Hp5_vDsFDD6sw4hpiH8s",
         "invalidAdminToken":  "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJ6dWJzIiwibGFzdE5hbWUiOiJBbHBoYSIsImVtYWlsIjoibnp1ZW5uYW1hbmlAZ21haWwuY29tIiwidHlwZSI6ImNsaWVudCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTQ4MDE1MzAsImV4cCI6MTU1NTQwNjMzMH0.0C7zaKffLv9DgmpDyViuXf_P55HgwcIwPayf4g4V2c0",   
         "anotherInvalidAdminToken": "bearer aninvalidToken"
     },
 
     "Accounts": {
         "validAccount": {
-        "id": "123",
-        "accountNumber": "23451",
-        "ownerId": "2",
+        "id": "1",
+        "accountNumber": "1555747011471",
+        "owneremail": "jesusdesaviour@gmail.com",
         "type": "current",
         "status": "dormant",
         "openingBalance": "0",
@@ -196,8 +217,7 @@
         "createdOn": "12/04/2019"
         },
         "createNewAccount": {
-        "type": "savings",
-        "openingBalance": "0"
+        "type": "savings"
         },
         "invalidNewAccount": {
         "type": "",

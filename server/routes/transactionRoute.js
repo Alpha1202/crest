@@ -11,6 +11,7 @@ transactionRouter.post('/:accountNumber/debit',
   Auth.checkToken,
   validate.validateAccountNumber,
   Auth.allowStaffOnly,
+  validate.checkAccountNumber,
   TransactionHelper.checkAccountStatus,
   TransactionHelper.debitAccount,
   transaction.debit);
@@ -20,7 +21,9 @@ transactionRouter.post('/:accountNumber/credit',
   Auth.checkToken,
   validate.validateAccountNumber,
   Auth.allowStaffOnly,
+  validate.checkAccountNumber,
   TransactionHelper.checkAccountStatus,
+  validateTransactions.validateAmount,
   TransactionHelper.creditAccount,
   transaction.credit);
 
