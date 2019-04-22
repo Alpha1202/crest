@@ -1,9 +1,9 @@
-/* eslint-disable no-undef */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../server';
-import mockData from '../mockData.json';
+import mockData from '../dummyData.json';
 import db from '../../db/index';
+import moment from 'moment';
 
 process.env.NODE_ENV = 'test';
 
@@ -13,6 +13,7 @@ chai.should();
 
 const {
   validUser1,
+  validUserSignin,
   validUserToken,
   validAdminToken,
   anotherInvalidAdminToken,
@@ -29,135 +30,122 @@ const {
   invalidStatus,
 } = mockData.Accounts;
 
+describe('Accounts', () => {
 
-describe('API Routes Test: ', () => {
-  // let responseToken = '';
-  // before((done) => {
-  //   chai.request(app)
-  //     .post('/api/v1/users/auth/signin')
-  //     .send(validUser1)
-  //     .end((err, res) => {
-  //       const { data: { token } } = res.body;
-  //       responseToken = token;
-  //       done();
-  //     });
-  // });
+  describe('API Routes Test: ', () => {
 
-  describe('POST: /api/v1/accounts', () => {
-    it('should create a new user account when all conditions are met', (done) => {
-      // console.log('TOKEN HERE ::::::::::::::::::', responseToken);
-      chai.request(app)
-        .post('/api/v1/accounts')
-        .set({ Authorization: validUserToken })
-        .send(createNewAccount)
-        .end((err, res) => {
-          res.should.have.status(201);
-          res.body.should.have.property('status').eql(201);
-          res.body.should.be.a('object');
-          done();
-        });
-    });
+    describe('POST: /api/v1/accounts', () => {
 
-    it('should not allow an admin to create a new user account when all conditions are met', (done) => {
-      chai.request(app)
-        .post('/api/v1/accounts')
-        .set({ Authorization: validAdminToken })
-        .send(createNewAccount)
-        .end((err, res) => {
-          res.should.have.status(403);
-          res.body.should.have.property('status').eql(403);
-          res.body.should.be.a('object');
-          res.body.should.have.property('error')
-            .eql('Admin is not authorized');
-          done();
-        });
-    });
-
-    it('should not allow a user create a bank acount when account type is not specified or is undefined',
-      (done) => {
+      it('should create a new user account when all conditions are met', (done) => {
         chai.request(app)
           .post('/api/v1/accounts')
           .set({ Authorization: validUserToken })
-          .send(invalidNewAccount)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.have.property('error')
-              .eql('please enter account type, savings or current');
-            res.body.should.have.property('status')
-              .eql(400);
-            res.body.should.be.a('object');
-            done();
-          });
-      });
-
-    it('should not allow a user create a bank acount when account type is not an alphabet',
-      (done) => {
-        chai.request(app)
-          .post('/api/v1/accounts')
-          .set({ Authorization: validUserToken })
-          .send(anotherInvalidNewAccount)
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.have.property('error')
-              .eql('Only alphabets are allowed, white spaces are not allowed');
-            res.body.should.have.property('status')
-              .eql(400);
-            res.body.should.be.a('object');
-            done();
-          });
-      });
-
-    it('should allow a user create a bank acount when opening Balance is not specified or is missing',
-      (done) => {
-        chai.request(app)
-          .post('/api/v1/accounts')
-          .set({ Authorization: validUserToken })
-          .send(missingOpeningBalance)
+          .send(createNewAccount)
           .end((err, res) => {
             res.should.have.status(201);
-            res.body.should.have.property('status')
-              .eql(201);
+            res.body.should.have.property('status').eql(201);
             res.body.should.be.a('object');
             done();
           });
       });
-  });
 
-
-  describe('PATCH: /api/v1/accounts/:accountNumber', () => {
-    it('should patch an account when all conditions are met', (done) => {
-      chai.request(app)
-        .patch('/api/v1/accounts/1555890854177')
-        .set({ Authorization: validAdminToken })
-        .send(validAccount)
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.have.property('status').eql(200);
-          res.body.should.be.a('object');
-          done();
-        });
-    });
-
-    describe('PATCH: /api/v1/accounts/:accountNumber', () => {
-      it('should not allow non-admin to patch an account when all conditions are met', (done) => {
+      it('should not allow an admin to create a new user account when all conditions are met', (done) => {
         chai.request(app)
-          .patch('/api/v1/accounts/23451')
-          .set({ Authorization: validUserToken })
-          .send(validAccount)
+          .post('/api/v1/accounts')
+          .set({ Authorization: validAdminToken })
+          .send(createNewAccount)
           .end((err, res) => {
             res.should.have.status(403);
             res.body.should.have.property('status').eql(403);
             res.body.should.be.a('object');
             res.body.should.have.property('error')
-              .eql('Only Admin is authorized');
+              .eql('Admin is not authorized');
             done();
           });
       });
 
+      it('should not allow a user create a bank acount when account type is not specified or is undefined',
+        (done) => {
+          chai.request(app)
+            .post('/api/v1/accounts')
+            .set({ Authorization: validUserToken })
+            .send(invalidNewAccount)
+            .end((err, res) => {
+              res.should.have.status(400);
+              res.body.should.have.property('error')
+                .eql('please enter account type, savings or current');
+              res.body.should.have.property('status')
+                .eql(400);
+              res.body.should.be.a('object');
+              done();
+            });
+        });
+
+      it('should not allow a user create a bank acount when account type is not an alphabet',
+        (done) => {
+          chai.request(app)
+            .post('/api/v1/accounts')
+            .set({ Authorization: validUserToken })
+            .send(anotherInvalidNewAccount)
+            .end((err, res) => {
+              res.should.have.status(400);
+              res.body.should.have.property('error')
+                .eql('Only alphabets are allowed, white spaces are not allowed');
+              res.body.should.have.property('status')
+                .eql(400);
+              res.body.should.be.a('object');
+              done();
+            });
+        });
+
+      it('should allow a user create a bank acount when opening Balance is not specified or is missing',
+        (done) => {
+          chai.request(app)
+            .post('/api/v1/accounts')
+            .set({ Authorization: validUserToken })
+            .send(missingOpeningBalance)
+            .end((err, res) => {
+              res.should.have.status(201);
+              res.body.should.have.property('status')
+                .eql(201);
+              res.body.should.be.a('object');
+              done();
+            });
+        });
+
       describe('PATCH: /api/v1/accounts/:accountNumber', () => {
+
+        it('should patch an account when all conditions are met', (done) => {
+          chai.request(app)
+            .patch('/api/v1/accounts/1555958896710')
+            .set({ Authorization: validAdminToken })
+            .send(validAccount)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.have.property('status').eql(200);
+              res.body.should.be.a('object');
+              done();
+            });
+        });
+
+        it('should not allow non-admin to patch an account when all conditions are met', (done) => {
+          chai.request(app)
+            .patch('/api/v1/accounts/1555958896710')
+            .set({ Authorization: validUserToken })
+            .send(validAccount)
+            .end((err, res) => {
+              res.should.have.status(403);
+              res.body.should.have.property('status').eql(403);
+              res.body.should.be.a('object');
+              res.body.should.have.property('error')
+                .eql('Only Admin is authorized');
+              done();
+            });
+        });
+
         it('should not allow patch account when an invalid token is passed', (done) => {
           chai.request(app)
-            .patch('/api/v1/accounts/23451')
+            .patch('/api/v1/accounts/1555958896710')
             .set({ Authorization: anotherInvalidAdminToken })
             .send(validAccount)
             .end((err, res) => {
@@ -169,9 +157,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('PATCH: /api/v1/accounts/:accountNumber', () => {
         it('should not allow patch account when an invalid account number is passed', (done) => {
           chai.request(app)
             .patch('/api/v1/accounts/2345561')
@@ -186,9 +172,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('PATCH: /api/v1/accounts/:accountNumber', () => {
         it('should not allow patch account when an invalid account number is passed', (done) => {
           chai.request(app)
             .patch('/api/v1/accounts/abcnde')
@@ -203,9 +187,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('PATCH: /api/v1/accounts/:accountNumber', () => {
         it('should not allow patch account when status is empty or undefined', (done) => {
           chai.request(app)
             .patch('/api/v1/accounts/23451')
@@ -220,9 +202,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('PATCH: /api/v1/accounts/:accountNumber', () => {
         it('should not allow patch account when status is not a valid alphabet', (done) => {
           chai.request(app)
             .patch('/api/v1/accounts/23451')
@@ -237,9 +217,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('DELETE: /api/v1/accounts/:accountNumber', () => {
         it('should not delete an account when an invalid token is passed', (done) => {
           chai.request(app)
             .delete('/api/v1/accounts/23451')
@@ -254,9 +232,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('DELETE: /api/v1/accounts/:accountNumber', () => {
         it('should not allow a user to delete an account', (done) => {
           chai.request(app)
             .delete('/api/v1/accounts/23451')
@@ -271,9 +247,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('DELETE: /api/v1/accounts/:accountNumber', () => {
         it('should not allow an account to be deleted when an invalid account number is passed', (done) => {
           chai.request(app)
             .delete('/api/v1/accounts/23432451')
@@ -288,9 +262,7 @@ describe('API Routes Test: ', () => {
               done();
             });
         });
-      });
 
-      describe('DELETE: /api/v1/accounts/:accountNumber', () => {
         it('should not allow an account to be deleted when an invalid account number is passed', (done) => {
           chai.request(app)
             .delete('/api/v1/accounts/abcded')
@@ -306,7 +278,6 @@ describe('API Routes Test: ', () => {
             });
         });
       });
-
-    });
+    })
   });
-});
+})

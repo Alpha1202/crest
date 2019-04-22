@@ -9,13 +9,15 @@ dotenv.config();
 
 let databaseUrl = '';
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV === 'production') {
   databaseUrl = process.env.DATABASE_URL;
-} else {
+} else if (process.env.NODE_ENV === 'test') {
   databaseUrl = process.env.TEST_DATABASE_URL;
+} else {
+  databaseUrl = process.env.DEV_DATABASE_URL;
 }
 
-// console.log('DATABASE URL ::::::::::::::::::::', databaseUrl);
+
 const pool = new Pool({
   connectionString: databaseUrl,
 });
@@ -63,8 +65,7 @@ const createAccountTable = () => {
     owneremail VARCHAR NOT NULL,
     type TEXT NOT NULL,
     status TEXT NOT NULL,
-    balance FLOAT NOT NULL,
-    FOREIGN KEY (owneremail) REFERENCES users (email)
+    balance FLOAT NOT NULL
   )`;
 
   pool.query(tableData)
@@ -92,8 +93,7 @@ const createTransactionTable = () => {
     cashier serial NOT NULL,
     amount BIGINT NOT NULL,
     oldBalance FLOAT NOT NULL,
-    newBalance FLOAT NOT NULL,
-    FOREIGN KEY (cashier) REFERENCES users (id)
+    newBalance FLOAT NOT NULL
   )`;
 
   pool.query(tableData)
