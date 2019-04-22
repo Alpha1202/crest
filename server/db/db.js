@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'test') {
   databaseUrl = process.env.TEST_DATABASE_URL;
 }
 
-console.log('DATABASE URL ::::::::::::::::::::', databaseUrl);
+// console.log('DATABASE URL ::::::::::::::::::::', databaseUrl);
 const pool = new Pool({
   connectionString: databaseUrl,
 });
