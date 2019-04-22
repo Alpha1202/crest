@@ -29,7 +29,7 @@ const {
   anotherInvalidUserSignin,
 } = mockData.Users;
 
-describe('Connection', () => {
+describe('Connections', () => {
 
   const deleteQuery = 'DELETE FROM users returning *';
   const addQuery = `INSERT INTO users

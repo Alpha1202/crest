@@ -65,8 +65,7 @@ const createAccountTable = () => {
     owneremail VARCHAR NOT NULL,
     type TEXT NOT NULL,
     status TEXT NOT NULL,
-    balance FLOAT NOT NULL,
-    FOREIGN KEY (owneremail) REFERENCES users (email)
+    balance FLOAT NOT NULL
   )`;
 
   pool.query(tableData)
@@ -94,8 +93,7 @@ const createTransactionTable = () => {
     cashier serial NOT NULL,
     amount BIGINT NOT NULL,
     oldBalance FLOAT NOT NULL,
-    newBalance FLOAT NOT NULL,
-    FOREIGN KEY (cashier) REFERENCES users (id)
+    newBalance FLOAT NOT NULL
   )`;
 
   pool.query(tableData)
