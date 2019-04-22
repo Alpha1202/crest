@@ -7,8 +7,17 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+let databaseUrl = '';
+
+if (process.env.NODE_ENV !== 'test') {
+  databaseUrl = process.env.DATABASE_URL;
+} else {
+  databaseUrl = process.env.TEST_DATABASE_URL;
+}
+
+console.log('DATABASE URL ::::::::::::::::::::', databaseUrl);
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: databaseUrl,
 });
 
 pool.on('connect', () => {
@@ -51,11 +60,11 @@ const createAccountTable = () => {
     id serial NOT NULL PRIMARY KEY,
     accountNumber BIGINT NOT NULL UNIQUE,
     createdOn TIMESTAMP NOT NULL,
-    owner serial NOT NULL,
+    owneremail VARCHAR NOT NULL,
     type TEXT NOT NULL,
     status TEXT NOT NULL,
     balance FLOAT NOT NULL,
-    FOREIGN KEY (owner) REFERENCES users (id)
+    FOREIGN KEY (owneremail) REFERENCES users (email)
   )`;
 
   pool.query(tableData)

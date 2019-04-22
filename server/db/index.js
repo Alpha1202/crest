@@ -4,8 +4,18 @@ import { config } from 'dotenv';
 
 config();
 
+let databaseUrl = '';
+
+if (process.env.NODE_ENV !== 'test') {
+  databaseUrl = process.env.DATABASE_URL;
+} else {
+  databaseUrl = process.env.TEST_DATABASE_URL;
+}
+
+console.log('DATABASE UR 2 ::::::::::::::::::::', databaseUrl);
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: databaseUrl,
 });
 
 export default {
