@@ -6,13 +6,14 @@ config();
 
 let databaseUrl = '';
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV === 'production') {
   databaseUrl = process.env.DATABASE_URL;
-} else {
+} else if (process.env.NODE_ENV === 'test') {
   databaseUrl = process.env.TEST_DATABASE_URL;
+} else {
+  databaseUrl = process.env.DEV_DATABASE_URL;
 }
 
-console.log('DATABASE UR 2 ::::::::::::::::::::', databaseUrl);
 
 const pool = new Pool({
   connectionString: databaseUrl,
