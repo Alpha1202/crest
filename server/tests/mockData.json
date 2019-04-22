@@ -9,7 +9,7 @@
         "isAdmin": false
         },
         "validUser1": {
-        "email": "odinnaka231244@gmail.com",
+        "email": "nzubennamani119292@gmail.com",
         "firstName": "Nzubechukwu",
         "lastName": "Nnamani",
         "password": "123456",
@@ -24,7 +24,7 @@
         "isAdmin": true
         },
         "validAdmin1": {
-        "email": "nnamani1432@gmail.com",
+        "email": "nnamani1321432@gmail.com",
         "firstName": "Nzubechukwu",
         "lastName": "Nnamani",
         "password": "654321",
@@ -137,7 +137,7 @@
         "password": "123"
         },
         "validUserSignin": {
-        "email": "martinannamani@gmail.com",
+        "email": "chidinma@gmail.com",
         "password": "123456"
         },
         "invalidUserSignin": {
@@ -145,7 +145,7 @@
         "password": "123456"
         },
         "anotherInvalidUserSignin": {
-        "email": "nzubennamani@gmail.com",
+        "email": "chidinma@gmail.com",
         "password": "1456"
         },
         "validAdminSignin": {
@@ -163,7 +163,7 @@
         "email": "alpha9@gmail.com",
         "password": "raphael"
         },
-        "validUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsImVtYWlsIjoiamVzdXNkZXNhdmlvdXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiTnp1YmVjaHVrd3UiLCJsYXN0TmFtZSI6Ik5uYW1hbmkiLCJ0eXBlIjoiY2xpZW50IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU1NTcwNDU2NSwiZXhwIjoxNTU2MzA5MzY1fQ.yQFc15oKumMo6eQNdq05On7stkOnHSKCXa8KeoIBJtE",
+        "validUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTMsImVtYWlsIjoiY2hpZGlubWFAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiQ2hpZGlubWEiLCJsYXN0TmFtZSI6Ik5uYW1hbmkiLCJ0eXBlIjoiY2xpZW50IiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU1NTg4OTYyNywiZXhwIjoxNTU2NDk0NDI3fQ.7-xJqQHHC57jCYWywfsHL7oVM4Nejs3doHZkFfVdyTA",
         "invalidUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImZpcnN0TmFtZSI6Ik56dWJlY2h1a3d1IiwibGFzdE5hbWUiOiJObmFtYW5pIiwiZW1haWwiOiJubmFtYW5pQGdtYWlsLmNvbSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NDg4NDEyMywiZXhwIjoxNTU1NDg4OTIzfQ.-Gf7guTLBEWkgZ-xLQGtzblRcT7C5I065FzJKaObGwQ",
         "validAdminToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoibWFyeW1vdGhlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJOenViZWNodWt3dSIsImxhc3ROYW1lIjoiTm5hbWFuaSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTU3MDU5MjcsImV4cCI6MTU1NjMxMDcyN30.vIPoYm2EIuixbv_-lq5s8M-Hp5_vDsFDD6sw4hpiH8s",
         "invalidAdminToken":  "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJ6dWJzIiwibGFzdE5hbWUiOiJBbHBoYSIsImVtYWlsIjoibnp1ZW5uYW1hbmlAZ21haWwuY29tIiwidHlwZSI6ImNsaWVudCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTQ4MDE1MzAsImV4cCI6MTU1NTQwNjMzMH0.0C7zaKffLv9DgmpDyViuXf_P55HgwcIwPayf4g4V2c0",   

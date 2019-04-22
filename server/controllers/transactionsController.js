@@ -13,7 +13,7 @@ export default class TransactionController {
   static async debit(req, res) {
     const { accountNumber } = req.params;
     const { amount } = req.body;
-
+    const convertedAmount = parseFloat(amount);
     const authData = jwt.verify(req.token, process.env.JWT_SECRET);
     const { id } = authData;
 
@@ -21,7 +21,7 @@ export default class TransactionController {
 
     const result = await db.query(updatedAccount, [accountNumber]);
     const { accountnumber, createdon, balance } = result.rows[0];
-    const oldBalance = parseInt(amount, 10) + parseInt(balance, 10);
+    const oldBalance = parseFloat(balance) + parseFloat(amount);
     const newTransaction = `INSERT INTO
     transactions(
       createdon,
@@ -39,7 +39,7 @@ export default class TransactionController {
       'debit',
       accountnumber,
       id,
-      parseInt(amount, 10),
+      convertedAmount,
       oldBalance,
       balance,
     ];

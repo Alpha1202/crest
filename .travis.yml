@@ -6,17 +6,13 @@ cache:
     - "node_modules"
 services:
   - postgresql
-env: 
-  NODE_ENV=test
-  DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/travis_ci_test
-env:
-  global:
-  - PGPORT=5433
 before_install: cd ./server
 install:
     - npm install
 before_script:
-   - psql -c 'create database travis_ci_test;' -U postgres
+   - psql -c 'create database banka_test;' -U postgres
+   - npm run create-table
+   - npm run seeder
 script:
     - npm run test
 after_success:
