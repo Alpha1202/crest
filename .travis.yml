@@ -6,6 +6,8 @@ cache:
     - "node_modules"
 services:
   - postgresql
+env:
+  - NODE_ENV=test
 before_install: cd ./server
 install:
     - npm install
