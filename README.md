@@ -67,20 +67,20 @@ To run tests for the server side
 #### API 
 | METHOD 	| ENDPOINT                                                                      	| DESCRIPTION                                          	|
 |--------	|-------------------------------------------------------------------------------	|------------------------------------------------------	|
-| POST   	| https://crestfinance.herokuapp.com/api/v1/users/auth/signup                   	| Creates a new user account                           	|
-| POST   	| https://crestfinance.herokuapp.com/api/v1/users/auth/signin                   	| Logs in a user                                       	|
-| POST   	| https://crestfinance.herokuapp.com/api/v1/accounts                            	| Creates a bank account                               	|
-| PATCH  	| https://crestfinance.herokuapp.com/api/v1/accounts/1555919170790              	| Activates or deactivates an account.                 	|
-| DELETE 	| https://crestfinance.herokuapp.com/api/v1/accounts/1555922619600              	| Deletes a specific bank account.                     	|
-| POST   	| https://crestfinance.herokuapp.com/api/v1/transactions/1555919170790/debit    	| Debits a bank account.                               	|
-| POST   	| https://crestfinance.herokuapp.com/api/v1/transactions/1555919170790/credit   	| credits a bank account.                              	|
-| GET    	| https://crestfinance.herokuapp.com/api/v1/accounts/1555919170790/transactions 	| View an account’s transaction history.               	|
-| GET    	| https://crestfinance.herokuapp.com/api/v1/transactions/                       	| View a specific transaction.                         	|
-| GET    	| https://crestfinance.herokuapp.com/api/v1/users/newuser@gmail.com/accounts    	| View all accounts owned by a specific user (client). 	|
-| GET    	| https://crestfinance.herokuapp.com/api/v1/accounts/1555919170790              	| View a specific account’s details.                   	|
-| GET    	| https://crestfinance.herokuapp.com/api/v1/accounts/                           	| View a list of all bank accounts.                    	|
-| GET    	| https://crestfinance.herokuapp.com/api/v1/accounts/?status=active             	| View a list of all active bank accounts.             	|
-| GET    	| https://crestfinance.herokuapp.com/api/v1/accounts/?status=dormant            	| View a list of all dormant bank accounts.            	|
+| POST   	|/api/v1/users/auth/signup                   	| Creates a new user account                           	|
+| POST   	| /api/v1/users/auth/signin                   	| Logs in a user                                       	|
+| POST   	| /api/v1/accounts                            	| Creates a bank account                               	|
+| PATCH  	| /api/v1/accounts/1555919170790              	| Activates or deactivates an account.                 	|
+| DELETE 	| /api/v1/accounts/1555922619600              	| Deletes a specific bank account.                     	|
+| POST   	| /api/v1/transactions/1555919170790/debit    	| Debits a bank account.                               	|
+| POST   	| /api/v1/transactions/1555919170790/credit   	| credits a bank account.                              	|
+| GET    	| /api/v1/accounts/1555919170790/transactions 	| View an account’s transaction history.               	|
+| GET    	| /api/v1/transactions/                       	| View a specific transaction.                         	|
+| GET    	| /api/v1/users/newuser@gmail.com/accounts    	| View all accounts owned by a specific user (client). 	|
+| GET    	| /api/v1/accounts/1555919170790              	| View a specific account’s details.                   	|
+| GET    	| /api/v1/accounts/                           	| View a list of all bank accounts.                    	|
+| GET    	| /api/v1/accounts/?status=active             	| View a list of all active bank accounts.             	|
+| GET    	| /api/v1/accounts/?status=dormant            	| View a list of all dormant bank accounts.            	|
 
 
 ### Contributing
