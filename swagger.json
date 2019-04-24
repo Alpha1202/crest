@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "/",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Welcome to crest finance APIs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/auth/signup": {
+      "post": {
+        "summary": "/api/v1/users/auth/signup",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/api/v1/users/auth/signin": {
+      "post": {
+        "summary": "/api/v1/users/auth/signin",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/api/v1/users/{email}/accounts": {
+      "get": {
+        "summary": "/api/v1/users/{email}/accounts",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/accounts": {
+      "post": {
+        "summary": "/api/v1/accounts",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      },
+      "get": {
+        "summary": "/api/v1/accounts",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/api/v1/accounts/{accountNumber}": {
+      "patch": {
+        "summary": "/api/v1/accounts/{accountNumber}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ]
+      },
+      "delete": {
+        "summary": "/api/v1/accounts/{accountNumber}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ]
+      },
+      "get": {
+        "summary": "/api/v1/accounts/{accountNumber}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/accounts/{accountNumber}/transactions": {
+      "get": {
+        "summary": "/api/v1/accounts/{accountNumber}/transactions",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/transactions/{accountNumber}/debit": {
+      "post": {
+        "summary": "/api/v1/transactions/{accountNumber}/debit",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/transactions/{accountNumber}/credit": {
+      "post": {
+        "summary": "/api/v1/transactions/{accountNumber}/credit",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/v1/transactions/{transactionId}": {
+      "get": {
+        "summary": "/api/v1/transactions/{transactionId}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "crest",
+    "version": "1.0.0",
+    "license": {
+      "name": "ISC"
+    },
+    "description": "[Specification JSON](/api-spec)"
+  }
+}
