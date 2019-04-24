@@ -249,7 +249,8 @@ footer {
     display: flex;
   }
   .top-box {
-    display: none;
+    display: block;
+    margin-top: 5rem;
   }
   .showcase {
     width: 100%;
@@ -266,9 +267,7 @@ footer {
     margin-left: 0.5rem;
     display: block;
   }
-  .top-box {
-    display: none;
-  }
+
   .top-container .boxes {
     display: flex;
   }
@@ -305,6 +304,7 @@ footer {
     margin-left: 2rem;
   }
   .boxes.small div.box {
+    background: red;
     display: grid;
     margin-right: -1rem;
     margin-top: 2rem;
@@ -373,6 +373,7 @@ footer {
     padding-bottom: 1rem;
     padding-right: 0.5rem;
     margin-left: 3rem;
+    background: red;
   }
   .boxes.big {
     display: none;
