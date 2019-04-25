@@ -69,7 +69,7 @@ div.header-text p {
 }
 .header-links ul li {
   list-style: none;
-  padding-right: 5rem;
+  padding-right: 0.5rem;
 }
 .header-links ul li a {
   padding: 1rem 2rem;
@@ -78,8 +78,8 @@ div.header-text p {
   color: var(--primary);
 }
 .header-links ul li a:hover {
-  color: var(--dark);
-  background: var(--primary);
+  color: #555;
+  /* background: var(--primary); */
   cursor: pointer;
 }
 .header-greeting {

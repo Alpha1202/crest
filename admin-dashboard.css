@@ -69,7 +69,7 @@ div.header-text p {
 }
 .header-links ul li {
   list-style: none;
-  padding-right: 5px;
+  padding-right: 0.5rem;
 }
 .header-links ul li a {
   padding: 1rem 2rem;
@@ -78,8 +78,7 @@ div.header-text p {
   color: var(--primary);
 }
 .header-links ul li a:hover {
-  color: var(--dark);
-  background: var(--primary);
+  color: #555;
   cursor: pointer;
 }
 .header-greeting {
@@ -334,7 +333,8 @@ span.badge {
   text-align: center;
   border-bottom: 2px solid;
   font-size: 2rem;
-  
+  background: var(--style);
+  color: var(--light);
 }
 .list .top-box {
 /* display: grid;

@@ -13,7 +13,20 @@
 <body>
 
     <div class="wrapper">
-        <div class="top-box top-box-a" id="side-menu">
+    <div class="header" id="dashboard">
+        <span class="open-slide">
+        <a href="#" onclick="openSlideMenu()">
+        <svg width="30" height="30">
+        <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+        <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+        <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+        </svg>
+        </a>
+        </span>
+        <h1>Dashboard</h1>
+    </div>
+    <div class="box-wrapper">
+        <div class="top-box" id="side">
             <div class="left-image">
                 <figure>
                     <img src="./logo (2).png" alt="Logo">
@@ -23,16 +36,16 @@
             <hr>
             <div class="left-links">
                 <ul>
-                    <li><a href="#dashboard" id="links" class="selected">
+                    <li><a href="#dashboard" class="selected">
                             <i class="fas fa-home fa-1x"></i>
                             Dashboard</a></li>
                     <li><a href="#" id="links">
                             <i class="fas fa-envelope-open"></i>
                             Create Account</a></li>
-                    <li><a href="#account-details" id="links">
+                    <li><a href="#account-details">
                             <i class="fas fa-eye"></i>
                             View Account</a></li>
-                    <li><a href="#transaction" id="links">
+                    <li><a href="#transaction">
                             <i class="fas fa-search-dollar"></i>
                             Transactions</a></li>
                     <li><a href="./index.html">
@@ -44,62 +57,45 @@
 
 
         <div class="showcase" id="main">
-            <div class="header" id="dashboard">
-                <span class="open-slide">
-                    <a href="#" onclick="openSlideMenu()">
-                        <svg width="30" height="30">
-                            <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
-                            <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
-                            <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
-                        </svg>
-                    </a>
-                </span>
-                <p>Dashboard</p>
-            </div>
-
-            <div class="">
-                <section class="">
-                    <div class="right">
-                        <h3>Account Balance:  $1,000,000</h3>
-                        <h3>Account Type:  Current</h3><span>
-                    </div>
-                </section>
+            <div class="right">
+                <h3>Account Balance:  $1,000,000</h3>
+                <h3>Account Type:  Current</h3><span>
             </div>
             <div class="div-box">
                 <section class="boxes boxes-small box-account">
-                    <div class="box">
-                        <h3>Account Details:</h3><span>
+                    <div class="box account">
+                        <h1>Account Details:</h1><span>
                             <table>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Nnamani Nzubechukwu</th>
+                                    <th>Name :</th>
+                                    <td>Nnamani Nzubechukwu</td>
                                 </tr>
                                 <tr>
-                                    <th>Account Name</th>
-                                    <th>Nnamani Nzubechukwu .R.</th>
+                                    <th>Account Name :</th>
+                                    <td>Nnamani Nzubechukwu .R.</td>
                                 </tr>
                                 <tr>
-                                    <th>Account Number</th>
-                                    <th>08139228639</th>
+                                    <th>Account Number :</th>
+                                    <td>08139228639</td>
                                 </tr>
                                 <tr>
-                                    <th>Account Balance</th>
-                                    <th>$1,000,000.04</th>
+                                    <th>Account Balance :</th>
+                                    <td>$1,000,000.04</td>
                                 </tr>
                                 <tr>
-                                    <th>Account Type</th>
-                                    <th>Current</th>
+                                    <th>Account Type :</th>
+                                    <td>Current</td>
                                 </tr>
                                 <tr>
-                                    <th>Account Status</th>
-                                    <th>Active</th>
+                                    <th>Account Status :</th>
+                                    <td>Active</td>
                                 </tr>
                             </table>
                     </div>
                 </section>
                 <section class="boxes boxes-small small">
                     <div class="box">
-                        <h3>Last 50 Transactions:</h3><span>
+                        <h1>Last 50 Transactions:</h1><span>
                             <table>
                                 <tr>
                                     <th>S/no</th>
@@ -120,7 +116,7 @@
                 </section>
                 <section class="boxes boxes-small big">
                     <div class="box">
-                        <h3>Last 50 Transactions:</h3><span>
+                        <h1>Last 50 Transactions:</h1><span>
                             <table>
                                 <tr>
                                     <th>S/no</th>
@@ -168,13 +164,11 @@
         </div>
 
     </div>
-
+</div>
     </div>
-
-
-    <footer>
-        <p>Made with love</p>
-    </footer>
+<footer>
+    <p>Banka</p>
+</footer>
     <!-- modal -->
     <div id="Modal" class="modal">
         <div id="signin" class="modal-dialog">
@@ -203,7 +197,7 @@
                         <input type="password" class="text-input">
                     </div>
                     <div>
-                        <label for="">Account Type</label><br>
+                        <label for="">Type</label><br>
                         <input type="radio" name="account" value="savings" checked class="">Savings
                         <input type="radio" name="account" value="current" checked class="">Current
                     </div><br>
@@ -212,7 +206,7 @@
             </div>
         </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="./user-dashboard.js"></script>
 </body>
 
 </html>
