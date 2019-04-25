@@ -6,10 +6,10 @@ config();
 export default class TransactionHelper {
 
   /**
-   * 
-   * @param {*} req 
-   * @param {*} res 
-   * @param {*} next 
+   *
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
    */
   static async checkAccountStatus(req, res, next) {
     const { accountNumber } = req.params;
@@ -22,11 +22,11 @@ export default class TransactionHelper {
       return res.status(400).json({
         status: 400,
         error: 'This account is not active, please activate',
-      })
+      });
     }
     next();
 
-  
+
   }
   /**
    * verify account number and account balance for a debit transaction
@@ -45,24 +45,27 @@ export default class TransactionHelper {
       const { rows } = await db.query(findOne, [accountNumber]);
 
       if (!rows[0]) {
-        return res.status(404).json({ status: 404, message: 'Account Not found'});
+        return res.status(404).json({ status: 404, message: 'Account Not found' });
       }
 
       const oldBalance = rows[0].balance;
-      const balance = oldBalance - parseInt(amount, 10);
-     
+      if (oldBalance === 0 || oldBalance <= parseFloat(amount)) {
+        return res.status(400).json({ status: 400, error: 'Insufficient Balance' });
+      }
+      const balance = oldBalance - parseFloat(amount);
+
       const values = [
         balance,
         accountNumber,
       ];
-  
-      await db.query(debit, values);
-     
-    } catch (error) {
-      res.status(500).json({ status: 500, error })
 
-    }    
-    next(); 
+      await db.query(debit, values);
+
+    } catch (error) {
+      res.status(500).json({ status: 500, error });
+
+    }
+    next();
   }
 
   /**
@@ -80,25 +83,25 @@ export default class TransactionHelper {
       WHERE accountNumber = $2 returning *`;
     try {
       const { rows } = await db.query(findOne, [accountNumber]);
-      
+
       if (!rows[0]) {
-        return res.status(404).json({ status: 404, message: 'Account Not found'});
+        return res.status(404).json({ status: 404, message: 'Account Not found' });
       }
 
       const oldBalance = rows[0].balance;
-      const balance = oldBalance + parseInt(amount, 10);
-     
+      const balance = oldBalance + parseFloat(amount);
+
       const values = [
         balance,
         accountNumber,
       ];
-  
-      await db.query(debit, values);
-     
-    } catch (error) {
-      res.status(500).json({ status: 500, error })
 
-    }    
-    next(); 
+      await db.query(debit, values);
+
+    } catch (error) {
+      res.status(500).json({ status: 500, error });
+
+    }
+    next();
   }
 }

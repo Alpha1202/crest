@@ -59,7 +59,7 @@ describe('Transactions', () => {
           .end((err, res) => {
             res.should.have.status(403);
             res.body.should.have.property('status').eql(403);
-            res.body.should.have.property('error').eql('Only Admin is authorized');
+            res.body.should.have.property('error').eql('Only Staff members are authorized');
             res.body.should.be.a('object');
             done();
           });
@@ -143,7 +143,7 @@ describe('Transactions', () => {
           .end((err, res) => {
             res.should.have.status(403);
             res.body.should.have.property('status').eql(403);
-            res.body.should.have.property('error').eql('Only Admin is authorized');
+            res.body.should.have.property('error').eql('Only Staff members are authorized');
             res.body.should.be.a('object');
             done();
           });

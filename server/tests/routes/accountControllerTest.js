@@ -59,7 +59,7 @@ describe('Accounts', () => {
             res.body.should.have.property('status').eql(403);
             res.body.should.be.a('object');
             res.body.should.have.property('error')
-              .eql('Admin is not authorized');
+              .eql('Staff is not authorized');
             done();
           });
       });
@@ -138,7 +138,7 @@ describe('Accounts', () => {
               res.body.should.have.property('status').eql(403);
               res.body.should.be.a('object');
               res.body.should.have.property('error')
-                .eql('Only Admin is authorized');
+                .eql('Only Staff members are authorized');
               done();
             });
         });
