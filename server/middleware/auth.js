@@ -58,7 +58,7 @@ export default class Auth {
         return res.status(403).json({ status: 403, error: 'Forbidden' });
       }
       const { type } = authData;
-      if (type === 'client' || type === 'cashier' || type !== 'Admin' || type !== 'staff') {
+      if (type === 'client' || type === 'cashier') {
         return res.status(403).json({ status: 403, error: 'Only Admin is authorized' });
       }
       next();
@@ -76,7 +76,7 @@ export default class Auth {
         return res.status(403).json({ status: 403, error: 'Forbidden' });
       }
       const { type } = authData;
-      if (type === 'client' || type !== 'staff' || type !== 'admin' || type !== 'cashier') {
+      if (type === 'client') {
         return res.status(403).json({ status: 403, error: 'Only Staff members are authorized' });
       }
       next();
