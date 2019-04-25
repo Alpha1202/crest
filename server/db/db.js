@@ -43,11 +43,10 @@ const createUserTable = () => {
 
   pool.query(tableData)
     .then((res) => {
-      console.log(res);
       pool.end();
+      return res;
     })
     .catch((error) => {
-      console.log(error);
       pool.end();
       return error;
     });
@@ -70,13 +69,12 @@ const createAccountTable = () => {
 
   pool.query(tableData)
     .then((res) => {
-      console.log(res);
-      
       pool.end();
+      return res;
     })
     .catch((error) => {
-      console.log(error);
       pool.end();
+      return error;
     });
 };
 
@@ -97,13 +95,13 @@ const createTransactionTable = () => {
   )`;
 
   pool.query(tableData)
-    .then((res) => { 
-      console.log(res);
+    .then((res) => {
       pool.end();
+      return res;
     })
     .catch((error) => {
-      console.log(error);
       pool.end();
+      return error;
     });
 };
 
@@ -115,12 +113,12 @@ const dropUserTable = () => {
   const tableData = 'DROP TABLE IF EXISTS users returning *';
   pool.query(tableData)
     .then((res) => {
-      console.log(res);
       pool.end();
+      return res;
     })
     .catch((error) => {
-      console.log(error);
       pool.end();
+      return error;
     });
 };
 
@@ -132,12 +130,12 @@ const dropAccountTable = () => {
   const tableData = 'DROP TABLE IF EXISTS accounts returning *';
   pool.query(tableData)
     .then((res) => {
-      console.log(res);
       pool.end();
+      return res;
     })
     .catch((error) => {
-      console.log(error);
       pool.end();
+      return error;
     });
 };
 
@@ -149,12 +147,12 @@ const dropTransactionTable = () => {
   const tableData = 'DROP TABLE IF EXISTS transactions returning *';
   pool.query(tableData)
     .then((res) => {
-      console.log(res);
       pool.end();
+      return res;
     })
     .catch((error) => {
-      console.log(error);
       pool.end();
+      return error;
     });
 };
 

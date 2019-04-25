@@ -18,8 +18,8 @@ export default class Auth {
       // eslint-disable-next-line dot-notation
       const token = req.headers['authorization'];
       if (typeof token !== 'undefined') {
-        const bearer = token.split(' ');
-        const bearerToken = bearer[1];
+        const Bearer = token.split(' ');
+        const bearerToken = Bearer[1];
         req.token = bearerToken;
         next();
       } else {
@@ -40,12 +40,30 @@ export default class Auth {
         return res.status(403).json({ status: 403, error: 'Forbidden' });
       }
       const { type } = authData;
-      if (type === 'admin' || type === 'staff') {
-        return res.status(403).json({ status: 403, error: 'Admin is not authorized' });
+      if (type === 'admin' || type === 'staff' || type === 'cashier') {
+        return res.status(403).json({ status: 403, error: 'Staff is not authorized' });
       }
       next();
     });
     
+  }
+
+  /**
+ * checks the staff
+ */
+  static allowAdminOnly(req, res, next) {
+
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      if (err) {
+        return res.status(403).json({ status: 403, error: 'Forbidden' });
+      }
+      const { type } = authData;
+      if (type === 'client' || type === 'cashier' || type !== 'Admin' || type !== 'staff') {
+        return res.status(403).json({ status: 403, error: 'Only Admin is authorized' });
+      }
+      next();
+    });
+  
   }
 
   /**
@@ -58,11 +76,11 @@ export default class Auth {
         return res.status(403).json({ status: 403, error: 'Forbidden' });
       }
       const { type } = authData;
-      if (type === 'client') {
-        return res.status(403).json({ status: 403, error: 'Only Admin is authorized' });
+      if (type === 'client' || type !== 'staff' || type !== 'admin' || type !== 'cashier') {
+        return res.status(403).json({ status: 403, error: 'Only Staff members are authorized' });
       }
       next();
     });
-  
+
   }
 }

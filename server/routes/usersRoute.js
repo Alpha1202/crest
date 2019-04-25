@@ -23,6 +23,7 @@ usersRouter.post('/auth/signin',
 usersRouter.get('/:email/accounts',
   Auth.checkToken,
   validate.validateEmailParam,
+  Auth.allowStaffOnly,
   validate.checkEmail,
   user.getUserAccountList);
 
