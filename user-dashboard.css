@@ -119,16 +119,21 @@ background: #383f4d;
 .boxes {
   display: flex;
   padding: 2rem;
-  background: var(--style)
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  /* background: var(--style) */
 }
 .box {
-  padding: 2rem 0 0 2rem;
+  padding: 1rem 0 0 2rem;
   width: 100%;
+ 
+  /* background: red; */
 }
 .box h1 {
   font-weight: bolder;
   font-size: 2rem;
-  margin: -3rem 0 0 -2rem;
+  margin: -3rem 0 0 0;
+  color: #6133dd;
 }
 .box table {
   margin-top: 1rem;
@@ -136,8 +141,8 @@ background: #383f4d;
   border-collapse: collapse;
 }
 .box table tr {
-  background-color: var(--style);
-  color: var(--light);
+  /* background-color: var(--primary); */
+  color: var(--dark);
   font-size: 1rem;
   text-align: left;
   line-height: 4rem;
