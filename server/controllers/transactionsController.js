@@ -116,7 +116,14 @@ export default class TransactionController {
 
     try {
       const { rows } = await db.query(findAtransaction, [transactionId]);
-      return res.status(200).json({ status: 200, data: rows[0] });
+      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+        const { type, email } = authData;
+        if (type === 'client') {
+          const transaction = rows.filter(allTransaction => allTransaction.owneremail === email);
+          return res.status(200).json({ status: 200, data: transaction });
+        }
+        return res.status(200).json({ status: 200, data: rows[0] });
+      });
     } catch (error) {
       return res.status(500).json({ status: 500, error });
        

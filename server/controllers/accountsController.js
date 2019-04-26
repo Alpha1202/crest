@@ -2,6 +2,7 @@ import { config } from 'dotenv';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
 import db from '../db/index';
+import accountsRouter from '../routes/accountsRoute';
 
 config();
 
@@ -119,7 +120,14 @@ export default class AccountsController {
     const findTransactionsHistory = 'SELECT * FROM transactions WHERE accountnumber = $1';
     try {
       const { rows } = await db.query(findTransactionsHistory, [accountNumber]);
-      return res.status(200).json({ status: 200, data: rows });
+      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+        const { type, email } = authData;
+        if (type === 'client') {
+          const userTransactions = rows.filter(transactions => transactions.owneremail === email);
+          return res.status(200).json({ status: 200, data: userTransactions });
+        }
+        return res.status(200).json({ status: 200, data: rows });
+      });
     } catch (error) {
       return res.status(500).json({ status: 500, error });
     }
@@ -139,8 +147,6 @@ export default class AccountsController {
       return res.status(500).json({ status: 500, error });
     }
   }
-
-
   /**
    * 
    */
@@ -151,18 +157,25 @@ export default class AccountsController {
     const findAllAccount = 'SELECT * FROM accounts';
     try {
       const { rows } = await db.query(findAllAccount);
-      if (!status) {
-        return res.status(200).json({ status: 200, data: rows });
-      }
-      if (status === 'active') {
-        const activeAccounts = rows.filter(someAccounts => someAccounts.status === 'active');
-        return res.status(200).json({ status: 200, data: activeAccounts });
-      }
-      if (status === 'dormant') {
-        const dormantAccounts = rows.filter(someAccounts => someAccounts.status === 'dormant');
-        return res.status(200).json({ status: 200, data: dormantAccounts });
-      }
-      return res.status(400).json({ status: 400, message: 'Please specify active or dormant'});
+      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+        const { type, email } = authData;
+        if (type === 'client') {
+          const userAccount = rows.filter(accounts => accounts.owneremail === email);
+          return res.status(200).json({ status: 200, data: userAccount });
+        } if (!status) {
+          return res.status(200).json({ status: 200, data: rows });
+        } 
+        if (status === 'active') {
+          const activeAccounts = rows.filter(someAccounts => someAccounts.status === 'active');
+          return res.status(200).json({ status: 200, data: activeAccounts });
+        }
+        if (status === 'dormant') {
+          const dormantAccounts = rows.filter(someAccounts => someAccounts.status === 'dormant');
+          return res.status(200).json({ status: 200, data: dormantAccounts });
+        }
+        return res.status(400).json({ status: 400, message: 'Please specify active or dormant'});
+        
+      });
     } catch (error) {
       return res.status(500).json({ status: 500, error });
     }

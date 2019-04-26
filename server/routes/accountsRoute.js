@@ -32,7 +32,6 @@ accountsRouter.get('/:accountNumber/transactions',
   Auth.checkToken,
   validate.validateAccountNumber,
   validate.checkAccountNumber,
-  Auth.allowStaffOnly,
   account.getAccountTransactionsHistory);
 
 accountsRouter.get('/:accountNumber',
@@ -44,7 +43,6 @@ accountsRouter.get('/:accountNumber',
 
 accountsRouter.get('/',
   Auth.checkToken,
-  Auth.allowAdminOnly,
   account.getAllAccount);
 
 

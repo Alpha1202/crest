@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 import { config } from 'dotenv';
 import db from '../db/index';
+import { type } from 'os';
 
 config();
 
@@ -20,7 +21,7 @@ export default class validate {
       return res.status(400).json({ status: 400, error: 'Please enter your email' });
     }
     const emailExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!email.match(emailExp)) {
+    if (!(emailExp.test(email))) {
       return res.status(400).json({ status: 400, error: 'Invalid Email' });
     }
     next();

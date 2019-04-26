@@ -20,12 +20,4 @@ usersRouter.post('/auth/signin',
   validate.verifyUser,
   user.login);
 
-usersRouter.get('/:email/accounts',
-  Auth.checkToken,
-  validate.validateEmailParam,
-  Auth.allowStaffOnly,
-  validate.checkEmail,
-  user.getUserAccountList);
-
-
 export default usersRouter;
