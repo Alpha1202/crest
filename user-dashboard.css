@@ -73,7 +73,7 @@ body,
   padding: 1rem 1rem;
 }
 .left-links {
- 
+ height: 100vh;
 }
 .left-links ul{
   margin-left: -1rem;
