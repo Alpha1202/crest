@@ -13,6 +13,7 @@ const {
   validUser1,
   validAdmin1,
   validUserSignup,
+  validCashierSignup,
   validAdminSignup,
   invalidEmail,
   missingEmail,
@@ -27,6 +28,8 @@ const {
   validUserSignin,
   invalidUserSignin,
   anotherInvalidUserSignin,
+  validAdminToken,
+  invalidCashierSignup,
 } = mockData.Users;
 
 describe('Connections', () => {
@@ -74,26 +77,14 @@ describe('Connections', () => {
     await db.query(anotherQuery, values1);
     await db.query(adminQuery, values2);
   });
-
   describe('API Route Test: ', () => {
     
-    describe('POST: /api/v1/auth/signup', () => {
-      it('should create a new user account when all conditions are met', (done) => {
+    describe('POST: /api/v1/users', () => {
+      it('should create a new admin/staff account when all conditions are met', (done) => {
         chai.request(app)
-          .post('/api/v1/auth/signup')
-          .send(validUserSignup)
-          .end((err, res) => {
-            res.should.have.status(201);
-            res.body.should.have.property('status').eql(201);
-            res.body.should.be.a('object');
-            done();
-          });
-      });
-
-      it('should create a new Admin/staff user account when all conditions are met', (done) => {
-        chai.request(app)
-          .post('/api/v1/auth/signup')
-          .send(validAdminSignup)
+          .post('/api/v1/users')
+          .set({ Authorization: validAdminToken })
+          .send(validCashierSignup)
           .end((err, res) => {
             res.should.have.status(201);
             res.body.should.have.property('status').eql(201);
@@ -105,8 +96,9 @@ describe('Connections', () => {
       it('should throw error when a duplicate user account wants to be created',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
-            .send(validUserSignup)
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
+            .send(validCashierSignup)
             .end((err, res) => {
               res.should.have.status(400);
               res.body.should.have.property('message')
@@ -121,8 +113,9 @@ describe('Connections', () => {
       it('should throw error when a duplicate admin account wants to be created',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
-            .send(validAdminSignup)
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
+            .send(validCashierSignup)
             .end((err, res) => {
               res.should.have.status(400);
               res.body.should.have.property('message')
@@ -134,11 +127,12 @@ describe('Connections', () => {
             });
         });
 
-      it('should not allow user to be created when email is invalid',
+      it('should not allow admin to be created when email is invalid',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
-            .send(invalidEmail)
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
+            .send(invalidCashierSignup)
             .end((err, res) => {
               res.should.have.status(400);
               res.body.should.have.property('error')
@@ -153,7 +147,8 @@ describe('Connections', () => {
       it('should not allow user to be created when email is missing',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(missingEmail)
             .end((err, res) => {
               res.should.have.status(400);
@@ -166,10 +161,11 @@ describe('Connections', () => {
             });
         });
 
-      it('should not allow user to be created when first Name field is missing',
+      it('should not allow admin to be created when first Name field is missing',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(missingFirstName)
             .end((err, res) => {
               res.should.have.status(400);
@@ -182,11 +178,11 @@ describe('Connections', () => {
             });
         });
 
-
-      it('should not allow user to be created when any field is empty',
+      it('should not allow admin to be created when any field is empty',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(emptyFirstName)
             .end((err, res) => {
               res.should.have.status(400);
@@ -199,10 +195,11 @@ describe('Connections', () => {
             });
         });
 
-      it('should not allow user to be created when first name is invalid',
+      it('should not allow admin to be created when first name is invalid',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(invalidFirstName)
             .end((err, res) => {
               res.should.have.status(400);
@@ -215,10 +212,11 @@ describe('Connections', () => {
             });
         });
 
-      it('should not allow user to be created when first name is less than two(2) characters',
+      it('should not allow admin to be created when first name is less than two(2) characters',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(anotherInvalidFirstName)
             .end((err, res) => {
               res.should.have.status(400);
@@ -231,10 +229,11 @@ describe('Connections', () => {
             });
         });
 
-      it('should not allow user to be created when last Name field is missing',
+      it('should not allow admin to be created when last Name field is missing',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(missingLastName)
             .end((err, res) => {
               res.should.have.status(400);
@@ -247,10 +246,11 @@ describe('Connections', () => {
             });
         });
 
-      it('should not allow user to be created when last name is invalid',
+      it('should not allow admin to be created when last name is invalid',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(invalidLastName)
             .end((err, res) => {
               res.should.have.status(400);
@@ -263,26 +263,11 @@ describe('Connections', () => {
             });
         });
 
-      it('should not allow user to be created when last name is less than two(2) characters',
+      it('should not allow admin to be created when password field is missing',
         (done) => {
           chai.request(app)
-            .post('/api/v1/auth/signup')
-            .send(anotherInvalidLastName)
-            .end((err, res) => {
-              res.should.have.status(400);
-              res.body.should.have.property('error')
-                .eql('Last Name should be atleast 3 letters');
-              res.body.should.have.property('status')
-                .eql(400);
-              res.body.should.be.a('object');
-              done();
-            });
-        });
-
-      it('should not allow user to be created when password field is missing',
-        (done) => {
-          chai.request(app)
-            .post('/api/v1/auth/signup')
+            .post('/api/v1/users')
+            .set({ Authorization: validAdminToken })
             .send(missingPassword)
             .end((err, res) => {
               res.should.have.status(400);
@@ -295,103 +280,7 @@ describe('Connections', () => {
             });
         });
 
-      describe('POST: /api/v1/auth/signin', () => {
 
-        it('should sigin a new user account when all conditions are met and token', (done) => {
-          chai.request(app)
-            .post('/api/v1/auth/signin')
-            .send(validUserSignin)
-            .end((err, res) => {
-              res.should.have.status(200);
-              res.body.should.have.property('status').eql(200);
-              res.body.should.be.a('object');
-              done();
-            });
-        });
-
-        it('should not sigin a new user account when email does not exist', (done) => {
-          chai.request(app)
-            .post('/api/v1/auth/signin')
-            .send(invalidUserSignin)
-            .end((err, res) => {
-              res.should.have.status(404);
-              res.body.should.have.property('status').eql(404);
-              res.body.should.be.a('object');
-              res.body.should.have.property('error')
-                .eql('Email does not exist');
-              done();
-            });
-        });
-
-        it('should not signin a new user account when password is incorrect', (done) => {
-          chai.request(app)
-            .post('/api/v1/auth/signin')
-            .send(anotherInvalidUserSignin)
-            .end((err, res) => {
-              res.should.have.status(400);
-              res.body.should.have.property('status').eql(400);
-              res.body.should.be.a('object');
-              res.body.should.have.property('error')
-                .eql('invalid password');
-              done();
-            });
-        });
-
-        it('should not allow user to signin when email is invalid',
-          (done) => {
-            chai.request(app)
-              .post('/api/v1/auth/signin')
-              .send(invalidEmail)
-              .end((err, res) => {
-                res.should.have.status(400);
-                res.body.should.have.property('error')
-                  .eql('Invalid Email');
-                res.body.should.have.property('status')
-                  .eql(400);
-                res.body.should.be.a('object');
-                done();
-              });
-          });
-
-        it('should not allow user to signin when email is missing',
-          (done) => {
-            chai.request(app)
-              .post('/api/v1/auth/signin')
-              .send(missingEmail)
-              .end((err, res) => {
-                res.should.have.status(400);
-                res.body.should.have.property('error')
-                  .eql('Please enter your email');
-                res.body.should.have.property('status')
-                  .eql(400);
-                res.body.should.be.a('object');
-                done();
-              });
-          });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      });
 
 
 
@@ -440,5 +329,8 @@ describe('Connections', () => {
 
 
     });
+
+
   });
-})
+
+});
