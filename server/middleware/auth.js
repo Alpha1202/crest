@@ -49,6 +49,24 @@ export default class Auth {
   }
 
   /**
+ * checks the user email
+ */
+  static checkUserEmail(req, res, next) {
+  // const { email } = req.params;
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      if (err) {
+        return res.status(403).json({ status: 403, error: 'Forbidden' });
+      }
+      // const { email } = authData;
+      if (authData.email !== req.params.email ) {
+        return res.status(403).json({ status: 403, error: 'This is not your email, you are not allowed' });
+      }
+      next();
+    });
+  
+  }
+
+  /**
  * checks the staff
  */
   static allowAdminOnly(req, res, next) {

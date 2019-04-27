@@ -277,7 +277,50 @@ describe('Accounts', () => {
               done();
             });
         });
-      });
-    })
-  });
+
+        describe('GET: /api/v1/accounts/:accountNumber/transaction', () => {
+
+          it('should get an accounts transaction history when all conditions are met', (done) => {
+            chai.request(app)
+              .get('/api/v1/accounts/1555958896710/transactions')
+              .set({ Authorization: validAdminToken })
+              .send(validAccount)
+              .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.have.property('status').eql(200);
+                res.body.should.be.a('object');
+                done();
+              });
+          });
+  
+          it('should get not an accounts transaction history when no token is passed', (done) => {
+            chai.request(app)
+              .get('/api/v1/accounts/1555958896710/transactions')
+              .send(validAccount)
+              .end((err, res) => {
+                res.should.have.status(403);
+                res.body.should.have.property('status').eql(403);
+                res.body.should.have.property('error').eql('You are not authorised');
+                res.body.should.be.a('object');
+                done();
+              });
+          });
+
+          it('should get not an accounts transaction history when an invalid account number is passed', (done) => {
+            chai.request(app)
+              .get('/api/v1/accounts/abcde/transactions')
+              .set({ Authorization: validAdminToken })
+              .send(validAccount)
+              .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.have.property('status').eql(400);
+                res.body.should.have.property('error').eql('Please enter a valid account Number');
+                res.body.should.be.a('object');
+                done();
+              });
+          });
+        });
+      })
+    });
+  })
 })

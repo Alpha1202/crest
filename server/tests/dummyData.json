@@ -47,6 +47,22 @@
       "type": "staff",
       "isAdmin": true
       },
+      "validCashierSignup": {
+        "email": "chidera@gmail.com",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456",
+        "type": "cashier",
+        "isAdmin": false
+        },
+    "invalidCashierSignup": {
+        "email": "chidera",
+        "firstName": "Nzubechukwu",
+        "lastName": "Nnamani",
+        "password": "123456",
+        "type": "cashier",
+        "isAdmin": false
+        },
       "invalidUser": {
       "id": "1",
       "email": "nzubennamani@gmail.com",
@@ -165,7 +181,7 @@
       },
       "validUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTg1LCJlbWFpbCI6Im56dWJlbm5hbWFuaTE5OUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJOenViZWNodWt3dSIsImxhc3ROYW1lIjoiTm5hbWFuaSIsInR5cGUiOiJjbGllbnQiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU1OTU1NDE2LCJleHAiOjE1NTY1NjAyMTZ9.KwNS0CrtAmwA3V2avG8H5RwpDqjQ9qMCvpySJ1XpOMs",
       "invalidUserToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImZpcnN0TmFtZSI6Ik56dWJlY2h1a3d1IiwibGFzdE5hbWUiOiJObmFtYW5pIiwiZW1haWwiOiJubmFtYW5pQGdtYWlsLmNvbSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU1NDg4NDEyMywiZXhwIjoxNTU1NDg4OTIzfQ.-Gf7guTLBEWkgZ-xLQGtzblRcT7C5I065FzJKaObGwQ",
-      "validAdminToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsImVtYWlsIjoibWFyeW1vdGhlckBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiJOenViZWNodWt3dSIsImxhc3ROYW1lIjoiTm5hbWFuaSIsInR5cGUiOiJzdGFmZiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTU3MDU5MjcsImV4cCI6MTU1NjMxMDcyN30.vIPoYm2EIuixbv_-lq5s8M-Hp5_vDsFDD6sw4hpiH8s",
+      "validAdminToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJuZXdhZG1pbjJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiTnp1YmVjaHVrd3UiLCJsYXN0TmFtZSI6Ik5uYW1hbmkiLCJ0eXBlIjoic3RhZmYiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU1OTIxMDg2LCJleHAiOjE1NTY1MjU4ODZ9.cMacczj76DsSR0-iwBr2D2PHIvW2rPMgmX5G_9YHngc",
       "invalidAdminToken":  "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJ6dWJzIiwibGFzdE5hbWUiOiJBbHBoYSIsImVtYWlsIjoibnp1ZW5uYW1hbmlAZ21haWwuY29tIiwidHlwZSI6ImNsaWVudCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTQ4MDE1MzAsImV4cCI6MTU1NTQwNjMzMH0.0C7zaKffLv9DgmpDyViuXf_P55HgwcIwPayf4g4V2c0",   
       "anotherInvalidAdminToken": "bearer aninvalidToken"
   },

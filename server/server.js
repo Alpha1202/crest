@@ -2,9 +2,12 @@ import '@babel/polyfill';
 import express from 'express';
 import bodyparser from 'body-parser';
 import { config } from 'dotenv';
+import debug from 'debug';
 import router from './routes';
 
 config();
+
+const debugLog = debug('check');
 
 const app = express();
 
@@ -22,7 +25,7 @@ app.use('/api/v1', router);
 const PORT = process.env.PORT || 2000;
 
 app.listen(PORT, () => {
-  console.log('server is running');
+  debugLog('server is running');
 });
 
 export default app;

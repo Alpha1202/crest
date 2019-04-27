@@ -2,10 +2,13 @@
 // here is the link: https://www.codementor.io/olawalealadeusi896/building-a-simple-api-with-nodejs-expressjs-postgresql-db-and-jwt-3-mke10c5c5
 
 
-const { Pool } = require('pg');
-const dotenv = require('dotenv');
+import { Pool } from 'pg';
+import { config } from 'dotenv';
+import debug from 'debug';
 
-dotenv.config();
+config();
+
+const debugLog = debug('check');
 
 let databaseUrl = '';
 
@@ -23,7 +26,7 @@ const pool = new Pool({
 });
 
 pool.on('connect', () => {
-  console.log('connected to the database');
+  debugLog('connected to the database');
 });
 
 /**
@@ -177,7 +180,7 @@ const dropAllTables = () => {
 };
 
 pool.on('remove', () => {
-  console.log('tables removed');
+  debugLog('tables removed');
   process.exit(0);
 });
 
@@ -192,4 +195,4 @@ module.exports = {
   dropAllTables,
 };
 
-require('make-runnable');
+import 'make-runnable';

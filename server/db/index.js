@@ -4,6 +4,8 @@ import { config } from 'dotenv';
 
 config();
 
+
+
 let databaseUrl = '';
 
 if (process.env.NODE_ENV === 'production') {

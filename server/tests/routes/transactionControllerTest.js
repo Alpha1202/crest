@@ -191,5 +191,33 @@ describe('Transactions', () => {
           });
       });
     });
+
+    describe('POST: /api/v1/transactions/transactionId', () => {
+      it('should get a specific transaction history', (done) => {
+        chai.request(app)
+          .get('/api/v1/transactions/2')
+          .set({ Authorization: validAdminToken })
+          .send(validTransaction)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.have.property('status').eql(200);
+            res.body.should.be.a('object');
+            done();
+          });
+      });
+
+      it('should not get a specific transaction history when token is not passed', (done) => {
+        chai.request(app)
+          .get('/api/v1/transactions/2')
+          .send(validTransaction)
+          .end((err, res) => {
+            res.should.have.status(403);
+            res.body.should.have.property('status').eql(403);
+            res.body.should.have.property('error').eql('You are not authorised');
+            res.body.should.be.a('object');
+            done();
+          });
+      });
+    });
   });
-});
+})

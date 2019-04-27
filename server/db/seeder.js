@@ -1,8 +1,11 @@
-const { Pool } = require('pg');
-const dotenv = require('dotenv');
-const moment = require('moment');
+import { Pool } from 'pg';
+import { config } from 'dotenv';
+import moment from 'moment';
+import debug from 'debug';
 
-dotenv.config();
+config();
+
+const debugLog = debug('check');
 
 let databaseUrl = '';
 
@@ -14,13 +17,12 @@ if (process.env.NODE_ENV === 'production') {
   databaseUrl = process.env.DEV_DATABASE_URL;
 }
 
-// console.log('DATABASE URL ::::::::::::::::::::', databaseUrl);
 const pool = new Pool({
   connectionString: databaseUrl,
 });
 
 pool.on('connect', () => {
-  console.log('connected to the database');
+ debugLog('connected to the database');
 });
 
 /**
@@ -88,9 +90,9 @@ const insertAccount = () => {
     });
 };
 
-module.exports = {
+export default {
   insertUser,
   insertAccount,
 };
 
-require('make-runnable');
+import 'make-runnable';
