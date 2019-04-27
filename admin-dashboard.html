@@ -4,211 +4,343 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin Dashboard</title>
+  <title>Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./admin-dashboard.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./user-dashboard.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./table.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
 
 <body>
   <div class="wrapper">
-    <div class="head">
-      <div class="header">
-
-        <div class="header-text"><a href="./index.html"><img src="./logo (2).png" alt="">
-            <p>Banka</p>
-          </a></div>
-        <div class="header-links big-screen">
+    <div class="header" >
+      <span class="open-slide" id="dashboard">
+        <a href="#" id="openSlideMenu">
+          <svg width="30" height="30">
+            <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+            <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+            <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+          </svg>
+        </a>
+      </span>
+      <h1 class="header-dashboard">Dashboard</h1>
+      <nav class="nav">
+        <ul class="navList">
+          <li class="nav-items"><a class="navLinks" href="#">Dashboard</a></li>
+          <li class="nav-items"><a class="navLinks" href="#">Users</a></li>
+          <li class="nav-items"><a class="navLinks" href="#">Active Accounts</a></li>
+          <li class="nav-items"><a class="navLinks" href="#">Deactivated Accounts</a></li>
+        </ul>
+      </nav>
+        <div class="dropdown">
+          <div class="header-greeting">Welcome <span>Admin</span> <i class="fas fa-sort-down"></i></div>
+          <div class="dropdown-content">
+              <a class="dropdown-list" href="#">Create Admin </a>
+             <a class="dropdown-list" href="./index.html">Logout </a>
+            </div>
+        </div>
+    </div>
+    <div class="box-wrapper">
+      <div class="side top-box">
+        <div class="left-image">
+          <figure>
+            <img src="./logo (2).png" alt="Logo">
+            <figcaption><strong>Banka</strong></figcaption>
+          </figure>
+        </div>
+        <hr>
+        <div class="left-links">
           <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Users</a></li>
-            <li><a href="#">Active Accounts</a></li>
-            <li><a href="#">Deactivated Accounts</a></li>
+            <li><a href="#dashboard" id="side-users"class="selected">
+                <i class="fas fa-users"></i>
+                Users</a></li>
+            <li><a href="#" id="side-active">
+                <i class="fas fa-chart-line"></i>
+               Active Accounts</a></li>
+            <li><a href="#" id="side-deactive">
+                <i class="fas fa-bell-slash"> </i>
+                Deactivated Accounts</a></li>
+            <li><a href="./index.html">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout</a></li>
           </ul>
         </div>
-       
-        <!-- dropdown -->
-        <div class="dropdown">
-            <div class="header-greeting big-screen">Welcome <span>Admin</span>  <i class="fas fa-sort-down"></i></div>
+      </div>
 
-          <div class="dropdown-content">
-            <div class="header-logout"><a href="#">Create Admin</a></div>
-            <div class="header-logout"><a href="./index.html">Logout</a></div>
-          </div>
+
+      <div class="showcase" id="main">
+        
+        <div class="div-box">
+            <div class="summary-box">
+                <div class="box selected-user-box selected ">
+                    <a href="#"><i class="fas fa-users"> Users</i></a>
+                    <h3>300</h3>
+                  </div>
+                  <div class="box active-accounts-box">
+                    <a href="#"><i class="fas fa-chart-line"> Active Accounts</i></a>
+                    <h3>300</h3>
+                  </div>
+                  <div class="box deactive-accounts-box">
+                    <a href="#"><i class="fas fa-bell-slash"> Deactivated Accounts</i></a>
+                    <h3>300</h3>
+                  </div>
+            </div> 
+          <!-- <section class="boxes boxes-small box-account">
+            <div class="box account"><a id="account-details">
+                <h1>Account Details:</h1><span>
+                  <div class="table">
+                    <div class="table-row">
+                      <div class="table-head">Name</div>
+                      <div class="table-body">Nnamani Nzubechukwu</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-head">Account Name</div>
+                      <div class="table-body">Nnamani Nzubechukwu .R.</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-head">Account Number</div>
+                      <div class="table-body">08139228639</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-head">Account Balance</div>
+                      <div class="table-body">$1,000,000.04</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-head">Account Type</div>
+                      <div class="table-body">Current</div>
+                    </div>
+                    <div class="table-row">
+                      <div class="table-head">Account Status</div>
+                      <div class="table-body">Active</div>
+                    </div>
+                    </table>
+              </a>
+            </div>
+
+          </section> -->
+          <div class="list">
+              <div class="list-header">
+                <h3 class="tableText">All Users</h3>
+              </div>
+              <div class="table">
+                  <div class="table-row2">
+                  <div class="table-header">S/no</div>
+                  <div class="table-header">FirstName</div>
+                  <div class="table-header">Last Name</div>
+                  <div class="table-header">Email</div>
+                  <div class="table-header">AC Number</div>
+                  <div class="table-header">Type</div>
+                </div>
+    
+    
+                 <div class="table-row2" data-href="./singleuser.html">
+                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
+                
+                  <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">current</a> </div>
+                </div>
+                <div class="table-row2" data-href="./singleuser.html">
+                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
+                
+                  <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">current</a> </div>
+                </div>
+    
+                <div class="table-row2" data-href="./singleuser.html">
+                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
+                
+                  <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">current</a> </div>
+                </div>
+                <div class="table-row2" data-href="./singleuser.html">
+                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
+                
+                  <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">current</a> </div>
+                </div>
+    
+                <div class="table-row2" data-href="./singleuser.html">
+                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
+                
+                  <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">current</a> </div>
+                </div>
+    
+                <div class="table-row2" data-href="./singleuser.html">
+                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
+                
+                  <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">current</a> </div>
+                </div> 
+              </div>
+            </div>
+      </div>
+          <!-- <section class="boxes boxes-small">
+            <div class="box"><a id="transaction">
+                <h1>Last 50 Transactions:</h1><span>
+                  <div class="table">
+                    <div class="table-row2">
+
+                      <div class="table-header">Acc Number</div>
+                      <div class="table-header">Type </div>
+                      <div class="table-header">Old Balance</div>
+                      <div class="table-header">New Balance</div>
+                      <div class="table-header">Amount</div>
+                    </div>
+                    <div class="table-row2">
+
+                      <div class="table-content">003294933</div>
+                      <div class="table-content">Credit</div>
+                      <div class="table-content">$1,000,000</div>
+                      <div class="table-content">$ 4,000,000</div>
+                      <div class="table-content">$3,000,000</div>
+                    </div>
+                    <div class="table-row2">
+
+                      <div class="table-content">003294933</div>
+                      <div class="table-content">Credit</div>
+                      <div class="table-content">$1,000,000</div>
+                      <div class="table-content">$ 4,000,000</div>
+                      <div class="table-content">$3,000,000</div>
+                    </div>
+                    <div class="table-row2">
+
+                      <div class="table-content">003294933</div>
+                      <div class="table-content">Credit</div>
+                      <div class="table-content">$1,000,000</div>
+                      <div class="table-content">$ 4,000,000</div>
+                      <div class="table-content">$3,000,000</div>
+                    </div>
+
+                  </div>
+              </a>
+            </div>
+
+          </section> -->
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <footer>
+    <p>Banka</p>
+  </footer>
+  <div id="Modal" class="modal">
+    <div id="signin" class="modal-dialog">
+      <button class="modal-close">×</button>
+      <div class="modal-header">
+        <div class="logo modal-title">
+          <a href="./index.html"><img src="./logo (2).png" alt="logo"></a>
         </div>
       </div>
-<!-- <i class="fas fa-cog"></i> -->
-      <div class="header-layer">
-        <div class="dashboard">
-          Dashboard
-        </div>
+      <div class="modal-content">
+        <form action="">
+          <div>
+            <label for="">Choose Account Type : </label><br>
+            <p>Savings :<input type="radio" name="account" value="savings" checked class=""></p>
+            <p>Current :<input type="radio" name="account" value="current" checked class=""></p>
+          </div><br>
+          <a href="./user-dashboard.html" class="primary-btn">Open Account</a>
+        </form>
       </div>
     </div>
-    <section class="top-container">
-        <div class="top-box top-box-a">
-            <ul class="side-nav big-screen">
-              <li>
-              <a href="#"><i class="fas fa-users"> Users</i></li>
-                <li><a href="#"><i class="fas fa-chart-line"> Active Accounts</i></li>
-                <li><a href="#"><i class="fas fa-bell-slash"> Deactivated Accounts</i></li>
-            </ul>
-          </div>
-      <header class="showcase">
-        <div class="summary-box">
-            <div class="box selected-user-box selected ">
-                <a href="#"><i class="fas fa-users"> Users</i></a>
-                <h3>300</h3>
-              </div>
-              <div class="box active-accounts-box">
-                <a href="#"><i class="fas fa-chart-line"> Active Accounts</i></a>
-                <h3>300</h3>
-              </div>
-              <div class="box deactive-accounts-box">
-                <a href="#"><i class="fas fa-bell-slash"> Deactivated Accounts</i></a>
-                <h3>300</h3>
-              </div>
-        </div>
-        <div class="list big-screen">
-            <div class="list-header">
-              <h3 class="tableText">All Users</h3>
-            </div>
-            <!-- <div class="top-box"> -->
-              <table class="user-table">
-                <tr>
-                  <th>S/no</th>
-                  <th>FirstName</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Account Number</th>
-                  <th>Account Type</th>
-                </tr>
-                <tr data-href="./singleuser.html">
-                  <td><a href="./singleuser.html">1</a></td>
-                  <td><a href="./singleuser.html">Nzubechukwu</a></td>
-                  <td><a href="./singleuser.html">Nnamani</a></td>
-                  <td><a href="./singleuser.html">Email</a></td>
-                  <td><a href="./singleuser.html">08139228639</a></td>
-                  <td><a href="./singleuser.html">003322867</a></td>
-                  <td><a href="./singleuser.html">current</a></td>
-                </tr>
-                <tr data-href="./singleuser.html">
-                  <td><a href="./singleuser.html">1</a></td>
-                  <td><a href="./singleuser.html">Nzubechukwu</a></td>
-                  <td><a href="./singleuser.html">Nnamani</a></td>
-                  <td><a href="./singleuser.html">Email</a></td>
-                  <td><a href="./singleuser.html">08139228639</a></td>
-                  <td><a href="./singleuser.html">003322867</a></td>
-                  <td><a href="./singleuser.html">current</a></td>
-                </tr>
-               
-                <tr data-href="./singleuser.html">
-                  <td><a href="./singleuser.html">1</a></td>
-                  <td><a href="./singleuser.html">Nzubechukwu</a></td>
-                  <td><a href="./singleuser.html">Nnamani</a></td>
-                  <td><a href="./singleuser.html">Email</a></td>
-                  <td><a href="./singleuser.html">08139228639</a></td>
-                  <td><a href="./singleuser.html">003322867</a></td>
-                  <td><a href="./singleuser.html">current</a></td>
-                </tr>
-                <tr data-href="./singleuser.html">
-                  <td><a href="./singleuser.html">1</a></td>
-                  <td><a href="./singleuser.html">Nzubechukwu</a></td>
-                  <td><a href="./singleuser.html">Nnamani</a></td>
-                  <td><a href="./singleuser.html">Email</a></td>
-                  <td><a href="./singleuser.html">08139228639</a></td>
-                  <td><a href="./singleuser.html">003322867</a></td>
-                  <td><a href="./singleuser.html">current</a></td>
-                </tr>
-
-                <tr data-href="./singleuser.html">
-                  <td><a href="./singleuser.html">1</a></td>
-                  <td><a href="./singleuser.html">Nzubechukwu</a></td>
-                  <td><a href="./singleuser.html">Nnamani</a></td>
-                  <td><a href="./singleuser.html">Email</a></td>
-                  <td><a href="./singleuser.html">08139228639</a></td>
-                  <td><a href="./singleuser.html">003322867</a></td>
-                  <td><a href="./singleuser.html">current</a></td>
-                </tr>
-
-                <tr data-href="./singleuser.html">
-                  <td><a href="./singleuser.html">1</a></td>
-                  <td><a href="./singleuser.html">Nzubechukwu</a></td>
-                  <td><a href="./singleuser.html">Nnamani</a></td>
-                  <td><a href="./singleuser.html">Email</a></td>
-                  <td><a href="./singleuser.html">08139228639</a></td>
-                  <td><a href="./singleuser.html">003322867</a></td>
-                  <td><a href="./singleuser.html">current</a></td>
-                </tr>
-              </table>
-            </div>
-
-              <div class="list small-screen">
-                  <div class="list-header">
-                    <h3 class="tableText">All Users</h3>
-                  </div>
-                  <!-- <div class="top-box"> -->
-                    <table class="user-table">
-                      <tr>
-                        <th>S/no</th>
-                        <th>FirstName</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                      </tr>
-                      <tr data-href="./singleuser.html">
-                        <th><a href="./singleuser.html">1</a></th>
-                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
-                        <th><a href="./singleuser.html">Nnamani</a></th>
-                        <th><a href="./singleuser.html">Email</a></th>
-                      </tr>
-                      <tr data-href="">
-                        <th><a href="./singleuser.html">2</a></th>
-                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
-                        <th><a href="./singleuser.html">Nnamani</a></th>
-                        <th><a href="./singleuser.html">Email</a></th>
-                      </tr>
-                     
-                      <tr data-href="./singleuser.html">
-                        <th><a href="./singleuser.html">3</a></th>
-                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
-                        <th><a href="./singleuser.html">Nnamani</a></th>
-                        <th><a href="./singleuser.html">Email</a></th>
-
-                      </tr>
-                      <tr data-href="./singleuser.html">
-                        <th><a href="./singleuser.html">3</a></th>
-                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
-                        <th><a href="./singleuser.html">Nnamani</a></th>
-                        <th><a href="./singleuser.html">Email</a></th>
-                      </tr>
-      
-                      <tr data-href="./singleuser.html">
-                        <th><a href="./singleuser.html">3</a></th>
-                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
-                        <th><a href="./singleuser.html">Nnamani</a></th>
-                        <th><a href="./singleuser.html">Email</a></th>
-                      </tr>
-      
-                      <tr data-href="./singleuser.html">
-                        <th><a href="./singleuser.html">3</a></th>
-                        <th><a href="./singleuser.html">Nzubechukwu</a></th>
-                        <th><a href="./singleuser.html">Nnamani</a></th>
-                        <th><a href="./singleuser.html">Email</a></th>
-                      </tr>
-                    </table>
-            </div>
-          </div>
-      </header>
-      <!-- users table -->
-
-
-     
-    </section>
-    <footer>
-      <p>Made with love</p>
-    </footer>
   </div>
+  <script src="./user-dashboard.js"></script>
   <script src="./admin.js"></script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <link rel="stylesheet" type="text/css" media="screen" href="./table.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    
+    <section class="top-container">
+      <div class="side top-box top-box-a">
+        <ul class="side-nav big-screen">
+          <li>
+            <a href="#"></li>
+          <li><a href="#"></li>
+          <li><a href="#"></li>
+        </ul>
+      </div>
+      <header class="showcase"> -->
+<!-- 
+<!-- 
+  </header> 
+ 
+
+
+
+   </section>
+  <footer>
+    <p>Made with love</p>
+  </footer>
+  </div>
+ 
+</body>
+
+</html> -->

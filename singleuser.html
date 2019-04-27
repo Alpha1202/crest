@@ -4,6 +4,248 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./admin-dashboard.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./user-dashboard.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./table.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="header" id="dashboard">
+            <span class="open-slide">
+                <a href="#" id="openSlideMenu">
+                    <svg width="30" height="30">
+                        <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+                        <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+                        <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+                    </svg>
+                </a>
+            </span>
+            <h1 class="header-dashboard">Dashboard</h1>
+            <nav class="nav">
+                <ul class="navList">
+                    <li class="nav-items"><a class="navLinks" href="./admin-dashboard.html">Dashboard</a></li>
+                    <li class="nav-items"><a class="navLinks" href="./admin-dashboard.html">Users</a></li>
+                    <li class="nav-items"><a class="navLinks" href="./admin-dashboard.html">Active Accounts</a></li>
+                    <li class="nav-items"><a class="navLinks" href="./admin-dashboard.html">Deactivated Accounts</a></li>
+                </ul>
+            </nav>
+            <div class="dropdown">
+                <div class="header-greeting">Welcome <span>Admin</span> <i class="fas fa-sort-down"></i></div>
+                <div class="dropdown-content">
+                        <a class="dropdown-list" href="./singleuser.html">Activate</a>
+                        <a class="dropdown-list" href="./singleuser.html">Deactivate</a>
+                        <a class="dropdown-list" href="./singleuser.html">Credit</a>
+                        <a class="dropdown-list" href="./singleuser.html">Debit</a>
+                        <a class="dropdown-list" href="./singleuser.html">Delete</a>
+                    <a class="dropdown-list" href="./index.html">Logout </a>
+                </div>
+            </div>
+        </div>
+        <div class="box-wrapper">
+            <div class="side top-box">
+                <div class="left-image">
+                    <figure>
+                        <img src="./logo (2).png" alt="Logo">
+                        <figcaption><strong>Banka</strong></figcaption>
+                    </figure>
+                </div>
+                <hr>
+                <div class="left-links">
+                <ul>
+                    <li><a href="./admin-dashboard.html" id="side-users"class="selected">
+                        <i class="fas fa-users"></i>
+                        Users</a></li>
+                    <li><a href="./admin-dashboard.html" id="side-active">
+                        <i class="fas fa-chart-line"></i>
+                        Active Accounts</a></li>
+                    <li><a href="./admin-dashboard.html" id="side-deactive">
+                        <i class="fas fa-bell-slash"> </i>
+                        Deactivated Accounts</a></li>
+                    <li><a href="./index.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout</a></li>
+                </ul>
+                </div>
+            </div>
+
+
+            <div class="showcase" id="main">
+                <div class="div-box">
+                    <section class="boxes boxes-small box-account">
+                        <div class="box account"><a id="account-details">
+                                <h1>Overview</h1><span>
+                                    <div class="table">
+                                        <div class="table-row">
+                                            <div class="table-head">Name</div>
+                                            <div class="table-body">Nnamani Nzubechukwu</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="table-head">Email:</div>
+                                            <div class="table-body">nzubennamani@gmail.com</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="table-head">Account Number</div>
+                                            <div class="table-body">08139228639</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="table-head">Account Balance</div>
+                                            <div class="table-body">$1,000,000.04</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="table-head">Account Type</div>
+                                            <div class="table-body">Current</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="table-head">Account Status</div>
+                                            <div class="table-body">Active</div>
+                                        </div>
+                                        </table>
+                            </a>
+                        </div>
+
+                    </section>
+
+                    <section class="boxes boxes-small">
+                        <div class="box"><a id="transaction">
+                                <h1>Last 50 Transactions:</h1><span>
+                                    <div class="table">
+                                        <div class="table-row2">
+
+                                            <div class="table-header">Acc Number</div>
+                                            <div class="table-header">Type </div>
+                                            <div class="table-header">Old Balance</div>
+                                            <div class="table-header">New Balance</div>
+                                            <div class="table-header">Amount</div>
+                                        </div>
+                                        <div class="table-row2">
+
+                                            <div class="table-content">003294933</div>
+                                            <div class="table-content">Credit</div>
+                                            <div class="table-content">$1,000,000</div>
+                                            <div class="table-content">$ 4,000,000</div>
+                                            <div class="table-content">$3,000,000</div>
+                                        </div>
+                                        <div class="table-row2">
+
+                                            <div class="table-content">003294933</div>
+                                            <div class="table-content">Credit</div>
+                                            <div class="table-content">$1,000,000</div>
+                                            <div class="table-content">$ 4,000,000</div>
+                                            <div class="table-content">$3,000,000</div>
+                                        </div>
+                                        <div class="table-row2">
+
+                                            <div class="table-content">003294933</div>
+                                            <div class="table-content">Credit</div>
+                                            <div class="table-content">$1,000,000</div>
+                                            <div class="table-content">$ 4,000,000</div>
+                                            <div class="table-content">$3,000,000</div>
+                                        </div>
+
+                                    </div>
+                            </a>
+                        </div>
+
+                    </section>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <footer>
+        <p>Banka</p>
+    </footer>
+    <!-- modal -->
+    <div id="Modal" class="modal">
+        <div id="signin" class="modal-dialog">
+            <button class="modal-close">×</button>
+            <div class="modal-header">
+                <div class="logo modal-title">
+                    <a href="./index.html"><img src="./logo (2).png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="modal-content">
+                <form action="">
+                    <div>
+                        <label for="">Choose Account Type : </label><br>
+                        <p>Savings :<input type="radio" name="account" value="savings" checked class=""></p>
+                        <p>Current :<input type="radio" name="account" value="current" checked class=""></p>
+                    </div><br>
+                    <a href="./user-dashboard.html" class="primary-btn">Open Account</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./user-dashboard.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./singleuser.css">
@@ -35,7 +277,7 @@
                     </i>Dashboard
                 </div>
                 <!-- dropdown -->
-                <div class="dropdown">
+<!-- <div class="dropdown">
                     <button class="dropbtn">Action<i class="fas fa-sort-down"></i></button>
                     <div class="dropdown-content">
                         <a href="./singleuser.html">Activate</a>
@@ -64,7 +306,7 @@
             </div>
             <header class="showcase">
                 <div class="showcase-header">
-                    <h3>Overview</h3>
+                    <h3></h3>
                 </div>
                 <div class="box">
                     <table class="user-table">
@@ -81,8 +323,8 @@
                             <th>$1,000,000.05</th>
                         </tr>
                         <tr>
-                            <th>Email:</th>
-                            <th>nzubennamani@gmail.com</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         <tr>
                             <th>Phone Number:</th>
@@ -159,4 +401,4 @@
     </div>
 </body>
 
-</html>
+</html>  -->

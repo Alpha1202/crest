@@ -33,7 +33,6 @@ h6 {
 
 #wrapper {
   display: flex;
-  flex-direction: row;
 }
 #left {
   display: flex;
@@ -45,7 +44,8 @@ h6 {
 }
 
 #right {
-  flex: 1;
+  flex: 0 0 65%;
+
 }
 
 /* Sign In */
@@ -271,10 +271,10 @@ h4{
 /* media queries */
 @media (min-width: 1200px) {
   #left {
-    flex: 4;
+    /* flex: 4; */
   }
   #right {
-    flex: 6;
+    /* flex: 6; */
   }
 }
 
@@ -286,6 +286,7 @@ h4{
     display: none;
   }
   #right {
+    flex: 0 0 100%;
     justify-content: start;
     margin-top: 4vh;
   }

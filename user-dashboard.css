@@ -114,6 +114,7 @@ color: var(--dark);
   margin: 0 auto;
   padding: 1rem 2rem;
 }
+
 .boxes {
   display: flex;
   padding: 2rem;
@@ -158,20 +159,22 @@ tr[data-href]:hover {
 }
 .modal {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   overflow: auto;
   background-color: fade(rgb(141, 138, 138), 88%);
-  z-index: 1;
+  z-index: 10;
   padding: 15px;
 }
 .modal-dialog {
-  position: relative;
-  width: 500px;
-  /* height: 70vh; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 15rem;
   padding: 2rem;
   margin: auto;
   border-radius: 4px;
@@ -223,7 +226,7 @@ flex-direction: column;
 font-size: 1rem;
 font-weight: bold;
 margin-top: 10px;
-width: 40%;
+/* width: 40%; */
 }
 .modal-content div input {
   width: 40%;
@@ -264,7 +267,6 @@ footer {
 
 
 
-
 @media (min-width: 320px) and (max-width: 880px) {
 .box-wrapper {
     display: flex;
@@ -276,19 +278,14 @@ footer {
 .small{
     display: flex;
   }
-.box table {
-  display: flex;
-  flex-direction: row;
-}
-.account table tr th {
-  display: block;
-  line-height: 1rem;
-}
-.account table tr td {
-  line-height: 1rem;
-}
+  .boxes {
+    padding: 1.5rem 1rem;
+  }
 .top-box{
   width: 50%;
+  /* display: none; */
+}
+.side {
   display: none;
 }
 .header {
