@@ -23,7 +23,7 @@ export default class Auth {
         req.token = bearerToken;
         next();
       } else {
-        res.status(403).json({ status: 403, error: 'You are not authorised' });
+        res.status(401).json({ status: 401, error: 'You are not authorised' });
       }
     } catch (error) {
       res.status(500).json({ status: 500, error: 'Access token not valid' });
@@ -41,7 +41,7 @@ export default class Auth {
       }
       const { type } = authData;
       if (type === 'admin' || type === 'staff' || type === 'cashier') {
-        return res.status(403).json({ status: 403, error: 'Staff is not authorized' });
+        return res.status(401).json({ status: 401, error: 'Staff is not authorized' });
       }
       next();
     });
@@ -59,7 +59,7 @@ export default class Auth {
       }
       // const { email } = authData;
       if (authData.email !== req.params.email ) {
-        return res.status(403).json({ status: 403, error: 'This is not your email, you are not allowed' });
+        return res.status(401).json({ status: 401, error: 'This is not your email, you are not allowed' });
       }
       next();
     });
@@ -77,11 +77,29 @@ export default class Auth {
       }
       const { type } = authData;
       if (type === 'client' || type === 'cashier') {
-        return res.status(403).json({ status: 403, error: 'Only Admin is authorized' });
+        return res.status(401).json({ status: 401, error: 'Only Admin is authorized' });
       }
       next();
     });
   
+  }
+
+  /**
+ * checks the staff
+ */
+  static allowAdminOrUser(req, res, next) {
+
+    jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      if (err) {
+        return res.status(403).json({ status: 403, error: 'Forbidden' });
+      }
+      const { type } = authData;
+      if (type === 'cashier') {
+        return res.status(401).json({ status: 401, error: 'You are not authorized' });
+      }
+      next();
+    });
+
   }
 
   /**
@@ -95,7 +113,7 @@ export default class Auth {
       }
       const { type } = authData;
       if (type === 'client') {
-        return res.status(403).json({ status: 403, error: 'Only Staff members are authorized' });
+        return res.status(401).json({ status: 401, error: 'Only Staff members are authorized' });
       }
       next();
     });

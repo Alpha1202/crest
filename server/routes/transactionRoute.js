@@ -29,7 +29,9 @@ transactionRouter.post('/:accountNumber/credit',
 
 transactionRouter.get('/:transactionId',
   Auth.checkToken,
+  validateTransactions.validateTransactionId,
   validateTransactions.checkTransactionId,
+  Auth.allowStaffOnly,
   transaction.getAtransaction);
 
 

@@ -115,18 +115,10 @@ export default class TransactionController {
     const findAtransaction = 'SELECT * FROM transactions WHERE id = $1';
 
     try {
-      const { rows } = await db.query(findAtransaction, [transactionId]);
-      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
-        const { type, email } = authData;
-        if (type === 'client') {
-          const transaction = rows.filter(allTransaction => allTransaction.owneremail === email);
-          return res.status(200).json({ status: 200, data: transaction });
-        }
-        return res.status(200).json({ status: 200, data: rows[0] });
-      });
+      const { rows } = await db.query(findAtransaction, [parseInt(transactionId, 10)]);
+      return res.status(200).json({ status: 200, data: rows[0] });
     } catch (error) {
       return res.status(500).json({ status: 500, error });
-       
     }
   }
 }

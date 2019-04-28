@@ -2,7 +2,6 @@ import { config } from 'dotenv';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
 import db from '../db/index';
-import accountsRouter from '../routes/accountsRoute';
 
 config();
 
@@ -106,7 +105,7 @@ export default class AccountsController {
       if (!rows[0]) {
         return res.status(404).json({ status: 404, message: 'account not found' });
       }
-      return res.status(204).json({ status: 204, message: 'Account deleted successfully' });
+      return res.status(200).json({ status: 200, message: 'Account successfully deleted' });
     } catch (error) {
       return res.status(500).json({ status: 500, error });
     }
@@ -120,10 +119,17 @@ export default class AccountsController {
     const findTransactionsHistory = 'SELECT * FROM transactions WHERE accountnumber = $1';
     try {
       const { rows } = await db.query(findTransactionsHistory, [accountNumber]);
-      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+
+      jwt.verify(req.token, process.env.JWT_SECRET, async (err, authData) => {
         const { type, email } = authData;
         if (type === 'client') {
-          const userTransactions = rows.filter(transactions => transactions.owneremail === email);
+          const checkAccount = 'SELECT * FROM accounts WHERE owneremail = $1';
+          const accounts = await db.query(checkAccount, [email.toLowerCase()]);
+          
+          if (accounts.rows.length === 0) {
+            return res.status(403).json({ status: 403, error: 'You do not have access to this account' })
+          }  
+          const userTransactions = rows.filter(transactions => transactions.accountnumber === accountNumber);
           return res.status(200).json({ status: 200, data: userTransactions });
         }
         return res.status(200).json({ status: 200, data: rows });
@@ -157,9 +163,15 @@ export default class AccountsController {
     const findAllAccount = 'SELECT * FROM accounts';
     try {
       const { rows } = await db.query(findAllAccount);
-      jwt.verify(req.token, process.env.JWT_SECRET, (err, authData) => {
+      jwt.verify(req.token, process.env.JWT_SECRET, async (err, authData) => {
         const { type, email } = authData;
         if (type === 'client') {
+          const checkAccount = 'SELECT * FROM accounts WHERE owneremail = $1';
+          const allaccounts = await db.query(checkAccount, [email.toLowerCase()]);
+          
+          if (allaccounts.rows.length === 0) {
+            return res.status(403).json({ status: 403, error: 'You do not have any account yet' })
+          } 
           const userAccount = rows.filter(accounts => accounts.owneremail === email);
           return res.status(200).json({ status: 200, data: userAccount });
         } if (!status) {

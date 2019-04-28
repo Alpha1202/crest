@@ -43,6 +43,7 @@ accountsRouter.get('/:accountNumber',
 
 accountsRouter.get('/',
   Auth.checkToken,
+  Auth.allowAdminOrUser,
   account.getAllAccount);
 
 
