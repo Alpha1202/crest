@@ -11,11 +11,13 @@ usersAccountRouter.post('/',
   validate.validateFirstName,
   validate.validateLastName,
   validate.validatePassword,
+  validate.validateType,
   Auth.allowAdminOnly,
   user.createUser);
 
 usersAccountRouter.put('/:email',
   Auth.checkToken,
+  validate.validateType,
   Auth.allowAdminOnly,
   user.updateUser);
 

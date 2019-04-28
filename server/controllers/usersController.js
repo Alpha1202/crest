@@ -24,9 +24,9 @@ export default class UserController {
     VALUES($1, $2, $3, $4, $5, $6)
     returning *`;
     const values = [
-      email,
-      firstName,
-      lastName,
+      email.toLowerCase(),
+      firstName.toLowerCase(),
+      lastName.toLowerCase(),
       hash,
       type,
       isAdmin,
@@ -46,7 +46,7 @@ export default class UserController {
 
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        return res.status(400).json({ status: 400, message: 'Email already exists' });
+        return res.status(409).json({ status: 409, error: 'Email already exists' });
       }
       return res.status(500).json({ status: 500, error });
     }
@@ -63,7 +63,7 @@ export default class UserController {
 
     const data = 'SELECT * FROM users WHERE email = $1';
     try {
-      const { rows } = await db.query(data, [email]);
+      const { rows } = await db.query(data, [email.toLowerCase()]);
     
       if (!Helper.checkPassword(rows[0].password, password)) {
         return res.status(400).send({ status: 400, error: 'invalid password'});
@@ -93,7 +93,7 @@ export default class UserController {
 
     const findUserAccountList = 'SELECT * FROM accounts WHERE owneremail = $1';
     try {
-      const { rows } = await db.query(findUserAccountList, [email]);
+      const { rows } = await db.query(findUserAccountList, [email.toLowerCase()]);
       return res.status(200).json({ status: 200, data: rows });
     } catch (error) {
       return res.status(500).json({ status: 500, error });
@@ -108,20 +108,20 @@ export default class UserController {
     const { email, firstName, lastName, password, type, isAdmin } = req.body;
     const hash = Helper.hash(password);
 
-    const data = `INSERT INTO
+    const query = `INSERT INTO
     users( email, firstName, lastName, password, type, isAdmin)
     VALUES($1, $2, $3, $4, $5, $6)
     returning *`;
     const values = [
-      email,
-      firstName,
-      lastName,
+      email.toLowerCase(),
+      firstName.toLowerCase(),
+      lastName.toLowerCase(),
       hash,
-      type,
+      type.toLowerCase(),
       isAdmin,
     ];
     try {
-      const { rows } = await db.query(data, values);
+      const { rows } = await db.query(query, values);
       const { id, firstname, lastname, isadmin } = rows[0];
       const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );
       res.status(201).json({ status: 201,
@@ -137,7 +137,7 @@ export default class UserController {
 
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        return res.status(400).json({ status: 400, message: 'Email already exists' });
+        return res.status(409).json({ status: 409, message: 'Email already exists' });
       }
       return res.status(500).json({ status: 500, error });
     }
@@ -158,22 +158,31 @@ export default class UserController {
     WHERE email = $3 returning *`;
 
     try {
-      const { rows } = await db.query(findOne, [email]);
+      const { rows } = await db.query(findOne, [email.toLowerCase()]);
       if (!rows[0]) {
         return res.status(404).json({ status: 404, error: 'user not found' });
       }
-      if (rows[0].type === type) {
+      if (rows[0].type === type.toLowerCase()) {
         return res.status(400).json({ status: 400, error: `user is already updated to ${type}`});
       }  
       
       const values = [
-        type,
+        type.toLowerCase(),
         isAdmin,
-        email,
+        email.toLowerCase(),
       ];
       const result = await db.query(updateOne, values);
+      const { id, firstname, lastname } = result.rows[0]
       return res.status(200).json({ status: 200,
-        data: result.rows[0] });
+        data: {
+          id,
+          email: result.rows[0].email,
+          firstname,
+          lastname,
+          type: result.rows[0].type,
+          isAdmin: result.rows[0].isadmin,
+        }
+});
     } catch (error) {
       return res.status(500).json({ status: 500, error });
     }

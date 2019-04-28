@@ -45,4 +45,18 @@ export default class validateTransactions {
     }
     next();
   }
+
+   /**
+   *
+   */
+
+  static async validateTransactionId(req, res, next) {
+    const { transactionId } = req.params;
+   
+    const numericRegExp = /^[0-9]+$/;
+    if (numericRegExp.test(transactionId) === false) {
+      return res.status(400).json({ status: 400, error: 'Please enter a valid transaction Id' });
+    }
+    next();
+  }
 }
