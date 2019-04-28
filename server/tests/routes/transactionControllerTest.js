@@ -57,8 +57,8 @@ describe('Transactions', () => {
           .set({ Authorization: validUserToken })
           .send(validTransaction)
           .end((err, res) => {
-            res.should.have.status(403);
-            res.body.should.have.property('status').eql(403);
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql(401);
             res.body.should.have.property('error').eql('Only Staff members are authorized');
             res.body.should.be.a('object');
             done();
@@ -141,8 +141,8 @@ describe('Transactions', () => {
           .set({ Authorization: validUserToken })
           .send(validTransaction)
           .end((err, res) => {
-            res.should.have.status(403);
-            res.body.should.have.property('status').eql(403);
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql(401);
             res.body.should.have.property('error').eql('Only Staff members are authorized');
             res.body.should.be.a('object');
             done();
@@ -211,8 +211,8 @@ describe('Transactions', () => {
           .get('/api/v1/transactions/2')
           .send(validTransaction)
           .end((err, res) => {
-            res.should.have.status(403);
-            res.body.should.have.property('status').eql(403);
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql(401);
             res.body.should.have.property('error').eql('You are not authorised');
             res.body.should.be.a('object');
             done();
