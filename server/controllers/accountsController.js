@@ -41,7 +41,7 @@ export default class AccountsController {
       newAccountNumber,
       moment(new Date()),
       email,
-      type,
+      type.toLowerCase(),
       'dormant',
       0,
     ];
@@ -69,6 +69,7 @@ export default class AccountsController {
   static async updateAccountStatus(req, res) {
     const { accountNumber } = req.params;
     const { status } = req.body;
+    
     const findOne = 'SELECT * FROM accounts WHERE accountNumber = $1';
     const updateOne = `UPDATE accounts
     SET status = $1
@@ -79,7 +80,7 @@ export default class AccountsController {
         return res.status(404).json({ status: 404, error: 'account not found' });
       }
       const values = [
-        status || rows[0].status,
+        status.toLowerCase() || rows[0].status,
         accountNumber,
       ];
 

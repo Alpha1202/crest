@@ -105,9 +105,12 @@ export default class UserController {
    */
 
   static async createUser(req, res) {
-    const { email, firstName, lastName, password, type, isAdmin } = req.body;
+    const { email, firstName, lastName, password, type } = req.body;
     const hash = Helper.hash(password);
-
+    let isAdmin = false;
+    if (type.toLowerCase() === 'staff' || type.toLowerCase() === 'admin') {
+      isAdmin = true;
+    }
     const query = `INSERT INTO
     users( email, firstName, lastName, password, type, isAdmin)
     VALUES($1, $2, $3, $4, $5, $6)
@@ -123,6 +126,7 @@ export default class UserController {
     try {
       const { rows } = await db.query(query, values);
       const { id, firstname, lastname, isadmin } = rows[0];
+    
       const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );
       res.status(201).json({ status: 201,
         data: {
@@ -150,8 +154,11 @@ export default class UserController {
  */
   static async updateUser(req, res) {
     const { email } = req.params;
-    const { type, isAdmin } = req.body;
-
+    const { type } = req.body;
+    let isAdmin = false;
+    if (type.toLowerCase() === 'staff' || type.toLowerCase() === 'admin') {
+      isAdmin = true;
+    }
     const findOne = 'SELECT * FROM users WHERE email = $1';
     const updateOne = `UPDATE users
     SET type = $1, isadmin = $2
@@ -163,7 +170,7 @@ export default class UserController {
         return res.status(404).json({ status: 404, error: 'user not found' });
       }
       if (rows[0].type === type.toLowerCase()) {
-        return res.status(400).json({ status: 400, error: `user is already updated to ${type}`});
+        return res.status(400).json({ status: 400, error: `user is already updated to ${type.toLowerCase()}`});
       }  
       
       const values = [
@@ -182,7 +189,7 @@ export default class UserController {
           type: result.rows[0].type,
           isAdmin: result.rows[0].isadmin,
         }
-});
+      });
     } catch (error) {
       return res.status(500).json({ status: 500, error });
     }
