@@ -4,6 +4,7 @@ import Auth from '../middleware/auth';
 import validate from '../middleware/accountMiddleware';
 
 
+
 const accountsRouter = express.Router();
 
 accountsRouter.post('/',

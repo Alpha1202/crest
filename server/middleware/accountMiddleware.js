@@ -20,9 +20,15 @@ export default class validate {
     if (!type) {
       return res.status(400).json({ status: 400, error: 'please enter account type, savings or current' });
     }
+    if (typeof type !== 'string') {
+      return res.status(400).json({ status: 400, error: 'Please enter a valid text' });
+    }
     const alphaRegExp = /^[a-zA-Z]+$/;
     if (!type.match(alphaRegExp)) {
       return res.status(400).json({ status: 400, error: 'Only alphabets are allowed, white spaces are not allowed' });
+    }
+    if (type.toLowerCase() !== 'current' && type.toLowerCase() !== 'savings') {
+      return res.status(400).json({ status: 400, error: 'Sorry, the type you specified is not available at the moment' });
     }
     next();
   }
@@ -53,12 +59,15 @@ export default class validate {
      */
   static validateStatus(req, res, next) {
     const { status } = req.body;
-    if (!status || status === 'undefined' || status === '') {
-      return res.status(400).json({ status: 400, error: 'please specify the account status, please specify dormant or active' });
+    if (!status || status === 'undefined' || status === '' || typeof status !== 'string') {
+      return res.status(400).json({ status: 400, error: 'please specify the account status, please specify \'dormant\' or \'active\' ' });
+    }
+    if (status.toLowerCase() !== 'active' && status.toLowerCase() !== 'dormant') {
+      return res.status(400).json({ status: 400, error: 'Please specify \'active\' or \'dormant\' '});
     }
     const alphaRegExp = /^[a-zA-Z]+$/;
     if (!status.match(alphaRegExp)) {
-      return res.status(400).json({ status: 400, error: 'Invalid account status, please specify dormant or active' });
+      return res.status(400).json({ status: 400, error: 'Invalid account status, please specify \'dormant\' or \'active\' ' });
     }
     next();
   }
