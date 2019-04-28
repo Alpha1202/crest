@@ -108,11 +108,11 @@ describe('Connections', () => {
             .post('/api/v1/auth/signup')
             .send(validUserSignup)
             .end((err, res) => {
-              res.should.have.status(400);
-              res.body.should.have.property('message')
+              res.should.have.status(409);
+              res.body.should.have.property('error')
                 .eql('Email already exists');
               res.body.should.have.property('status')
-                .eql(400);
+                .eql(409);
               res.body.should.be.a('object');
               done();
             });
@@ -124,11 +124,11 @@ describe('Connections', () => {
             .post('/api/v1/auth/signup')
             .send(validAdminSignup)
             .end((err, res) => {
-              res.should.have.status(400);
-              res.body.should.have.property('message')
+              res.should.have.status(409);
+              res.body.should.have.property('error')
                 .eql('Email already exists');
               res.body.should.have.property('status')
-                .eql(400);
+                .eql(409);
               res.body.should.be.a('object');
               done();
             });
@@ -318,7 +318,7 @@ describe('Connections', () => {
               res.body.should.have.property('status').eql(404);
               res.body.should.be.a('object');
               res.body.should.have.property('error')
-                .eql('Email does not exist');
+                .eql('User does not exist');
               done();
             });
         });
@@ -332,7 +332,7 @@ describe('Connections', () => {
               res.body.should.have.property('status').eql(400);
               res.body.should.be.a('object');
               res.body.should.have.property('error')
-                .eql('invalid password');
+                .eql('Password should be atleast 6 characters');
               done();
             });
         });

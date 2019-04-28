@@ -55,8 +55,8 @@ describe('Accounts', () => {
           .set({ Authorization: validAdminToken })
           .send(createNewAccount)
           .end((err, res) => {
-            res.should.have.status(403);
-            res.body.should.have.property('status').eql(403);
+            res.should.have.status(401);
+            res.body.should.have.property('status').eql(401);
             res.body.should.be.a('object');
             res.body.should.have.property('error')
               .eql('Staff is not authorized');
@@ -134,8 +134,8 @@ describe('Accounts', () => {
             .set({ Authorization: validUserToken })
             .send(validAccount)
             .end((err, res) => {
-              res.should.have.status(403);
-              res.body.should.have.property('status').eql(403);
+              res.should.have.status(401);
+              res.body.should.have.property('status').eql(401);
               res.body.should.be.a('object');
               res.body.should.have.property('error')
                 .eql('Only Staff members are authorized');
@@ -198,7 +198,7 @@ describe('Accounts', () => {
               res.body.should.have.property('status').eql(400);
               res.body.should.be.a('object');
               res.body.should.have.property('error')
-                .eql('please specify the account status, please specify dormant or active');
+                .eql('please specify the account status, please specify \'dormant\' or \'active\' ');
               done();
             });
         });
@@ -213,7 +213,7 @@ describe('Accounts', () => {
               res.body.should.have.property('status').eql(400);
               res.body.should.be.a('object');
               res.body.should.have.property('error')
-                .eql('Invalid account status, please specify dormant or active');
+                .eql('Please specify \'active\' or \'dormant\' ');
               done();
             });
         });
@@ -239,8 +239,8 @@ describe('Accounts', () => {
             .set({ Authorization: validUserToken })
             .send(validAccount)
             .end((err, res) => {
-              res.should.have.status(403);
-              res.body.should.have.property('status').eql(403);
+              res.should.have.status(401);
+              res.body.should.have.property('status').eql(401);
               res.body.should.be.a('object');
               res.body.should.have.property('error')
                 .eql('Only Admin is authorized');
@@ -298,8 +298,8 @@ describe('Accounts', () => {
               .get('/api/v1/accounts/1555958896710/transactions')
               .send(validAccount)
               .end((err, res) => {
-                res.should.have.status(403);
-                res.body.should.have.property('status').eql(403);
+                res.should.have.status(401);
+                res.body.should.have.property('status').eql(401);
                 res.body.should.have.property('error').eql('You are not authorised');
                 res.body.should.be.a('object');
                 done();

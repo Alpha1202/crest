@@ -100,11 +100,11 @@ describe('Connections', () => {
             .set({ Authorization: validAdminToken })
             .send(validCashierSignup)
             .end((err, res) => {
-              res.should.have.status(400);
+              res.should.have.status(409);
               res.body.should.have.property('message')
                 .eql('Email already exists');
               res.body.should.have.property('status')
-                .eql(400);
+                .eql(409);
               res.body.should.be.a('object');
               done();
             });
@@ -117,11 +117,11 @@ describe('Connections', () => {
             .set({ Authorization: validAdminToken })
             .send(validCashierSignup)
             .end((err, res) => {
-              res.should.have.status(400);
+              res.should.have.status(409);
               res.body.should.have.property('message')
                 .eql('Email already exists');
               res.body.should.have.property('status')
-                .eql(400);
+                .eql(409);
               res.body.should.be.a('object');
               done();
             });
