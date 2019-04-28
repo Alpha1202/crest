@@ -92,8 +92,8 @@ export default class validate {
     if (typeof password !== 'string') {
       return res.status(400).json({ status: 400, error: 'Please enter a valid Password' });
     }
-    if (!password.length >= 7 && password.length <= 15) {
-      return res.status(400).json({ status: 400, error: 'Password should be atleast 7 characters' });
+    if (password.length < 6) {
+      return res.status(400).json({ status: 400, error: 'Password should be atleast 6 characters' });
     }
     next();
   }
