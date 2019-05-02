@@ -15,6 +15,12 @@ usersAccountRouter.post('/',
   Auth.allowAdminOnly,
   user.createUser);
 
+usersAccountRouter.post('/signin',
+  validate.validateEmail,
+  validate.validatePassword,
+  validate.verifyUser,
+  user.signin);
+
 usersAccountRouter.put('/:email',
   Auth.checkToken,
   validate.validateType,
