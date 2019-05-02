@@ -84,6 +84,42 @@ export default class UserController {
       return res.status(500).json({ status: 500, error });
     }
   }
+
+  /**
+ * Login Admin/staff/cashier
+ * @param {object} req
+ * @param {object} res
+ * @return {json} user logged in
+ */
+  static async signin(req, res) {
+    const { email, password } = req.body;
+
+    const data = 'SELECT * FROM users WHERE email = $1';
+    try {
+      const { rows } = await db.query(data, [email.toLowerCase()]);
+      if (rows[0].type === 'client') {
+        return res.status(404).json({ status: 404, error: 'Will you like to be redirected to the user\'s login page? '})
+      }
+      
+      if (!Helper.checkPassword(rows[0].password, password)) {
+        return res.status(400).send({ status: 400, error: 'invalid password'});
+      }
+      const { id, firstname, lastname, isadmin } = rows[0];
+      const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );
+      return res.status(200).json({ 
+        status: 200,
+        data: {
+          token,
+          id: rows[0].id,
+          firstName: rows[0].firstname,
+          lastName: rows[0].lastname,
+          email: rows[0].email,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({ status: 500, error });
+    }
+  }
   /**
  * 
  */

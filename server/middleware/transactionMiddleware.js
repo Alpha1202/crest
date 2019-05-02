@@ -19,6 +19,9 @@ export default class validateTransactions {
     if (!amount || amount === 'undefined' || amount === '') {
       return res.status(400).json({ status: 400, error: 'please specify an amount' });
     }
+    if (amount < 1) {
+      return res.status(400).json({ status: 400, error: 'Values below 1 are not allowed ' });
+    }
     const numericRegExp = /^[0-9]+$/;
     if (numericRegExp.test(amount) === false) {
       return res.status(400).json({ status: 400, error: 'Please enter a valid amount' });
