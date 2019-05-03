@@ -1,7 +1,5 @@
-
 let index = 0;
 slide();
-
 function slide() {
     let i;
     let x = document.getElementsByClassName('slide');
@@ -13,11 +11,5 @@ function slide() {
         index = 1
     }
     x[index-1].style.display = "block";
-    setTimeout(slide, 3000);
-}
-
-let changeClass = document.getElementById('links');
-
-changeClass.onclick = function select(){
-    document.getElementById('links').className = "selected"
+    setTimeout(slide, 5000);
 }
