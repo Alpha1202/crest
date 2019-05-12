@@ -1,5 +1,6 @@
 import '@babel/polyfill';
 import express from 'express';
+import cors from 'cors';
 import bodyparser from 'body-parser';
 import { config } from 'dotenv';
 import debug from 'debug';
@@ -18,7 +19,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.status(200).send({ message: 'Welcome to crest finance APIs' });
 });
-
+app.use(cors());
 app.use('/api/v1', router);
 
 

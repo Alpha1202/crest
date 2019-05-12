@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/user-dashboard.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/table.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+    <div class="header" id="dashboard">
+        <span class="open-slide">
+        <a href="#" id="openSlideMenu">
+        <svg width="30" height="30">
+        <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+        <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+        <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+        </svg>
+        </a>
+        </span>
+        <h1>Dashboard</h1>
+    </div>
+    <div class="box-wrapper">
+        <div class="side top-box">
+            <div class="left-image">
+                <figure>
+                    <img src="../images/logo (2).png" alt="Logo">
+                    <figcaption><strong>Banka</strong></figcaption>
+                </figure>
+            </div>
+            <hr>
+            <div class="left-links">
+                <ul>
+                    <li><a href="#dashboard" class="selected">
+                            <i class="fas fa-home fa-1x"></i>
+                            Dashboard</a></li>
+                    <li><a href="#" id="links">
+                            <i class="fas fa-envelope-open"></i>
+                            Create Account</a></li>
+                    <li><a href="#account-details">
+                            <i class="fas fa-eye"></i>
+                            View Account</a></li>
+                    <li><a href="#transaction">
+                            <i class="fas fa-search-dollar"></i>
+                            Transactions</a></li>
+                    <li><a href="./index.html">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="showcase" id="main">
+            <div class="right">
+                <h3>Account Balance:  $1,000,000</h3>
+                <h3>Account Type:  Current</h3><span>
+            </div>
+            <div class="div-box">
+                <section class="boxes boxes-small box-account">
+                    <div class="box account"><a id="account-details">
+                        <h1>Account Details:</h1><span>
+                            <div class="table">
+                                <div class="table-row">
+                                    <div class="table-head">Name</div>
+                                   <div class="table-body">Nnamani Nzubechukwu</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-head">Account Name</div>
+                                    <div class="table-body">Nnamani Nzubechukwu .R.</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-head">Account Number</div>
+                                    <div class="table-body">08139228639</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-head">Account Balance</div>
+                                    <div class="table-body">$1,000,000.04</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-head">Account Type</div>
+                                    <div class="table-body">Current</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="table-head">Account Status</div>
+                                    <div class="table-body">Active</div>
+                                </div>
+                            </table>
+                        </a>
+                    </div>
+                
+                </section>
+              
+                <section class="boxes boxes-small">
+                    <div class="box"><a id="transaction">
+                        <h1>Last 50 Transactions:</h1><span>
+                            <div class="table">
+                              <div class="table-row2">
+            
+                            <div class="table-header">Acc Number</div>
+                            <div class="table-header">Type </div>
+                            <div class="table-header">Old Balance</div>
+                            <div class="table-header">New Balance</div>
+                            <div class="table-header">Amount</div>
+                              </div>
+                              <div class="table-row2">
+                                   
+                                    <div class="table-content">003294933</div>
+                                    <div class="table-content">Credit</div>
+                                    <div class="table-content">$1,000,000</div>
+                                    <div class="table-content">$ 4,000,000</div>
+                                    <div class="table-content">$3,000,000</div>
+                              </div>
+                              <div class="table-row2">
+                                   
+                                    <div class="table-content">003294933</div>
+                                    <div class="table-content">Credit</div>
+                                    <div class="table-content">$1,000,000</div>
+                                    <div class="table-content">$ 4,000,000</div>
+                                    <div class="table-content">$3,000,000</div>
+                              </div>
+                              <div class="table-row2">
+                                   
+                                    <div class="table-content">003294933</div>
+                                    <div class="table-content">Credit</div>
+                                    <div class="table-content">$1,000,000</div>
+                                    <div class="table-content">$ 4,000,000</div>
+                                    <div class="table-content">$3,000,000</div>
+                              </div>
+
+                            </div>
+                        </a>
+                    </div>
+                
+                </section>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+    </div>
+<footer>
+    <p>Banka</p>
+</footer>
+    <!-- modal -->
+    <div id="Modal" class="modal">
+        <div id="signin" class="modal-dialog">
+            <button class="modal-close">×</button>
+            <div class="modal-header">
+                <div class="logo modal-title">
+                    <a href="./index.html"><img src="../images/logo (2).png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="modal-content">
+                <form action="">
+                    <div>
+                        <label for="">Choose Account Type : </label><br>
+                        <p>Savings :<input type="radio" name="account" value="savings" checked class=""></p>
+                        <p>Current :<input type="radio" name="account" value="current" checked class=""></p>
+                    </div><br>
+                    <a href="./user-dashboard.html" class="primary-btn">Open Account</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../script/user-dashboard.js"></script>
+</body>
+
+</html>
+
+
