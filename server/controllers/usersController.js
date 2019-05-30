@@ -64,7 +64,9 @@ export default class UserController {
     const data = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await db.query(data, [email.toLowerCase()]);
-    
+      if (rows[0].type !== 'client') {
+        return res.status(404).json({ status: 404, error: 'Will you like to be redirected to the Admin\'s login page? '})
+      }
       if (!Helper.checkPassword(rows[0].password, password)) {
         return res.status(400).send({ status: 400, error: 'invalid password'});
       }
