@@ -25,8 +25,8 @@ const activeToggle = (activeAccounts, sideActive, allUser, sideUsers, sideDeacti
 }
 activeToggle(activeAccounts, sideActive, allUser, sideUsers, sideDeactive, deactiveAccounts, 'Active Accounts');
 activeToggle(sideActive, activeAccounts, allUser, sideUsers, sideDeactive, deactiveAccounts, 'Active Accounts');
-activeToggle(allUser, sideUsers, activeAccounts, deactiveAccounts, sideActive, sideDeactive, 'All Users');
-activeToggle(sideUsers,allUser, activeAccounts, deactiveAccounts, sideActive, sideDeactive, 'All Users');
-activeToggle(deactiveAccounts, sideDeactive, allUser, sideUsers, activeAccounts, sideActive, 'Deactive Accounts');
-activeToggle(sideDeactive, deactiveAccounts, allUser, sideUsers, activeAccounts, sideActive, 'Deactive Accounts');
+activeToggle(allUser, sideUsers, activeAccounts, deactiveAccounts, sideActive, sideDeactive, 'All Accounts');
+activeToggle(sideUsers,allUser, activeAccounts, deactiveAccounts, sideActive, sideDeactive, 'All Accounts');
+activeToggle(deactiveAccounts, sideDeactive, allUser, sideUsers, activeAccounts, sideActive, 'Dormant Accounts');
+activeToggle(sideDeactive, deactiveAccounts, allUser, sideUsers, activeAccounts, sideActive, 'Dormant Accounts');
 

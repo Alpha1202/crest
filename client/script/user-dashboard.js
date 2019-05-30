@@ -1,30 +1,31 @@
 
-let openDashboard = document.getElementById('dashboard');
+const openDashboard = document.getElementById('dashboard');
 
-let sideMenu = document.querySelector('.top-box');
+const sideMenu = document.querySelector('.top-box');
 
-let open = document.getElementById('links');
+const open = document.getElementById('links');
 
-let modal = document.getElementById('Modal');
+const modal = document.getElementById('Modal');
 
-let close = document.querySelector('.modal-close');
+const close = document.querySelector('.modal-close');
 if (open !== null) {
-    open.onclick = function(){
-        modal.style.display = 'flex';
-    }
+  open.onclick = function(){
+    modal.style.display = 'flex';
+  }
 }
 
 
 close.onclick = function(){
-    modal.style.display = 'none';
+  modal.style.display = 'none';
 }
 
 openDashboard.addEventListener('click', () => {
-    sideMenu.classList.toggle('side');
+  sideMenu.classList.toggle('side');
 })
 
 window.onclick = function(event) {
-    if (event.target == sideMenu) {
-        sideMenu.style.display = 'none';
-    }
+  if (event.target == sideMenu) {
+    sideMenu.style.display = 'none';
+  }
 }
+

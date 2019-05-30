@@ -44,28 +44,19 @@
                 <div class="logo">
                     <a href="./index.html"><img src="../images/logo (2).png" alt="logo"></a>
                 </div>
-                <form action="">
-                    <!-- <div>
-                        <label for="">Name</label>
-                        <input type="text" class="text-input">
-                    </div> -->
+                <form action="" id="adminLoginForm">
                     <div>
-                        <label for="">Email</label>
-                        <input type="text" class="text-input">
+                    <label for="">Email</label>
+                    <input type="text" class="text-input" id="email" name="email" required>
                     </div>
-                    <!-- <div>
-                        <label for="">Phone</label>
-                        <input type="text" class="text-input">
-                    </div> -->
+                    <span id="errorHandler"></span>
+                    <br>
                     <div>
-                        <label for="">Password</label>
-                        <input type="password" class="text-input">
+                    <label for="">Password</label>
+                    <input type="password" class="text-input" id="password" required>
                     </div>
-                    <a href="./admin-dashboard.html" class="primary-btn">Log In</a>
+                    <input type="submit" id="signin" class="primary-btn" value="Sign In">
                 </form>
-                <!-- <div class="links">
-                    <a href="./index.html">back to home</a>
-                </div> -->
             </div>
         </div>
       
@@ -73,7 +64,7 @@
     </div>
     <script src="../script/index.js"></script>
     <!-- <script src="./modal.js"></script> -->
-    <script src="../script/checkUser.js"></script>
+    <script src="../script/adminLogin.js"></script>
 </body>
 
 </html>

@@ -122,6 +122,8 @@ export default class AccountsController {
       const { rows } = await db.query(findTransactionsHistory, [accountNumber]);
 
       jwt.verify(req.token, process.env.JWT_SECRET, async (err, authData) => {
+        
+        
         const { type, email } = authData;
         if (type === 'client') {
           const checkAccount = 'SELECT * FROM accounts WHERE owneremail = $1';

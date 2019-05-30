@@ -64,7 +64,9 @@ export default class UserController {
     const data = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await db.query(data, [email.toLowerCase()]);
-    
+      if (rows[0].type === 'admin' || rows[0].type === 'staff') {
+        return res.status(404).json({ status: 404, error: 'Will you like to be redirected to the Admin\'s login page? '});
+      }
       if (!Helper.checkPassword(rows[0].password, password)) {
         return res.status(400).send({ status: 400, error: 'invalid password'});
       }
@@ -98,7 +100,7 @@ export default class UserController {
     try {
       const { rows } = await db.query(data, [email.toLowerCase()]);
       if (rows[0].type === 'client') {
-        return res.status(404).json({ status: 404, error: 'Will you like to be redirected to the user\'s login page? '})
+        return res.status(404).json({ status: 404, error: 'Will you like to be redirected to the user\'s login page? '});
       }
       
       if (!Helper.checkPassword(rows[0].password, password)) {
@@ -215,7 +217,7 @@ export default class UserController {
         email.toLowerCase(),
       ];
       const result = await db.query(updateOne, values);
-      const { id, firstname, lastname } = result.rows[0]
+      const { id, firstname, lastname } = result.rows[0];
       return res.status(200).json({ status: 200,
         data: {
           id,
