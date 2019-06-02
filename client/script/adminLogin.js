@@ -36,12 +36,15 @@ adminLoginForm.addEventListener('submit', (e) => {
       }
       if (data) {
         console.log(data);
-        const { email, firstName, lastName, token } = data;
+        const { email, firstName, lastName, token, type } = data;
         localStorage.staffUserEmail = email;
         localStorage.staffUserfirstName = JSON.stringify(firstName);
         localStorage.staffUserlastName = JSON.stringify(lastName);
         localStorage.staffUserToken = `bearer ${token}`;
-        // window.location = './admin-dashboard.html';
+        if ( type === 'cashier') {
+          return window.location = './cashier-dashboard.html';
+        }
+        window.location = './admin-dashboard.html';
       }
     })
     .catch(error => error);
