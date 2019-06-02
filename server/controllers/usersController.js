@@ -106,6 +106,7 @@ export default class UserController {
       if (!Helper.checkPassword(rows[0].password, password)) {
         return res.status(400).send({ status: 400, error: 'invalid password'});
       }
+      
       const { id, firstname, lastname, isadmin } = rows[0];
       const token = Helper.getToken(id, rows[0].email, firstname, lastname, rows[0].type, isadmin );
       return res.status(200).json({ 
@@ -116,6 +117,7 @@ export default class UserController {
           firstName: rows[0].firstname,
           lastName: rows[0].lastname,
           email: rows[0].email,
+          type: rows[0].type,
         },
       });
     } catch (error) {

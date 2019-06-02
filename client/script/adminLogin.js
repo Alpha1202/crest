@@ -35,12 +35,13 @@ adminLoginForm.addEventListener('submit', (e) => {
         spanError.style.color = 'red';
       }
       if (data) {
+        console.log(data);
         const { email, firstName, lastName, token } = data;
         localStorage.staffUserEmail = email;
         localStorage.staffUserfirstName = JSON.stringify(firstName);
         localStorage.staffUserlastName = JSON.stringify(lastName);
         localStorage.staffUserToken = `bearer ${token}`;
-        window.location = './admin-dashboard.html';
+        // window.location = './admin-dashboard.html';
       }
     })
     .catch(error => error);

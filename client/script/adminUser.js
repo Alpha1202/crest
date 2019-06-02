@@ -9,6 +9,9 @@ const navAcc = document.getElementById('nav-acc');
 const navActive = document.getElementById('nav-active');
 const navDormant = document.getElementById('nav-dormant');
 const createAdmin = document.getElementById('createAdmin');
+const placeholderModal = document.querySelector('.placeholder-modal');
+const closeButton = document.querySelector('.placeholder-close-button');
+const modalDisplay = document.getElementById('modal-display');
 // let accDetails;
 
 createAdmin.addEventListener('click', () => {
@@ -38,7 +41,13 @@ window.onload = () => {
     .then((res) => {
       const { error, data } = res;
       if (error) {
-        console.log(error);
+        modalDisplay.innerHTML = error;
+        modalDisplay.style.color = 'red';
+        placeholderModal.classList.add('placeholder-show-modal');
+        closeButton.addEventListener('click', () => {
+          placeholderModal.classList.remove('placeholder-show-modal');
+          window.location = './admin-login.html';
+        });
       }
       if (data) {
         allAccounts.textContent = data.length;
@@ -90,21 +99,29 @@ allAcc.addEventListener('click', () => {
     .then((res) => {
       const { error, data } = res;
       if (error) {
-        console.log(error);
+        modalDisplay.innerHTML = error;
+        modalDisplay.style.color = 'red';
+        placeholderModal.classList.add('placeholder-show-modal');
+        closeButton.addEventListener('click', () => {
+          placeholderModal.classList.remove('placeholder-show-modal');
+          window.location = './admin-login.html';
+        });
       }
+      
       if (data) {
         allAccounts.textContent = data.length;
         let output = '';
         data.forEach((account) => {
           output += `
           <div>
-          <div class="table-row2" data-href="./singleuser.html">
-          <div class="table-content"><a href="./singleuser.html">${account.accountnumber}</a></div>
-          <div class="table-content"><a href="./singleuser.html">${account.owneremail}</a></div>
+          <div class="table-row2" data-href="#">
+          <div class="table-content onclick="testJS('${account.accountnumber}'
+          )"><a href="#">${account.accountnumber}</a></div>
+          <div class="table-content"><a href="#">${account.owneremail}</a></div>
          
-          <div class="table-content"><a href="./singleuser.html">$${account.balance}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.status}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.type}</a> </div>
+          <div class="table-content"><a href="#">$${account.balance}</a> </div>
+          <div class="table-content"><a href="#">${account.status}</a> </div>
+          <div class="table-content"><a href="#">${account.type}</a> </div>
         </div>
           `;
         });
@@ -119,7 +136,13 @@ navAcc.addEventListener('click', () => {
     .then((res) => {
       const { error, data } = res;
       if (error) {
-        console.log(error);
+        modalDisplay.innerHTML = error;
+        modalDisplay.style.color = 'red';
+        placeholderModal.classList.add('placeholder-show-modal');
+        closeButton.addEventListener('click', () => {
+          placeholderModal.classList.remove('placeholder-show-modal');
+          window.location = './admin-login.html';
+        });
       }
       if (data) {
         allAccounts.textContent = data.length;
@@ -127,13 +150,14 @@ navAcc.addEventListener('click', () => {
         data.forEach((account) => {
           output += `
           <div>
-          <div class="table-row2" data-href="./singleuser.html">
-          <div class="table-content"><a href="./singleuser.html">${account.accountnumber}</a></div>
-          <div class="table-content"><a href="./singleuser.html">${account.owneremail}</a></div>
+          <div class="table-row2" data-href="#">
+          <div class="table-content" onclick="testJS('${account.accountnumber}'
+          )"><a href="#">${account.accountnumber}</a></div>
+          <div class="table-content"><a href="#">${account.owneremail}</a></div>
          
-          <div class="table-content"><a href="./singleuser.html">$${account.balance}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.status}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.type}</a> </div>
+          <div class="table-content"><a href="#">$${account.balance}</a> </div>
+          <div class="table-content"><a href="#">${account.status}</a> </div>
+          <div class="table-content"><a href="#">${account.type}</a> </div>
         </div>
           `;
         });
@@ -148,7 +172,13 @@ activeAcc.addEventListener('click', () => {
     .then((res) => {
       const { error, data } = res;
       if (error) {
-        console.log(error);
+        modalDisplay.innerHTML = error;
+        modalDisplay.style.color = 'red';
+        placeholderModal.classList.add('placeholder-show-modal');
+        closeButton.addEventListener('click', () => {
+          placeholderModal.classList.remove('placeholder-show-modal');
+          window.location = './admin-login.html';
+        })
       }
       if (data) {
         allActiveAccounts.innerHTML = data.length;
@@ -156,12 +186,13 @@ activeAcc.addEventListener('click', () => {
         data.forEach((account) => {
           output += `
           <div>
-          <div class="table-row2" data-href="./singleuser.html">
-          <div class="table-content"><a href="./singleuser.html">${account.accountnumber}</a></div>
-          <div class="table-content"><a href="./singleuser.html">${account.owneremail}</a></div>
-          <div class="table-content"><a href="./singleuser.html">$${account.balance}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.status}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.type}</a> </div>
+          <div class="table-row2" data-href="#">
+          <div class="table-content" onclick="testJS('${account.accountnumber}'
+          )"><a href="#">${account.accountnumber}</a></div>
+          <div class="table-content"><a href="#">${account.owneremail}</a></div>
+          <div class="table-content"><a href="#">$${account.balance}</a> </div>
+          <div class="table-content"><a href="#">${account.status}</a> </div>
+          <div class="table-content"><a href="#">${account.type}</a> </div>
         </div>
           `;
         });
@@ -176,7 +207,13 @@ navActive.addEventListener('click', () => {
     .then((res) => {
       const { error, data } = res;
       if (error) {
-        console.log(error);
+         modalDisplay.innerHTML = error;
+         modalDisplay.style.color = 'red';
+         placeholderModal.classList.add('placeholder-show-modal');
+         closeButton.addEventListener('click', () => {
+           placeholderModal.classList.remove('placeholder-show-modal');
+           window.location = './admin-login.html';
+         })
       }
       if (data) {
         allActiveAccounts.innerHTML = data.length;
@@ -184,12 +221,13 @@ navActive.addEventListener('click', () => {
         data.forEach((account) => {
           output += `
           <div>
-          <div class="table-row2" data-href="./singleuser.html">
-          <div class="table-content"><a href="./singleuser.html">${account.accountnumber}</a></div>
-          <div class="table-content"><a href="./singleuser.html">${account.owneremail}</a></div>
-          <div class="table-content"><a href="./singleuser.html">$${account.balance}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.status}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.type}</a> </div>
+          <div class="table-row2" data-href="#">
+          <div class="table-content" onclick="testJS('${account.accountnumber}'
+          )"><a href="#">${account.accountnumber}</a></div>
+          <div class="table-content"><a href="#">${account.owneremail}</a></div>
+          <div class="table-content"><a href="#">$${account.balance}</a> </div>
+          <div class="table-content"><a href="#">${account.status}</a> </div>
+          <div class="table-content"><a href="#">${account.type}</a> </div>
         </div>
           </div>
           `;
@@ -208,7 +246,13 @@ deactiveAcc.addEventListener('click', () => {
     .then((res) => {
       const { error, data } = res;
       if (error) {
-        console.log(error);
+       modalDisplay.innerHTML = error;
+       modalDisplay.style.color = 'red';
+       placeholderModal.classList.add('placeholder-show-modal');
+       closeButton.addEventListener('click', () => {
+         placeholderModal.classList.remove('placeholder-show-modal');
+         window.location = './admin-login.html';
+       })
       }
       if (data) {
         alldeactiveAccounts.innerHTML = data.length;
@@ -216,12 +260,13 @@ deactiveAcc.addEventListener('click', () => {
         data.forEach((account) => {
           output += `
           <div>
-          <div class="table-row2" data-href="./singleuser.html">
-          <div class="table-content"><a href="./singleuser.html">${account.accountnumber}</a></div>
-          <div class="table-content"><a href="./singleuser.html">${account.owneremail}</a></div>
-          <div class="table-content"><a href="./singleuser.html">$${account.balance}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.status}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.type}</a> </div>
+          <div class="table-row2" data-href="#">
+          <div class="table-content" onclick="testJS('${account.accountnumber}'
+          )"><a href="#">${account.accountnumber}</a></div>
+          <div class="table-content"><a href="#">${account.owneremail}</a></div>
+          <div class="table-content"><a href="#">$${account.balance}</a> </div>
+          <div class="table-content"><a href="#">${account.status}</a> </div>
+          <div class="table-content"><a href="#">${account.type}</a> </div>
         </div>
           `;
         });
@@ -236,7 +281,13 @@ navDormant.addEventListener('click', () => {
     .then((res) => {
       const { error, data } = res;
       if (error) {
-        console.log(error);
+         modalDisplay.innerHTML = error;
+         modalDisplay.style.color = 'red';
+         placeholderModal.classList.add('placeholder-show-modal');
+         closeButton.addEventListener('click', () => {
+           placeholderModal.classList.remove('placeholder-show-modal');
+           window.location = './admin-login.html';
+         })
       }
       if (data) {
         alldeactiveAccounts.innerHTML = data.length;
@@ -244,12 +295,13 @@ navDormant.addEventListener('click', () => {
         data.forEach((account) => {
           output += `
           <div>
-          <div class="table-row2" data-href="./singleuser.html">
-          <div class="table-content"><a href="./singleuser.html">${account.accountnumber}</a></div>
-          <div class="table-content"><a href="./singleuser.html">${account.owneremail}</a></div>
-          <div class="table-content"><a href="./singleuser.html">$${account.balance}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.status}</a> </div>
-          <div class="table-content"><a href="./singleuser.html">${account.type}</a> </div>
+          <div class="table-row2" data-href="#">
+          <div class="table-content" onclick="testJS('${account.accountnumber}'
+          )"><a href="#">${account.accountnumber}</a></div>
+          <div class="table-content"><a href="#">${account.owneremail}</a></div>
+          <div class="table-content"><a href="#">$${account.balance}</a> </div>
+          <div class="table-content"><a href="#">${account.status}</a> </div>
+          <div class="table-content"><a href="#">${account.type}</a> </div>
         </div>
           `;
         });
