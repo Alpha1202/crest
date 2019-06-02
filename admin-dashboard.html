@@ -28,15 +28,15 @@
       <nav class="nav">
         <ul class="navList">
           <li class="nav-items"><a class="navLinks" href="#">Dashboard</a></li>
-          <li class="nav-items"><a class="navLinks" href="#">Users</a></li>
+          <li class="nav-items" ><a class="navLinks" href="#">Accounts</a></li>
           <li class="nav-items"><a class="navLinks" href="#">Active Accounts</a></li>
-          <li class="nav-items"><a class="navLinks" href="#">Deactivated Accounts</a></li>
+          <li class="nav-items"><a class="navLinks" href="#">Dormant Accounts</a></li>
         </ul>
       </nav>
         <div class="dropdown">
           <div class="header-greeting">Welcome <span>Admin</span> <i class="fas fa-sort-down"></i></div>
           <div class="dropdown-content">
-              <a class="dropdown-list" href="#">Create Admin </a>
+              <a class="dropdown-list" href="#" id="createAdmin">Create Admin </a>
              <a class="dropdown-list" href="./index.html">Logout </a>
             </div>
         </div>
@@ -52,15 +52,15 @@
         <hr>
         <div class="left-links">
           <ul>
-            <li><a href="#dashboard" id="side-users"class="selected">
+            <li id="nav-acc"><a href="#dashboard" id="side-users"class="selected">
                 <i class="fas fa-users"></i>
-                Users</a></li>
-            <li><a href="#" id="side-active">
+                All Accounts</a></li>
+            <li id="nav-active"><a href="#" id="side-active">
                 <i class="fas fa-chart-line"></i>
                Active Accounts</a></li>
-            <li><a href="#" id="side-deactive">
+            <li id="nav-dormant"><a href="#" id="side-deactive">
                 <i class="fas fa-bell-slash"> </i>
-                Deactivated Accounts</a></li>
+                Dormant Accounts</a></li>
             <li><a href="./index.html">
                 <i class="fas fa-sign-out-alt"></i>
                 Logout</a></li>
@@ -73,17 +73,17 @@
         
         <div class="div-box">
             <div class="summary-box">
-                <div class="box selected-user-box selected ">
-                    <a href="#"><i class="fas fa-users"> Users</i></a>
-                    <h3>300</h3>
+                <div class="box selected-user-box selected" id="allAcc">
+                    <a href="#"><i class="fas fa-users">All Accounts</i></a>
+                    <h3 id="allAccounts"></h3>
                   </div>
-                  <div class="box active-accounts-box">
+                  <div class="box active-accounts-box" id="activeAcc">
                     <a href="#"><i class="fas fa-chart-line"> Active Accounts</i></a>
-                    <h3>300</h3>
+                    <h3 id="allActiveAccounts"></h3>
                   </div>
-                  <div class="box deactive-accounts-box">
-                    <a href="#"><i class="fas fa-bell-slash"> Deactivated Accounts</i></a>
-                    <h3>300</h3>
+                  <div class="box deactive-accounts-box" id="deactiveAcc">
+                    <a href="#"><i class="fas fa-bell-slash"> Dormant Accounts</i></a>
+                    <h3 id="alldeactiveAccounts"></h3>
                   </div>
             </div> 
           <!-- <section class="boxes boxes-small box-account">
@@ -121,29 +121,27 @@
           </section> -->
           <div class="list">
               <div class="list-header">
-                <h3 class="tableText">All Users</h3>
+                <h3 class="tableText">All Accounts</h3>
               </div>
-              <div class="table">
+              
                   <div class="table-row2">
-                  <div class="table-header">S/no</div>
-                  <div class="table-header">FirstName</div>
-                  <div class="table-header">Last Name</div>
-                  <div class="table-header">Email</div>
                   <div class="table-header">AC Number</div>
+                  <div class="table-header">Email</div>
+                  <!-- <div class="table-header">Created Date</div> -->
+                  <div class="table-header">Balance</div>
+                  <div class="table-header">Status</div>
                   <div class="table-header">Type</div>
                 </div>
-    
-    
-                 <div class="table-row2" data-href="./singleuser.html">
-                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
-                  <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
-                  <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
-                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
-                
+                <div class="table" id="accountTable">
+                 <!-- <div class="table-row2" data-href="./singleuser.html">
                   <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Email</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">1</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Balance</a> </div>
+                  <div class="table-content"><a href="./singleuser.html">Status</a> </div>
                   <div class="table-content"><a href="./singleuser.html">current</a> </div>
-                </div>
-                <div class="table-row2" data-href="./singleuser.html">
+                </div> -->
+                <!-- <div class="table-row2" data-href="./singleuser.html">
                   <div class="table-content"><a href="./singleuser.html">1</a> </div>
                   <div class="table-content"><a href="./singleuser.html">Nzubechukwu</a> </div>
                   <div class="table-content"><a href="./singleuser.html">Nnamani</a> </div>
@@ -191,9 +189,15 @@
                   <div class="table-content"><a href="./singleuser.html">003322867</a> </div>
                   <div class="table-content"><a href="./singleuser.html">current</a> </div>
                 </div> 
-              </div>
+              </div> -->
             </div>
       </div>
+        <div class="placeholder-modal" id="placeholder-modal">
+          <div class="placeholder-modal-content">
+            <span class="placeholder-close-button" id="placeholder-close-button">&times;</span>
+            <h1 id="modal-display">Hello, I am a modal!</h1>
+          </div>
+        </div>
           <!-- <section class="boxes boxes-small">
             <div class="box"><a id="transaction">
                 <h1>Last 50 Transactions:</h1><span>
@@ -267,6 +271,7 @@
     </div>
   </div>
   <script src="./user-dashboard.js"></script>
+  <script src="./adminUser.js"></script>
   <script src="./admin.js"></script>
 </body>
 

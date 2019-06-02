@@ -73,7 +73,7 @@ body,
   padding: 1rem 1rem;
 }
 .left-links {
- height: 100vh;
+ min-height: 100vh;
 }
 .left-links ul{
   margin-left: -1rem;
@@ -257,14 +257,28 @@ margin-top: 10px;
     border: solid 1px #6133dd;
 }
 footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
   display: flex;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background: var(--dark);
   color: var(--light);
   text-align: center;
-  padding: 1rem;
+}
+/* view account dropdown */
+
+.active {
+  background-color: var(--style);
+  color: white;
 }
 
+.dropdown-container {
+  display: none;
+}
+
+/* end of view account dropdown */
 
 
 @media (min-width: 320px) and (max-width: 880px) {

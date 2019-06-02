@@ -37,11 +37,11 @@
             <div class="dropdown">
                 <div class="header-greeting">Welcome <span>Admin</span> <i class="fas fa-sort-down"></i></div>
                 <div class="dropdown-content">
-                        <a class="dropdown-list" href="./singleuser.html">Activate</a>
-                        <a class="dropdown-list" href="./singleuser.html">Deactivate</a>
-                        <a class="dropdown-list" href="./singleuser.html">Credit</a>
-                        <a class="dropdown-list" href="./singleuser.html">Debit</a>
-                        <a class="dropdown-list" href="./singleuser.html">Delete</a>
+                        <a class="dropdown-list" id="activate">Activate</a>
+                        <a class="dropdown-list"  id="deactivate">Deactivate</a>
+                        <a class="dropdown-list" id="credit">Credit</a>
+                        <a class="dropdown-list" id="debit">Debit</a>
+                        <a class="dropdown-list" id="delete">Delete</a>
                     <a class="dropdown-list" href="./index.html">Logout </a>
                 </div>
             </div>
@@ -73,6 +73,38 @@
                 </div>
             </div>
 
+            <div class="placeholder-modal" id="placeholder-modal">
+                    <div class="placeholder-modal-content">
+                        <span class="placeholder-close-button" id="placeholder-close-button">&times;</span>
+                        <h1 id="modal-display">Hello, I am a modal!</h1>
+                    </div>
+                </div>
+
+        <div id="transaction-modal" class="placeholder-modal">
+                <div class="placeholder-modal-content">
+                <span class="placeholder-close-button" id="transaction-close-button">&times;</span>
+            <div class="modal-header">
+                <div class="logo modal-title">
+                    <a href="./index.html"><img src="./logo (2).png" alt="logo"></a>
+                </div>
+            </div>
+            <div class="modal-content">
+                <form action="" id="transaction">
+                    <div>
+                       <br><br>
+                       <p>Enter Amount <input type="text" id="amount" placeholder="Enter an amount" name="amount" required></p>
+                    </div><br>
+                    <input type="submit" id="enter" class="primary-btn" value="Enter">
+                </form>
+            </div>
+                </div>
+            </div>
+<!-- <div class="placeholder-modal" id="placeholder-modal">
+<div class="placeholder-modal-content">
+    <span class="placeholder-close-button" id="placeholder-close-button">&times;</span>
+    <h1 id="modal-display">Hello, I am a modal!</h1>
+</div>
+        </div>     -->
 
             <div class="showcase" id="main">
                 <div class="div-box">
@@ -80,73 +112,47 @@
                         <div class="box account"><a id="account-details">
                                 <h1>Overview</h1><span>
                                     <div class="table">
-                                        <div class="table-row">
+                                        <!-- <div class="table-row">
                                             <div class="table-head">Name</div>
                                             <div class="table-body">Nnamani Nzubechukwu</div>
-                                        </div>
+                                        </div> -->
                                         <div class="table-row">
                                             <div class="table-head">Email</div>
-                                            <div class="table-body">nzube@gmail.com</div>
+                                            <div class="table-body" id="email">nzube@gmail.com</div>
                                         </div>
                                         <div class="table-row">
                                             <div class="table-head">Account Number</div>
-                                            <div class="table-body">08139228639</div>
+                                            <div class="table-body" id="accountNumber">08139228639</div>
                                         </div>
                                         <div class="table-row">
                                             <div class="table-head">Account Balance</div>
-                                            <div class="table-body">$1,000,000.04</div>
+                                            <div class="table-body" id="accountBalance">$1,000,000.04</div>
                                         </div>
                                         <div class="table-row">
                                             <div class="table-head">Account Type</div>
-                                            <div class="table-body">Current</div>
+                                            <div class="table-body" id="accountType">Current</div>
                                         </div>
                                         <div class="table-row">
                                             <div class="table-head">Account Status</div>
-                                            <div class="table-body">Active</div>
+                                            <div class="table-body" id="accountStatus">Active</div>
                                         </div>
                                         </table>
                             </a>
                         </div>
 
                     </section>
-
                     <section class="boxes boxes-small">
                         <div class="box"><a id="transaction">
                                 <h1>Last 50 Transactions:</h1><span>
-                                    <div class="table">
+                                <span id="transactionError"></span>
+                                <div class="table" id="transactionBox">
                                         <div class="table-row2">
-
                                             <div class="table-header">Acc Number</div>
                                             <div class="table-header">Type </div>
                                             <div class="table-header">Old Balance</div>
                                             <div class="table-header">New Balance</div>
                                             <div class="table-header">Amount</div>
                                         </div>
-                                        <div class="table-row2">
-
-                                            <div class="table-content">003294933</div>
-                                            <div class="table-content">Credit</div>
-                                            <div class="table-content">$1,000,000</div>
-                                            <div class="table-content">$ 4,000,000</div>
-                                            <div class="table-content">$3,000,000</div>
-                                        </div>
-                                        <div class="table-row2">
-
-                                            <div class="table-content">003294933</div>
-                                            <div class="table-content">Credit</div>
-                                            <div class="table-content">$1,000,000</div>
-                                            <div class="table-content">$ 4,000,000</div>
-                                            <div class="table-content">$3,000,000</div>
-                                        </div>
-                                        <div class="table-row2">
-
-                                            <div class="table-content">003294933</div>
-                                            <div class="table-content">Credit</div>
-                                            <div class="table-content">$1,000,000</div>
-                                            <div class="table-content">$ 4,000,000</div>
-                                            <div class="table-content">$3,000,000</div>
-                                        </div>
-
                                     </div>
                             </a>
                         </div>
@@ -184,6 +190,7 @@
         </div>
     </div>
     <script src="./user-dashboard.js"></script>
+    <script src="./singleUser.js"></script>
 </body>
 
 </html>

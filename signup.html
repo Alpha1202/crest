@@ -44,24 +44,26 @@
                 <div class="logo">
                     <a href="./index.html"><img src="./logo (2).png" alt="logo"></a>
                 </div>
-                <form action="">
+                <form action="" id="signUpUser">
                     <div>
-                        <label for="">Name</label>
-                        <input type="text" class="text-input">
+                        <label for="">First Name</label>
+                        <input type="text" class="text-input" id="fname" name="name" required>
+                    </div>
+                    <div>
+                        <label for="">Last Name</label>
+                        <input type="text" class="text-input" id="lname" name="name" required>
                     </div>
                     <div>
                         <label for="">Email</label>
-                        <input type="text" class="text-input">
-                    </div>
-                    <div>
-                        <label for="">Phone</label>
-                        <input type="text" class="text-input">
+                        <input type="text" class="text-input" id="email" name="email" required>
                     </div>
                     <div>
                         <label for="">Password</label>
-                        <input type="password" class="text-input">
+                        <input type="password" class="text-input" id="password" required>
                     </div>
-                    <a href="./user-dashboard.html" class="primary-btn">Sign Up</a>
+                    <span id="errorHandler"></span>
+                    <input type="submit" id="signup" class="primary-btn" value="Sign Up">
+                    <!-- <a href="./user-dashboard.html" class="primary-btn">Sign Up</a> -->
                 </form>
                 <div class="links">
                     <a href="./index.html">Already registered?</a>
@@ -69,34 +71,11 @@
             </div>
         </div>
       
-        <!-- <div id="loginModal" class="modal">
-            <div id="signin" class="modal-dialog">
-                <button class="modal-close">×</button>
-                <div class="modal-header">
-                    <div class="logo modal-title">
-                        <a href="./index.html"><img src="./logo (2).png" alt="logo"></a>
-                    </div>
-                </div>
-                <div class="modal-content">
-                    <form action="">
-                        <div>
-                            <label for="">Email or Username</label>
-                            <input type="text" class="text-input">
-                        </div>
-                        <div>
-                            <label for="">Password</label>
-                            <input type="password" class="text-input">
-                        </div>
-                        <a href="./user-dashboard.html" class="primary-btn">Sign In</a>
-                    </form>
-                </div>
-            </div>
-        </div> -->
     </div>
     </div>
     <script src="./index.js"></script>
     <!-- <script src="./modal.js"></script> -->
-    <script src="./checkUser.js"></script>
+    <script src="./signup.js"></script>
 </body>
 
 </html>
