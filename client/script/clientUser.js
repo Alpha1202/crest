@@ -13,7 +13,7 @@ const transactionBox = document.getElementById('transactionBox');
 const transactionTable = document.getElementById('transactionTable');
 const createAccount = document.getElementById('createAccount');
 const accountTypeRadio = document.getElementsByName('account');
-
+const viewAccounts = document.getElementById('view-accounts');
 
 const savings = document.getElementById('savings');
 const current = document.getElementById('current');
@@ -54,6 +54,65 @@ const lastname = JSON.parse(bankaUserlastName);
 
 userName.textContent = `${firstName.toUpperCase()} ${lastname.toUpperCase()}`;
 
+function getAccountDetails(acc) {
+  fetch(`${defaultUrl}/users/${bankaUserEmail}/accounts`, userAccountConfig)
+
+    .then(res => res.json())
+    .then((res) => {
+      const { error, data } = res;
+      if (error) {
+        errorSpan.innerHTML = error;
+        errorSpan.style.color = 'red';
+      }
+      if (data) {
+        let accnum = data;
+        accnum = accnum.find(item => item.accountnumber === acc);
+        const { accountnumber, balance, status, type } = accnum;
+        // localStorage.bankaUserAccountNumber = accountnumber;
+        accountNumber.textContent = `${accountnumber}`;
+        accountBalance.textContent = `$${balance}`;
+        accountType.textContent = `${type}`;
+        accountStatus.textContent = `${status}`;
+        accBal.textContent = `Account Balance:  $${balance}`;
+        accType.textContent = `Account Type:  ${type}`;
+
+        // eslint-disable-next-line func-names
+        (function () {
+          fetch(`${defaultUrl}/accounts/${accountnumber}/transactions`, userAccountConfig)
+            .then(res => res.json())
+            .then((res) => {
+              const { error, data } = res;
+              if (data.length === 0) {
+                transactionBox.style.display = 'none';
+                transactionError.textContent = 'This Account has no transaction History';
+                transactionError.style.color = 'red';
+              }
+              if (error) {
+                transactionError.textContent = error;
+                transactionError.style.color = 'red';
+              }
+              if (data) {
+                let output = '';
+                data.forEach((transaction) => {
+                  output += `
+               <div class="table-row2" id="transactionTable">
+             <div class="table-content">${transaction.accountnumber}</div>
+             <div class="table-content">${transaction.type}</div>
+             <div class="table-content">$${transaction.oldbalance}</div>
+             <div class="table-content">$${transaction.newbalance}</div>
+             <div class="table-content">$${transaction.amount}</div>
+             </div>
+             `;
+                });
+                transactionBox.innerHTML += output;
+              }
+            });
+        }())
+      }
+    });
+}
+
+
 fetch(`${defaultUrl}/users/${bankaUserEmail}/accounts`, userAccountConfig)
 
   .then(res => res.json())
@@ -64,54 +123,21 @@ fetch(`${defaultUrl}/users/${bankaUserEmail}/accounts`, userAccountConfig)
       errorSpan.style.color = 'red';
     }
     if (data) {
-      const { accountnumber, balance, status, type } = data[0];
-      localStorage.bankaUserAccountNumber = accountnumber;
-      accountNumber.textContent = `${accountnumber}`;
-      accountBalance.textContent = `$${balance}`;
-      accountType.textContent = `${type}`;
-      accountStatus.textContent = `${status}`;
-      accBal.textContent = `Account Balance:  $${balance}`;
-      accType.textContent = `Account Type:  ${type}`;
+      let output = '';
+      data.forEach((account) => {
+        const { accountnumber } = account;
+        output += `
+        <li onclick="getAccountDetails('${accountnumber}')"><a href="#">${accountnumber}</a></li>
+        `;
+      });
+      viewAccounts.innerHTML += output;
     }
   })
   .catch(error => error);
-const { bankaUserAccountNumber } = localStorage;
-console.log(bankaUserAccountNumber);
-
-fetch(`${defaultUrl}/accounts/${bankaUserAccountNumber}/transactions`, userAccountConfig)
-  .then(res => res.json())
-  .then((res) => {
-    const { error, data } = res;
-
-    if (data.length === 0) {
-      transactionBox.style.display = 'none';
-      transactionError.textContent = 'This Account has no transaction History';
-      transactionError.style.color = 'red';
-    }
-    if (error) {
-      transactionError.textContent = error;
-      transactionError.style.color = 'red';
-    }
-    if (data) {
-      let output = '';
-      data.forEach((transaction) => {
-        output += `
-        <div class="table-row2" id="transactionTable">
-      <div class="table-content">${transaction.accountnumber}</div>
-      <div class="table-content">${transaction.type}</div>
-      <div class="table-content">$${transaction.oldbalance}</div>
-      <div class="table-content">$${transaction.newbalance}</div>
-      <div class="table-content">$${transaction.amount}</div>
-      </div>
-      `;
-      });
-      transactionBox.innerHTML += output;
-    }
-  });
-
+  
 createAccount.addEventListener('submit', (e) => {
   e.preventDefault();
-  
+
   const form = {};
 
   if (savings.value === 'savings') {
@@ -130,7 +156,7 @@ createAccount.addEventListener('submit', (e) => {
     body: JSON.stringify(form),
 
   };
-  
+
   fetch(`${defaultUrl}/accounts`, createAccountConfig)
     .then(res => res.json())
     .then((res) => {
